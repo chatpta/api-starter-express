@@ -4,8 +4,7 @@ const logger = require( 'morgan' );
 const cors = require( "cors" );
 const helmet = require( "helmet" );
 
-const indexRouter = require( './routes/index' );
-const usersRouter = require( './routes/users' );
+const indexRouter = require( './routes/indexRouter' );
 const errors = require( "./common/error" );
 
 const app = express();
@@ -19,8 +18,7 @@ app.use( express.urlencoded( { extended: false } ) );
 app.use( cookieParser() );
 
 // Add routers
-app.use( '/', indexRouter );
-app.use( '/users', usersRouter );
+app.use( indexRouter );
 
 // Not found json response
 app.use( ( req, res ) => res.status( 404 ).json( errors.appError404 ) );
