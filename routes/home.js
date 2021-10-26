@@ -1,9 +1,8 @@
 const express = require( 'express' );
 const router = express.Router();
+const home = require( '../controller/homeController' );
 
 /* GET home page. */
-router.get( '/', function ( req, res, next ) {
-    res.send( { message: 'Welcome to homepage' } );
-} );
+router.get( '/', home.getRequestHandler );
 
 module.exports = router;

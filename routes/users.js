@@ -1,9 +1,7 @@
 const express = require( 'express' );
 const router = express.Router();
+const user = require( '../controller/usersController' );
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send( { message: 'welcome to users page' });
-});
-
+router.get( '/', user.getRequestHandler );
 module.exports = router;
