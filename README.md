@@ -2,10 +2,16 @@
 
 To run application in docker compose
 
-Start postgres database in container, available at host port 5432 
+Start postgres database in container, available at host port 5432
 
 ```shell
 docker-compose -f docker-compose-pg-db.yaml up
+```
+
+Test connect to db
+
+```shell
+psql "postgresql://user:password@localhost/chatpta_db"
 ```
 
 Run application
@@ -22,7 +28,6 @@ Run test
 ```
 
 ### Directory structure
-
 
 Todo::
 
