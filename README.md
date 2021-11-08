@@ -1,4 +1,4 @@
-# starter json api expressjs postgres db with pg
+# starter json api expressjs with postgres
 
 To run application in docker compose
 
