@@ -21,6 +21,9 @@ Run test
  npm run test
 ```
 
+### Directory structure
+
+
 Todo::
 
 1. Setup postgres database in docker container.
