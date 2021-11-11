@@ -6,7 +6,7 @@ const commonMiddleware = require( '../../common-middleware' );
 
 
 describe( "Not found middleware", function () {
-    it( "returns not found 404 message", function () {
+    it( "returns not found 404 message", function ( done ) {
         // Setup
         let app = express();
         // noinspection JSCheckFunctionSignatures
@@ -21,12 +21,13 @@ describe( "Not found middleware", function () {
                 // Assert
                 assert( response.status === 404 );
                 assert( response.body.type === "not found" );
+                done();
             } );
     } );
 } );
 
 describe( "Data error middleware", function () {
-    it( "returns data error 400 message", function () {
+    it( "returns data error 400 message", function (done) {
         // Setup
         let app = express();
         // noinspection JSCheckFunctionSignatures
@@ -41,12 +42,13 @@ describe( "Data error middleware", function () {
                 // Assert
                 assert( response.status === 400 );
                 assert( response.body.type === "data error" );
+                done();
             } );
     } );
 } );
 
 describe( "Application error middleware", function () {
-    it( "returns application error 500 message", function () {
+    it( "returns application error 500 message", function (done) {
         // Setup
         let app = express();
         app.use( function ( req, res, next ) {
@@ -61,10 +63,10 @@ describe( "Application error middleware", function () {
             .end( ( err, response ) => {
                 if ( err ) return;
 
-                console.log(response)
                 // Assert
                 assert( response.statusCode === 500 );
                 assert( response.body.type === "app error" );
+                done();
             } );
     } );
 } );
