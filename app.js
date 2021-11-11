@@ -5,7 +5,7 @@ const cors = require( "cors" );
 const helmet = require( "helmet" );
 
 const indexRouter = require( './routes/indexRouter' );
-const errors = require( "./common/error" );
+const commonMiddleware = require( "./common-middleware/index" );
 
 const app = express();
 
@@ -21,9 +21,9 @@ app.use( cookieParser() );
 app.use( indexRouter );
 
 // Not found json response
-app.use( ( req, res ) => res.status( 404 ).json( errors.appError404 ) );
+app.use( commonMiddleware.appErrorHandlers.notFound404 );
 
 // Server error json response
-app.use( ( err, req, res, next ) => res.status( 500 ).json( errors.appError500 ) );
+app.use( commonMiddleware.appErrorHandlers.appError500 );
 
 module.exports = app;
