@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Load .env file
+ * Load .env file to process.env
  */
 require( 'dotenv' ).config();
 
