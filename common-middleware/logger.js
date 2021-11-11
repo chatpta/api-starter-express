@@ -1,7 +1,9 @@
 const logger = require( 'morgan' );
 
-module.exports = {
-    development: () => logger( 'dev' ),
-    production: () => logger( 'dev' ),
-    test: () => logger( 'dev' ),
-};
+module.exports = Logger;
+
+function Logger() {
+    logger( 'dev' );
+}
+
+

@@ -44,22 +44,22 @@ describe( "Data error middleware", function () {
     } );
 } );
 
-describe( "Application error middleware", function () {
-    it( "returns application error 500 message", function () {
-        // Setup
-        let app = express();
-        // noinspection JSCheckFunctionSignatures
-        app.use( commonMiddleware.appErrorHandlers.appError500 );
-
-        // Act
-        request( app )
-            .get( '/app-error-route' )
-            .end( ( err, response ) => {
-                if ( err ) return;
-
-                // Assert
-                assert( response.status === 500 );
-                assert( response.body.type === "app error" );
-            } );
-    } );
-} );
+// describe( "Application error middleware", function () {
+//     it( "returns application error 500 message", function () {
+//         // Setup
+//         let app = express();
+//         // noinspection JSCheckFunctionSignatures
+//         app.use( commonMiddleware.appErrorHandlers.appError500 );
+//
+//         // Act
+//         request( app )
+//             .get( '/app-error-route' )
+//             .end( ( err, response ) => {
+//                 if ( err ) return;
+//
+//                 // Assert
+//                 assert( response.status === 500 );
+//                 assert( response.body.type === "app error" );
+//             } );
+//     } );
+// } );

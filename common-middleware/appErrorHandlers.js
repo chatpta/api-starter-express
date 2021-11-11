@@ -23,7 +23,7 @@ function appError400( req, res, next ) {
     } )
 }
 
-function appError500( req, res, next ) {
+function appError500( err, req, res, next ) {
     res.status( 500 );
     res.send( {
         code: 500,
