@@ -6,7 +6,7 @@
     "start": "export NODE_ENV=development && export PORT=3002 && node ./bin/www",
     "devstart": "export NODE_ENV=development && export PORT=3002 &&  nodemon ./bin/www",
     "production": "export NODE_ENV=production && node ./bin/www",
-    "test": "mocha --watch --require test/support/env --reporter spec --bail --check-leaks test/**/*.test.js"
+    "test": "export NODE_ENV=test && mocha --watch --require test/support/env --reporter spec --bail --check-leaks test/**/*.test.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
