@@ -21,7 +21,7 @@ describe( "Not found app test", function () {
     } );
 } );
 
-describe( "Server error application", function () {
+describe( "Server error test", function () {
     it( "returns server error 500 message", function ( done ) {
 
         // Act
@@ -37,4 +37,3 @@ describe( "Server error application", function () {
             } );
     } );
 } );
-

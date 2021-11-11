@@ -5,7 +5,7 @@ const express = require( 'express' );
 const commonMiddleware = require( '../../common-middleware' );
 
 
-describe( "Not found middleware", function () {
+describe( "Not found middleware test", function () {
     it( "returns not found 404 message", function ( done ) {
         // Setup
         let app = express();
@@ -26,8 +26,8 @@ describe( "Not found middleware", function () {
     } );
 } );
 
-describe( "Data error middleware", function () {
-    it( "returns data error 400 message", function (done) {
+describe( "Data error middleware test", function () {
+    it( "returns data error 400 message", function ( done ) {
         // Setup
         let app = express();
         // noinspection JSCheckFunctionSignatures
@@ -47,8 +47,8 @@ describe( "Data error middleware", function () {
     } );
 } );
 
-describe( "Application error middleware", function () {
-    it( "returns application error 500 message", function (done) {
+describe( "Application error middleware test", function () {
+    it( "returns application error 500 message", function ( done ) {
         // Setup
         let app = express();
         app.use( function ( req, res, next ) {
