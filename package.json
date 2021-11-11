@@ -16,7 +16,8 @@
     "express": "~4.16.1",
     "helmet": "^4.6.0",
     "morgan": "~1.9.1",
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "rotating-file-stream": "^3.0.1"
   },
   "devDependencies": {
     "mocha": "^9.1.3",
