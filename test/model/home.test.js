@@ -2,7 +2,7 @@ const assert = require( 'assert' );
 const { describe, it } = require( "mocha" );
 const { Home } = require( "../../model/Home" );
 
-describe( 'Home tests model', () => {
+describe( 'Home model', () => {
 
     it( 'getFirstLine finds first line', ( done ) => {
         // Arrange

@@ -4,7 +4,7 @@ const request = require( 'supertest' );
 const app = require( '../../app' );
 
 
-describe( "Not found app test", function () {
+describe( "Not found app", function () {
     it( "returns not found 404 message", function ( done ) {
 
         // Act
@@ -21,7 +21,7 @@ describe( "Not found app test", function () {
     } );
 } );
 
-describe( "Server error test", function () {
+describe( "Server error app", function () {
     it( "returns server error 500 message", function ( done ) {
 
         // Act

@@ -2,7 +2,7 @@ const assert = require( 'assert' );
 const { describe, it } = require( "mocha" );
 const { User } = require( "../../model/User" );
 
-describe( 'User tests model', () => {
+describe( 'User model', () => {
 
     it( 'getFirstUser finds first user', ( done ) => {
         // Arrange

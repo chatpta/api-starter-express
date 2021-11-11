@@ -5,8 +5,8 @@ const express = require( 'express' );
 const commonMiddleware = require( '../../common-middleware' );
 
 
-describe( "Not found middleware test", function () {
-    it( "returns not found 404 message", function ( done ) {
+describe( "Middleware not found error handler", function () {
+    it( "returns not found 404, message", function ( done ) {
         // Setup
         let app = express();
         // noinspection JSCheckFunctionSignatures
@@ -14,7 +14,7 @@ describe( "Not found middleware test", function () {
 
         // Act
         request( app )
-            .get( '/not-exist-route' )
+            .get( '/' )
             .end( ( err, response ) => {
                 if ( err ) return;
 
@@ -26,8 +26,8 @@ describe( "Not found middleware test", function () {
     } );
 } );
 
-describe( "Data error middleware test", function () {
-    it( "returns data error 400 message", function ( done ) {
+describe( "Middleware data error handler", function () {
+    it( "returns data error 400, message", function ( done ) {
         // Setup
         let app = express();
         // noinspection JSCheckFunctionSignatures
@@ -35,7 +35,7 @@ describe( "Data error middleware test", function () {
 
         // Act
         request( app )
-            .get( '/bad-data-route' )
+            .get( '/' )
             .end( ( err, response ) => {
                 if ( err ) return;
 
@@ -47,8 +47,8 @@ describe( "Data error middleware test", function () {
     } );
 } );
 
-describe( "Application error middleware test", function () {
-    it( "returns application error 500 message", function ( done ) {
+describe( "Middleware server error handler", function () {
+    it( "returns server error 500, message", function ( done ) {
         // Setup
         let app = express();
         app.use( function ( req, res, next ) {
@@ -59,7 +59,7 @@ describe( "Application error middleware test", function () {
 
         // Act
         request( app )
-            .get( '/app-error-route' )
+            .get( '/' )
             .end( ( err, response ) => {
                 if ( err ) return;
 
