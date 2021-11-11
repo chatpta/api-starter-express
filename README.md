@@ -21,7 +21,7 @@ Run application
  npm run devstart
 ```
 
-Run test
+Run test in watch mode
 
 ```shell
  npm run test
