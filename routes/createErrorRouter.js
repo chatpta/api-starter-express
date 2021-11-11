@@ -2,9 +2,14 @@ const express = require( 'express' );
 const router = express.Router();
 
 
-/* GET home page. */
+/**
+ * Throws error for testing, only when process.env.NODE_ENV = "test"
+ */
 router.get( '/', function ( req, res, next ) {
-    throw new Error( "Application broke" )
+    if ( process.env.NODE_ENV === "test" ) {
+        throw new Error( "Application broke" )
+    }
+    next();
 } );
 
 
