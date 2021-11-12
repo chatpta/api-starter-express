@@ -13,6 +13,17 @@ class ActiveRecord {
         return { record: "HI I am here" }
     }
 
+    saveInDb( object ) {
+        return { record: "HI I am here" }
+    }
+
+    updateInDb(object){
+        return { record: "HI I am here" }
+    }
+
+    deleteFromDb() {
+        return { record: "HI I am here" }
+    }
 }
 
 module.exports = ActiveRecord;

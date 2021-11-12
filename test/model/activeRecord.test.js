@@ -27,4 +27,40 @@ describe( "Active Record base class", () => {
         assert(typeOfProperty === "function");
         done();
     } );
+
+    it( "Contains saveInDb function", done => {
+        // Arrange
+        const record = new ActiveRecord();
+
+        // Act
+        const typeOfProperty = typeof record.saveInDb;
+
+        // Assert
+        assert(typeOfProperty === "function");
+        done();
+    } );
+
+    it( "Contains updateInDb function", done => {
+        // Arrange
+        const record = new ActiveRecord();
+
+        // Act
+        const typeOfProperty = typeof record.updateInDb;
+
+        // Assert
+        assert(typeOfProperty === "function");
+        done();
+    } );
+
+    it( "Contains deleteFromDb function", done => {
+        // Arrange
+        const record = new ActiveRecord();
+
+        // Act
+        const typeOfProperty = typeof record.deleteFromDb;
+
+        // Assert
+        assert(typeOfProperty === "function");
+        done();
+    } );
 } );
