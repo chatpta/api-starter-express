@@ -38,7 +38,7 @@ describe( "Server error", function () {
     } );
 } );
 
-describe( "App requests", function () {
+describe( "App requests root route", function () {
     it( "/ route get", function ( done ) {
 
         // Act
@@ -95,6 +95,69 @@ describe( "App requests", function () {
                 // Assert
                 assert( response.status === 200 );
                 assert( response.body.message === 'home delete response' );
+                done();
+            } );
+    } );
+} );
+
+
+describe( "App requests user route", function () {
+    it( "/users route get", function ( done ) {
+
+        // Act
+        request( app )
+            .get( '/users' )
+            .end( ( err, response ) => {
+                if ( err ) return;
+
+                // Assert
+                assert( response.status === 200 );
+                assert( response.body.message === 'user get response' );
+                done();
+            } );
+    } );
+
+    it( "/users route post", function ( done ) {
+
+        // Act
+        request( app )
+            .post( '/users' )
+            .end( ( err, response ) => {
+                if ( err ) return;
+
+                // Assert
+                assert( response.status === 200 );
+                assert( response.body.message === 'user post response' );
+                done();
+            } );
+    } );
+
+    it( "/user route patch", function ( done ) {
+
+        // Act
+        request( app )
+            .patch( '/users' )
+            .end( ( err, response ) => {
+                if ( err ) return;
+
+                // Assert
+                assert( response.status === 200 );
+                assert( response.body.message === 'user patch response' );
+                done();
+            } );
+    } );
+
+    it( "/users route delete", function ( done ) {
+
+        // Act
+        request( app )
+            .delete( '/users' )
+            .end( ( err, response ) => {
+                if ( err ) return;
+
+                // Assert
+                assert( response.status === 200 );
+                assert( response.body.message === 'user delete response' );
                 done();
             } );
     } );
