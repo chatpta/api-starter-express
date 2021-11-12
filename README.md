@@ -21,10 +21,16 @@ Run application
  npm run devstart
 ```
 
-Run test in watch mode
+Run test in watch mode with postgres db connection
 
 ```shell
  npm run test
+```
+
+Run test in watch mode WITHOUT postgres db connection
+
+```shell
+ npm run testWithoutDb
 ```
 
 ### Directory structure
