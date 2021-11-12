@@ -1,8 +1,11 @@
 const express = require( 'express' );
 const router = express.Router();
-const home = require( '../controller/homeController' );
+const controller = require( '../controller' );
 
 /* GET home page. */
-router.get( '/', home.getRequestHandler );
+router.get( '/', controller.home.getRequestHandler );
+router.post( '/', controller.home.postRequestHandler );
+router.patch( '/', controller.home.patchRequestHandler );
+router.delete( '/', controller.home.deleteRequestHandler );
 
 module.exports = router;
