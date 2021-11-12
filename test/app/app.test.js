@@ -38,8 +38,8 @@ describe( "Server error", function () {
     } );
 } );
 
-describe( "Server routes", function () {
-    it( "/get home", function ( done ) {
+describe( "App requests", function () {
+    it( "/ route get", function ( done ) {
 
         // Act
         request( app )
@@ -50,6 +50,51 @@ describe( "Server routes", function () {
                 // Assert
                 assert( response.status === 200 );
                 assert( response.body.message === 'home get response' );
+                done();
+            } );
+    } );
+
+    it( "/ route post", function ( done ) {
+
+        // Act
+        request( app )
+            .post( '/' )
+            .end( ( err, response ) => {
+                if ( err ) return;
+
+                // Assert
+                assert( response.status === 200 );
+                assert( response.body.message === 'home post response' );
+                done();
+            } );
+    } );
+
+    it( "/ route patch", function ( done ) {
+
+        // Act
+        request( app )
+            .patch( '/' )
+            .end( ( err, response ) => {
+                if ( err ) return;
+
+                // Assert
+                assert( response.status === 200 );
+                assert( response.body.message === 'home patch response' );
+                done();
+            } );
+    } );
+
+    it( "/ route delete", function ( done ) {
+
+        // Act
+        request( app )
+            .delete( '/' )
+            .end( ( err, response ) => {
+                if ( err ) return;
+
+                // Assert
+                assert( response.status === 200 );
+                assert( response.body.message === 'home delete response' );
                 done();
             } );
     } );
