@@ -6,7 +6,7 @@ const user = require( '../../controller' ).user;
 describe( "Controller Users", function () {
     it( "/get request return message", function ( done ) {
 
-        // Setup
+        // Arrange
         const req = {};
         const res = {
             send( message ) {
@@ -26,7 +26,7 @@ describe( "Controller Users", function () {
 
     it( "/post request return message", function ( done ) {
 
-        // Setup
+        // Arrange
         const req = {};
         const res = {
             send( message ) {
@@ -46,7 +46,7 @@ describe( "Controller Users", function () {
 
     it( "/patch request return message", function ( done ) {
 
-        // Setup
+        // Arrange
         const req = {};
         const res = {
             send( message ) {
@@ -66,7 +66,7 @@ describe( "Controller Users", function () {
 
     it( "/delete request return message", function ( done ) {
 
-        // Setup
+        // Arrange
         const req = {};
         const res = {
             send( message ) {

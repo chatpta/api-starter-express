@@ -7,7 +7,7 @@ const commonMiddleware = require( '../../common-middleware' );
 
 describe( "Common-middleware not found error handler", function () {
     it( "returns not found 404, message", function ( done ) {
-        // Setup
+        // Arrange
         let app = express();
         // noinspection JSCheckFunctionSignatures
         app.use( commonMiddleware.appErrorHandlers.notFound404 );
@@ -28,7 +28,7 @@ describe( "Common-middleware not found error handler", function () {
 
 describe( "Common-middleware data error handler", function () {
     it( "returns data error 400, message", function ( done ) {
-        // Setup
+        // Arrange
         let app = express();
         // noinspection JSCheckFunctionSignatures
         app.use( commonMiddleware.appErrorHandlers.appError400 );
@@ -49,7 +49,7 @@ describe( "Common-middleware data error handler", function () {
 
 describe( "Common-middleware server error handler", function () {
     it( "returns server error 500, message", function ( done ) {
-        // Setup
+        // Arrange
         let app = express();
         app.use( function ( req, res, next ) {
             throw new Error( "Application broke" )

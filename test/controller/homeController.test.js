@@ -6,7 +6,7 @@ const home = require( '../../controller' ).home;
 describe( "Controller Home", function () {
     it( "/get request return message", function ( done ) {
 
-        // Setup
+        // Arrange
         const req = {};
         const res = {
             send( message ) {
@@ -26,7 +26,7 @@ describe( "Controller Home", function () {
 
     it( "/post request return message", function ( done ) {
 
-        // Setup
+        // Arrange
         const req = {};
         const res = {
             send( message ) {
@@ -46,7 +46,7 @@ describe( "Controller Home", function () {
 
     it( "/patch request return message", function ( done ) {
 
-        // Setup
+        // Arrange
         const req = {};
         const res = {
             send( message ) {
@@ -66,7 +66,7 @@ describe( "Controller Home", function () {
 
     it( "/delete request return message", function ( done ) {
 
-        // Setup
+        // Arrange
         const req = {};
         const res = {
             send( message ) {

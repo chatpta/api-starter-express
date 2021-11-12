@@ -9,7 +9,7 @@ describe( "Database connection", async function () {
             done();
         }
 
-        // Setup
+        // Arrange
         let time = null;
 
         // Act
