@@ -1,15 +1,16 @@
-class User {
+const ActiveRecord = require( './ActiveRecord' );
+
+
+class User extends ActiveRecord{
 
     constructor() {
+        super();
     }
 
     getFirstUser() {
         return { name: "Peter" }
     }
 
-    getUserById( id ) {
-        return { name: "Peter", id: id }
-    }
 }
 
 module.exports.User = User;

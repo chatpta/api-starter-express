@@ -23,10 +23,10 @@ describe( 'User model', () => {
         let expectedUser = { name: "Peter", id: 4 };
 
         // Act
-        let foundUser = user.getUserById( 4 );
+        const typeOfProperty = typeof user.getByName;
 
         // Assert
-        assert.deepStrictEqual( foundUser, expectedUser );
+        assert(typeOfProperty === "function");
         done()
     } );
 } );

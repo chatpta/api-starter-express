@@ -1,6 +1,9 @@
-class Home {
+const ActiveRecord = require( './ActiveRecord' );
+
+class Home extends ActiveRecord{
 
     constructor() {
+        super();
     }
 
     getFirstLine() {
