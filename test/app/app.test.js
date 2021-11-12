@@ -38,7 +38,7 @@ describe( "Server error application", function () {
     } );
 } );
 
-describe( "App requests root route", function () {
+describe( "Requests root route application", function () {
     it( "/ route get", function ( done ) {
 
         // Act
@@ -101,7 +101,7 @@ describe( "App requests root route", function () {
 } );
 
 
-describe( "App requests user route", function () {
+describe( "Requests user route application", function () {
     it( "/users route get", function ( done ) {
 
         // Act
