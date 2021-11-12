@@ -27,5 +27,4 @@ describe( "Active Record base class", () => {
         assert(typeOfProperty === "function");
         done();
     } );
-
 } );
