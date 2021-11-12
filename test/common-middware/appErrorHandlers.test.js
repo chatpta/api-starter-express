@@ -5,7 +5,7 @@ const express = require( 'express' );
 const commonMiddleware = require( '../../common-middleware' );
 
 
-describe( "Middleware not found error handler", function () {
+describe( "Common-middleware not found error handler", function () {
     it( "returns not found 404, message", function ( done ) {
         // Setup
         let app = express();
@@ -26,7 +26,7 @@ describe( "Middleware not found error handler", function () {
     } );
 } );
 
-describe( "Middleware data error handler", function () {
+describe( "Common-middleware data error handler", function () {
     it( "returns data error 400, message", function ( done ) {
         // Setup
         let app = express();
@@ -47,7 +47,7 @@ describe( "Middleware data error handler", function () {
     } );
 } );
 
-describe( "Middleware server error handler", function () {
+describe( "Common-middleware server error handler", function () {
     it( "returns server error 500, message", function ( done ) {
         // Setup
         let app = express();

@@ -4,7 +4,7 @@ const request = require( 'supertest' );
 const app = require( '../../app' );
 
 
-describe( "Not found application", function () {
+describe( "Application, req not found", function () {
     it( "returns not found 404 message", function ( done ) {
 
         // Act
@@ -21,7 +21,7 @@ describe( "Not found application", function () {
     } );
 } );
 
-describe( "Server error application", function () {
+describe( "Application, req server error", function () {
     it( "returns server error 500 message", function ( done ) {
 
         // Act
@@ -38,7 +38,7 @@ describe( "Server error application", function () {
     } );
 } );
 
-describe( "Requests root route application", function () {
+describe( "Application, requests root route", function () {
     it( "/ route get", function ( done ) {
 
         // Act
@@ -101,7 +101,7 @@ describe( "Requests root route application", function () {
 } );
 
 
-describe( "Requests user route application", function () {
+describe( "Application, requests user route", function () {
     it( "/users route get", function ( done ) {
 
         // Act

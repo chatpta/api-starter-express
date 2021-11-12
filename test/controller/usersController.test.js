@@ -3,7 +3,7 @@ const assert = require( "assert" );
 const user = require( '../../controller' ).user;
 
 
-describe( "User controller middleware", function () {
+describe( "Controller Users", function () {
     it( "/get request return message", function ( done ) {
 
         // Setup

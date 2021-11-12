@@ -3,7 +3,7 @@ const assert = require( "assert" );
 const home = require( '../../controller' ).home;
 
 
-describe( "Home controller middleware", function () {
+describe( "Controller Home", function () {
     it( "/get request return message", function ( done ) {
 
         // Setup
