@@ -1,11 +1,17 @@
 # starter json api expressjs with postgres
 
-To run application in docker compose
+To run application in docker compose, 
+
+Express runs at localhost:3000 and postgres runs at localhost:5432
+
+```shell
+docker-compose -f docker-compose.yaml up
+```
 
 Start postgres database in container, available at host port 5432
 
 ```shell
-docker-compose -f docker-compose-pg-db.yaml up
+docker-compose up db-starter-api-express
 ```
 
 Test connect to db
