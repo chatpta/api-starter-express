@@ -19,3 +19,6 @@ query( 'SELECT NOW()' )
     .then( console.log )
     .catch( console.log );
 
+// Create database if not exist.
+// Create tables if not exist.
+// Optional drop and create new database.
