@@ -1,3 +1,4 @@
+'use strict';
 const { query, getClient, pool } = require( '../../db' );
 const { describe, it, after } = require( "mocha" );
 const assert = require( "assert" );
