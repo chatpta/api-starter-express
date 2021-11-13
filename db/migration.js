@@ -17,8 +17,9 @@ require( 'dotenv' ).config();
 const { query, getClient, pool, endPool } = require( '../db' );
 query( 'SELECT NOW()' )
     .then( console.log )
-    .then( endPool )
+    .then( process.exit )
     .catch( console.log );
+
 
 // Create database if not exist.
 // Create tables if not exist.
