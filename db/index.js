@@ -1,5 +1,10 @@
 const { Pool } = require( 'pg' );
-const pool = new Pool();
+const pool = new Pool( {
+    max: 20,  // Clients in pool
+    idleTimeoutMillis: 10000,
+    connectionTimeoutMillis: 2000,
+    allowExitOnIdle: false
+} );
 
 // Pool connection output
 pool.on( 'connect', ( client ) => {
@@ -14,7 +19,7 @@ pool.on( 'error', ( err, client ) => {
 } )
 
 pool.on( 'acquire', ( client ) => {
-    console.log( 'Client acquired from pool')
+    console.log( 'Client acquired from pool' )
 } )
 
 pool.on( 'remove', ( client ) => {
