@@ -14,9 +14,10 @@ require( 'dotenv' ).config();
 /**
  * Connect to database and test it.
  */
-const { query, getClient, pool } = require( '../db' );
+const { query, getClient, pool, endPool } = require( '../db' );
 query( 'SELECT NOW()' )
     .then( console.log )
+    .then( endPool )
     .catch( console.log );
 
 // Create database if not exist.

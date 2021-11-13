@@ -1,6 +1,6 @@
 # starter json api expressjs with postgres
 
-To run application in docker compose, 
+To run application in docker compose,
 
 Express runs at localhost:3000 and postgres runs at localhost:5432
 
@@ -45,8 +45,15 @@ Run the build script to do all of above
  ./build
 ```
 
+Run database migration to create database tables
+
+```shell
+ npm run migrateDb
+```
+
 ### Directory structure
 
 Todo::
+
 2. Create and run migration to create development, test and production database.
 3. Setup pg database connection and disconnect.
