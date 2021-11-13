@@ -1,4 +1,6 @@
 const { Pool } = require( 'pg' );
+
+
 const pool = new Pool( {
     max: 20,  // Clients in pool
     idleTimeoutMillis: 10000,
@@ -36,9 +38,26 @@ process.on( 'SIGINT', function () {
 } );
 
 module.exports = {
-    query: ( queryObject ) => {
-        return pool.query( queryObject );
-    },
-    endPool: () => pool.end().then( () => console.log( 'Pool has ended' ) ),
-    pool: pool
+    pool: pool,
+    query: queryObject => pool.query( queryObject ),
+    endPool: async () => await pool.end(),
+    getClient: async () => {
+        const client = await pool.connect()
+        const query = client.query
+        const release = client.release
+
+        client.query = ( ...args ) => {
+            client.lastQuery = args
+            return query.apply( client, args )
+        }
+
+        client.release = () => {
+            // set the methods back to their old un-monkey-patched version
+            client.query = query
+            client.release = release
+            return release.apply( client )
+        }
+
+        return client
+    }
 }
