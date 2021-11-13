@@ -1,3 +1,8 @@
+'use strict';
+
+/**
+ * This is base class for all model classes
+ */
 class ActiveRecord {
     constructor( dbConnection ) {
         this._recordName = this.constructor.name;
@@ -17,7 +22,7 @@ class ActiveRecord {
         return { record: "HI I am here" }
     }
 
-    updateInDb(object){
+    updateInDb( object ) {
         return { record: "HI I am here" }
     }
 

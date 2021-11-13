@@ -1,3 +1,4 @@
+'use strict';
 const express = require( 'express' );
 const home = require( './home' );
 const users = require( './users' );
@@ -11,4 +12,3 @@ router.use( '/users', users );
 router.use( '/error', createErrorRouter );
 
 module.exports = router;
-

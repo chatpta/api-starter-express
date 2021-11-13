@@ -1,6 +1,8 @@
+'use strict';
 const ActiveRecord = require( './ActiveRecord' );
 
-class Home extends ActiveRecord{
+
+class Home extends ActiveRecord {
 
     constructor() {
         super();
