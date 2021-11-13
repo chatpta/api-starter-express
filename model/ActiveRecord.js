@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This is base class for all model classes
+ * This is base class for all model classes.
  */
 class ActiveRecord {
     constructor( dbConnection ) {
