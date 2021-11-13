@@ -45,7 +45,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             for ( let i = 0; i < 20; i++ ) {
                 let client = await getClient()
                 totalConnectionCount = pool.totalCount;
-                await client.release();
+                client.release();
                 iteration = i;
             }
 
