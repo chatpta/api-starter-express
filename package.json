@@ -6,6 +6,7 @@
     "start": "export NODE_ENV=development && export PORT=3002 && node ./bin/www",
     "devstart": "export NODE_ENV=development && export PORT=3002 &&  nodemon ./bin/www",
     "production": "export NODE_ENV=production && node ./bin/www",
+    "migration": "node ./db/migration.js",
     "test": "export NODE_ENV=test && mocha --watch --reporter spec --bail --check-leaks test/**/*.test.js",
     "testWithoutDb": "export NODE_ENV=test && export DB_CONN=none && mocha --watch --reporter spec --bail --check-leaks test/**/*.test.js"
   },
