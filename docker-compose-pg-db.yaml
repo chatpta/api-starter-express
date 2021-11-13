@@ -4,7 +4,7 @@
 #   database: chatpta_db
 version: "3.9"
 services:
-  db:
+  db-starter-api-express:
     image: postgres
     restart: always
     ports:
@@ -14,3 +14,10 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: chatpta_db
+
+  starter-api-express:
+    build: .
+    ports:
+      - target: 3000
+        published: 3000
+
