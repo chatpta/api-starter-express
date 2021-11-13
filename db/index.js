@@ -1,12 +1,27 @@
 const { Pool } = require( 'pg' );
 const pool = new Pool();
 
-// The pool will emit an error on behalf of any idle clients
-// it contains if a backend error or network partition happens
-pool.on( 'error', ( err ) => {
-    console.error( 'Unexpected error on idle client', err )
+// Pool connection output
+pool.on( 'connect', ( client ) => {
+    client.query( 'SELECT NOW()' )
+        .then( res => console.log( "Pg pool connected to database" ) )
+        .catch( console.error );
+} );
+
+pool.on( 'error', ( err, client ) => {
+    console.error( 'Unexpected error in pg pool', err )
     process.exit( -1 )
 } )
+
+pool.on( 'acquire', ( client ) => {
+    console.log( 'Client acquired from pool')
+} )
+
+pool.on( 'remove', ( client ) => {
+    client.query( 'SELECT NOW()' )
+        .then( res => console.log( "Client closed and removed from pool" ) )
+        .catch( console.error );
+} );
 
 // disconnect
 process.on( 'SIGINT', function () {
@@ -20,4 +35,5 @@ module.exports = {
         return pool.query( queryObject );
     },
     endPool: () => pool.end().then( () => console.log( 'Pool has ended' ) ),
+    pool: pool
 }
