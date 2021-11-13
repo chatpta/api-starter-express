@@ -1,4 +1,4 @@
-
+'use strict';
 const getRequestHandler = ( req, res, next ) => res.send( { message: 'home get response' } );
 
 const postRequestHandler = ( req, res, next ) => res.send( { message: 'home post response' } );

@@ -1,3 +1,4 @@
+'use strict';
 const morgan = require( 'morgan' );
 const path = require( 'path' );
 const rotatingFileStream = require( 'rotating-file-stream' );

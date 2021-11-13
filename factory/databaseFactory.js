@@ -1,3 +1,4 @@
+'use strict';
 const { query, getClient, pool } = require( '../db' );
 
 /**
