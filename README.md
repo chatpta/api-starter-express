@@ -50,3 +50,4 @@ Run the build script to do all of above
 Todo::
 2. Create and run migration to create development, test and production database.
 3. Setup pg database connection and disconnect.
+4. Log file dates and app time need fix.
