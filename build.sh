@@ -25,4 +25,3 @@ npm run export NODE_ENV=production
 
 # Build and run application
 docker-compose up
-
