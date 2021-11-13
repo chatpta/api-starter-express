@@ -11,7 +11,7 @@ const pool = new Pool( {
 // Pool connection output
 pool.on( 'connect', ( client ) => {
     client.query( 'SELECT NOW()' )
-        .then( res => console.log( "Pg pool connected to database" ) )
+        // .then( res => console.log( "Pg pool connected to database" ) )
         .catch( console.error );
 } );
 
@@ -21,7 +21,7 @@ pool.on( 'error', ( err, client ) => {
 } )
 
 pool.on( 'acquire', ( client ) => {
-    console.log( 'Client acquired from pool' )
+    // console.log( 'Client acquired from pool' )
 } )
 
 pool.on( 'remove', ( client ) => {

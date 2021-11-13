@@ -1,4 +1,4 @@
-const { query, getClient } = require( '../../db' );
+const { query, getClient, pool } = require( '../../db' );
 const { describe, it, after } = require( "mocha" );
 const assert = require( "assert" );
 
@@ -24,7 +24,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             // Good for running transactions
 
             // Arrange
-            let client = await getClient()
+            let client = await getClient();
             let time = null;
 
             // Act
@@ -33,6 +33,43 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Assert
             assert( time.rowCount === 1 );
+        } );
+
+        it( "checkout with release does not exhaust clients", async function () {
+            // Just one client is used, no additional connection created
+            // Arrange
+            let iteration = 0;
+            let totalConnectionCount = 0
+
+            // Act
+            for ( let i = 0; i < 20; i++ ) {
+                let client = await getClient()
+                totalConnectionCount = pool.totalCount;
+                await client.release();
+                iteration = i;
+            }
+
+            // Assert
+            assert( iteration === 19 );
+            assert( totalConnectionCount === 1 );
+        } );
+
+        it( "checkout without release, exhaust clients", async function () {
+            // Every time create an additional connection, to get new client
+            // Arrange
+            let iteration = 0;
+            let totalConnectionCount = 0
+
+            // Act
+            for ( let i = 0; i < 20; i++ ) {
+                let client = await getClient()
+                totalConnectionCount = pool.totalCount;
+                iteration = i;
+            }
+
+            // Assert
+            assert( iteration === 19 );
+            assert( totalConnectionCount === 20 );
         } );
     } );
 }
