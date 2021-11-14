@@ -15,9 +15,10 @@ require( 'dotenv' ).config();
  * Connect to database and test it.
  */
 const { query, getClient, pool, endPool } = require( '../db' );
+
 query( 'SELECT NOW()' )
     .then( console.log )
-    .then( process.exit )
+    .finally( process.exit )
     .catch( console.log );
 
 
