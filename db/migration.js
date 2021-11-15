@@ -30,6 +30,16 @@ Factory.Database.getDbClient()
                     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
                );
                
+               DROP TABLE IF EXISTS Items;
+               CREATE TABLE Items (
+                    item_id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
+                    title text,
+                    description text,
+                    main_body json,
+                    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+                    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+               );
+               
                CREATE OR REPLACE FUNCTION trigger_set_timestamp()
                     RETURNS TRIGGER AS $$
                     BEGIN
@@ -39,7 +49,12 @@ Factory.Database.getDbClient()
                     $$ LANGUAGE plpgsql;
                
                CREATE TRIGGER set_timestamp
-                    BEFORE UPDATE ON Users
+                    BEFORE UPDATE ON Users 
+                    FOR EACH ROW
+                    EXECUTE PROCEDURE trigger_set_timestamp();
+                    
+               CREATE TRIGGER set_timestamp
+                    BEFORE UPDATE ON Items 
                     FOR EACH ROW
                     EXECUTE PROCEDURE trigger_set_timestamp();
           COMMIT;
