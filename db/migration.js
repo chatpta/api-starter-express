@@ -14,13 +14,13 @@ require( 'dotenv' ).config();
 /**
  * Connect to database and test it.
  */
-const { query, getClient, pool, endPool } = require( '../db' );
+const Factory = require( '../factory' );
 
-query( 'SELECT NOW()' )
+Factory.Database.getDbClient()
+    .then( client => client.query( 'SELECT NOW()' ) )
     .then( console.log )
-    .finally( process.exit )
-    .catch( console.log );
-
+    .catch( console.error );
+// .finally( process.exit )
 
 // Create database if not exist.
 // Create tables if not exist.
