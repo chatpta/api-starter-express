@@ -20,7 +20,7 @@ Start postgres database in container, available at host port 5432
 docker-compose up db-starter-api-express
 ```
 
-Test connect to db
+Test connection to db
 
 ```shell
 psql "postgresql://user:password@localhost/chatpta_db"
