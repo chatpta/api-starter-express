@@ -6,15 +6,15 @@ const { query, getClient, pool } = require( '../db' );
  */
 class DatabaseFactory {
 
-    getDbClient() {
+    static getDbClient() {
         return getClient();
     }
 
-    getDbQuery() {
-        return query();
+    static getDbQuery() {
+        return query;
     }
 
-    getDbPool() {
+    static getDbPool() {
         return pool;
     }
 }
