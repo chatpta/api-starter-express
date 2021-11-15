@@ -43,20 +43,20 @@ module.exports = {
     query: queryObject => pool.query( queryObject ),
     endPool: async () => await pool.end(),
     getClient: async () => {
-        const client = await pool.connect()
-        const query = client.query
-        const release = client.release
+        const client = await pool.connect();
+        const query = client.query;
+        const release = client.release;
 
         client.query = ( ...args ) => {
-            client.lastQuery = args
-            return query.apply( client, args )
+            client.lastQuery = args;
+            return query.apply( client, args );
         }
 
         client.release = () => {
             // set the methods back to their old un-monkey-patched version
-            client.query = query
-            client.release = release
-            return release.apply( client )
+            client.query = query;
+            client.release = release;
+            return release.apply( client );
         }
 
         return client
