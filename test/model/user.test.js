@@ -1,12 +1,12 @@
 const assert = require( 'assert' );
 const { describe, it } = require( "mocha" );
-const { User } = require( "../../model/User" );
+const Factory = require( "../../factory" );
 
 describe( 'User model', () => {
 
     it( 'getFirstUser finds first user', ( done ) => {
         // Arrange
-        let user = new User();
+        let user = Factory.Model.getUser();
         let expectedUser = { name: "Peter" };
 
         // Act
@@ -19,7 +19,7 @@ describe( 'User model', () => {
 
     it( 'getUserById called by user_id finds user', ( done ) => {
         // Arrange
-        let user = new User();
+        let user = Factory.Model.getUser();
         let expectedUser = { name: "Peter", id: 4 };
 
         // Act

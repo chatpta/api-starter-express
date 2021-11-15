@@ -2,7 +2,7 @@
 const ActiveRecord = require( './ActiveRecord' );
 
 
-class Home extends ActiveRecord {
+class Item extends ActiveRecord {
 
     constructor() {
         super();
@@ -13,4 +13,4 @@ class Home extends ActiveRecord {
     }
 }
 
-module.exports.Home = Home;
+module.exports.Item = Item;

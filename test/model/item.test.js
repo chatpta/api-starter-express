@@ -1,12 +1,12 @@
 const assert = require( 'assert' );
 const { describe, it } = require( "mocha" );
-const { Home } = require( "../../model/Home" );
+const Factory = require( "../../factory" );
 
-describe( 'Home model', () => {
+describe( 'Item model', () => {
 
-    it( 'getFirstLine finds first line', ( done ) => {
+    it( 'getFirstLine finds first item', ( done ) => {
         // Arrange
-        let home = new Home();
+        let home = Factory.Model.getItem();
         let expectedLine = { name: "First line" };
 
         // Act

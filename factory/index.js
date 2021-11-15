@@ -1,6 +1,8 @@
 'use strict';
 const Database = require( './databaseFactory' );
+const Model = require( './modelFactory' );
 
 module.exports = {
-    Database: Database
+    Database: Database,
+    Model: Model
 }
