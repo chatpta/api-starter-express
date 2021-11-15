@@ -19,9 +19,10 @@ const Factory = require( '../factory' );
 Factory.Database.getDbClient()
     .then( client => client.query( `
           BEGIN;
+               CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
                DROP TABLE IF EXISTS Users;
                CREATE TABLE Users (
-                    user_id SERIAL PRIMARY KEY,
+                    user_id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
                     first_name text,
                     last_name text,
                     main_body json,
