@@ -1,5 +1,5 @@
 'use strict';
-const { query, getClient, pool } = require( '../db' );
+const { query, getClient, pool} = require( '../db' );
 
 /**
  * Factory for database functionality

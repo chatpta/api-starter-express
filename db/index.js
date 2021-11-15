@@ -59,6 +59,6 @@ module.exports = {
             return release.apply( client );
         }
 
-        return client
-    }
+        return client;
+    },
 }
