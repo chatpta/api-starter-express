@@ -1,6 +1,6 @@
 'use strict';
-const DatabaseFactory = require( './databaseFactory' );
+const Database = require( './databaseFactory' );
 
 module.exports = {
-    DatabaseFactory
+    Database: Database
 }
