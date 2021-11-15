@@ -19,7 +19,7 @@ class ActiveRecord {
     }
 
     saveInDb( object ) {
-        return { record: "HI I am here" }
+        return { record: this._className }
     }
 
     updateInDb( object ) {

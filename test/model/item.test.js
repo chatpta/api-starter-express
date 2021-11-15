@@ -2,18 +2,20 @@ const assert = require( 'assert' );
 const { describe, it } = require( "mocha" );
 const Factory = require( "../../factory" );
 
-describe( 'Item model', () => {
+// Runs test only if DB_CONN is defined
+if ( process.env?.DB_CONN !== "none" ) {
+    describe( 'Item model', () => {
+        it( 'Saves item', ( done ) => {
+            // Arrange
+            let item = Factory.Model.getItem();
+            let expectedLine = { record: "Item" };
 
-    it( 'getFirstLine finds first item', ( done ) => {
-        // Arrange
-        let home = Factory.Model.getItem();
-        let expectedLine = { name: "First line" };
+            // Act
+            let foundLine = item.saveInDb();
 
-        // Act
-        let foundLine = home.getFirstLine();
-
-        // Assert
-        assert.deepStrictEqual( foundLine, expectedLine );
-        done()
+            // Assert
+            assert.deepStrictEqual( foundLine, expectedLine );
+            done()
+        } );
     } );
-} );
+}
