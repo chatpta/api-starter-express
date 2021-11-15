@@ -1,5 +1,11 @@
 # starter json api expressjs with postgres
 
+To create a copy of this app run
+
+```shell
+npx @chatpta/starter-api-express my-api
+```
+
 To run application in docker compose,
 
 Express runs at localhost:3000 and postgres runs at localhost:5432
