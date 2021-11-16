@@ -10,8 +10,22 @@ class ActiveRecord {
         this._DatabaseFactory = DatabaseFactory;
     }
 
-    findById( id ) {
-        return { record: "HI I am here" }
+    async findById( id ) {
+        // Get database client
+        const client = await this._DatabaseFactory.getDbClient()
+
+        // Query database
+        const user = await client.query( `
+            SELECT *
+            FROM ${ this._className }s
+            WHERE ${ this._className }_id = '${ id }';
+        ` );
+
+        // Release client ( necessary )
+        await client.release();
+
+        // Return result
+        return user;
     }
 
     save( object ) {
