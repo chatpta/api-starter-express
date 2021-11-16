@@ -4,10 +4,10 @@
  * This is base class for all model classes.
  */
 class ActiveRecord {
-    constructor( Database ) {
+    constructor( DatabaseFactory ) {
         this._recordName = this.constructor.name;
         this._className = new.target.name;
-        this._Database = Database;
+        this._DatabaseFactory = DatabaseFactory;
     }
 
     findById( id ) {
@@ -28,6 +28,10 @@ class ActiveRecord {
 
     delete() {
         return { record: "HI I am here" }
+    }
+
+    getQuery( ) {
+        return this._DatabaseFactory.getDbQuery();
     }
 }
 

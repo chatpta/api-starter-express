@@ -65,15 +65,15 @@ if ( process.env?.DB_CONN !== "none" ) {
             let pool = Factory.getDbPool();
 
             // Act
-            for ( let i = 0; i < 20; i++ ) {
+            for ( let i = 0; i < 5; i++ ) {
                 let client = await Factory.getDbClient();
                 totalConnectionCount = pool.totalCount;
                 iteration = i;
             }
 
             // Assert
-            assert( iteration === 19 );
-            assert( totalConnectionCount === 20 );
+            assert( iteration === 4 );
+            assert( totalConnectionCount === 5 );
         } );
     } );
 }

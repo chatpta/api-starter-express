@@ -4,8 +4,8 @@ const ActiveRecord = require( './ActiveRecord' );
 
 class Item extends ActiveRecord {
 
-    constructor( Database ) {
-        super( Database );
+    constructor( DatabaseFactory ) {
+        super( DatabaseFactory );
     }
 
     getFirstLine() {

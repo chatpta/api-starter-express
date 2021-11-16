@@ -4,8 +4,8 @@ const ActiveRecord = require( './ActiveRecord' );
 
 class User extends ActiveRecord {
 
-    constructor(Database) {
-        super(Database);
+    constructor( DatabaseFactory ) {
+        super( DatabaseFactory );
     }
 
     findFirstUser() {

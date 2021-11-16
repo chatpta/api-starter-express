@@ -2,7 +2,19 @@ const assert = require( 'assert' );
 const { describe, it } = require( "mocha" );
 const { User } = require( "../../factory" );
 
-describe( 'User model', () => {
+describe( 'User model', ( done ) => {
+
+    it( 'getQuery', async () => {
+        // Arrange
+        const query = await User.getQuery();
+
+        // Act
+        const time = await query( 'SELECT NOW()' );
+
+        // Assert
+        assert( time.rowCount === 1 );
+
+    } );
 
     it( 'findById', ( done ) => {
         // Arrange
