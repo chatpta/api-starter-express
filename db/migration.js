@@ -59,7 +59,11 @@ Factory.getDbClient()
                     EXECUTE PROCEDURE trigger_set_timestamp();
           COMMIT;
      ` ) )
-    .then( console.log )
+    .then( result => {
+        if ( result.length === 10 ) {
+            console.log( "========== Migration complete ==========" );
+        }
+    } )
     .catch( console.error )
     .finally( process.exit );
 

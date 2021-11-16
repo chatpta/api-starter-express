@@ -34,7 +34,11 @@ Factory.getDbClient()
                ('Aloo',   'Good');
           COMMIT;
      ` ) )
-    .then( console.log )
+    .then( result => {
+        if ( result.length === 4 ) {
+            console.log( "========== Seeding of db complete ==========" );
+        }
+    } )
     .catch( console.error )
     .finally( process.exit );
 
