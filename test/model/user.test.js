@@ -23,6 +23,20 @@ describe( 'User model', ( done ) => {
         assert.deepStrictEqual( foundUser.rows[ 0 ].first_name, testUser.rows[ 0 ].first_name );
     } );
 
+    it( 'save', async () => {
+        // Arrange
+        const testUser = {
+            first_name: "Good",
+            last_name: "Fellow"
+        };
+
+        // Act
+        const savedUser = await User.save( testUser );
+
+        // Assert
+        assert.deepStrictEqual( savedUser.rows[ 0 ].first_name, testUser.first_name );
+    } );
+
     it( 'findByFirstName', async () => {
         // Act
         const user = await User.findByFirstName( "Pankaj" );
