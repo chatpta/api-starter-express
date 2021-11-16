@@ -57,7 +57,13 @@ Run database migration to create database tables
  npm run migrateDb
 ```
 
-### Directory structure
+# Directory structure
+
+## bin
+
+Contains express entry point script www, this script runs in response to ```npm run start``` and ```npm run devstart```
+
+## common-middleware
 
 Todo::
 
