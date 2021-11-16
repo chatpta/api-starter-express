@@ -3,6 +3,6 @@ const Database = require( './databaseFactory' );
 const Model = require( './modelFactory' );
 
 module.exports = {
-    Database: Database,
-    Model: Model
+    User: Model.getUser( Database ),
+    Item: Model.getItem( Database )
 }

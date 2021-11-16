@@ -14,9 +14,9 @@ require( 'dotenv' ).config();
 /**
  * Connect to database and test it.
  */
-const Factory = require( '../factory' );
+const Factory = require( '../factory/databaseFactory' );
 
-Factory.Database.getDbClient()
+Factory.getDbClient()
     .then( client => client.query( `
           BEGIN;
                CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

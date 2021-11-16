@@ -1,7 +1,7 @@
 'use strict';
 const { describe, it, after } = require( "mocha" );
 const assert = require( "assert" );
-const Factory = require( '../../factory' );
+const Factory = require( '../../factory/databaseFactory' );
 
 // Runs test only if DB_CONN is defined
 if ( process.env?.DB_CONN !== "none" ) {
@@ -13,7 +13,7 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Arrange
             let time = null;
-            let query = Factory.Database.getDbQuery();
+            let query = Factory.getDbQuery();
 
             // Act
             time = await query( 'SELECT NOW()' );
@@ -26,7 +26,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             // Good for running transactions
 
             // Arrange
-            let client = await Factory.Database.getDbClient();
+            let client = await Factory.getDbClient();
             let time = null;
 
             // Act
@@ -42,11 +42,11 @@ if ( process.env?.DB_CONN !== "none" ) {
             // Arrange
             let iteration = 0;
             let totalConnectionCount = 0
-            let pool = Factory.Database.getDbPool();
+            let pool = Factory.getDbPool();
 
             // Act
             for ( let i = 0; i < 20; i++ ) {
-                let client = await Factory.Database.getDbClient();
+                let client = await Factory.getDbClient();
                 totalConnectionCount = pool.totalCount;
                 client.release();
                 iteration = i;
@@ -62,11 +62,11 @@ if ( process.env?.DB_CONN !== "none" ) {
             // Arrange
             let iteration = 0;
             let totalConnectionCount = 0
-            let pool = Factory.Database.getDbPool();
+            let pool = Factory.getDbPool();
 
             // Act
             for ( let i = 0; i < 20; i++ ) {
-                let client = await Factory.Database.getDbClient();
+                let client = await Factory.getDbClient();
                 totalConnectionCount = pool.totalCount;
                 iteration = i;
             }

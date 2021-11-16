@@ -6,16 +6,16 @@ const { Item, User } = require( '../model' );
  */
 class ModelFactory {
 
-    static getUser() {
+    static getUser( Database ) {
         if ( !this._user ) {
-            this._user = new User();
+            this._user = new User( Database );
         }
         return this._user;
     }
 
-    static getItem() {
+    static getItem( Database ) {
         if ( !this._item ) {
-            this._item = new Item();
+            this._item = new Item( Database );
         }
         return this._item;
     }

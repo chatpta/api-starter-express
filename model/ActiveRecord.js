@@ -4,10 +4,10 @@
  * This is base class for all model classes.
  */
 class ActiveRecord {
-    constructor( dbConnection ) {
+    constructor( Database ) {
         this._recordName = this.constructor.name;
         this._className = new.target.name;
-        this._dbConnection = dbConnection;
+        this._Database = Database;
     }
 
     findById( id ) {
