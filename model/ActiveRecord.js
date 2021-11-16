@@ -77,8 +77,8 @@ class ActiveRecord {
         return user;
     }
 
-    update( object ) {
-        return { record: "HI I am here" }
+    async update( user_id, updatedUser ) {
+        return user_id;
     }
 
     delete() {
