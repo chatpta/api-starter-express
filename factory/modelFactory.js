@@ -7,10 +7,7 @@ const { Item, User } = require( '../model' );
 class ModelFactory {
 
     static getUser( Database ) {
-        if ( !this._user ) {
-            this._user = new User( Database );
-        }
-        return this._user;
+        return new User( Database )
     }
 
     static getItem( Database ) {

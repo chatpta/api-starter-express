@@ -4,12 +4,24 @@ const { User } = require( "../../factory" );
 
 describe( 'User model', () => {
 
-    it( 'getFirstUser finds first user', ( done ) => {
+    it( 'findById', ( done ) => {
+        // Arrange
+        let expectedUser = { record: 'HI I am here' };
+
+        // Act
+        let foundUser = User.findById();
+
+        // Assert
+        assert.deepStrictEqual( foundUser, expectedUser );
+        done()
+    } );
+
+    it( 'findFirstUser finds first user', ( done ) => {
         // Arrange
         let expectedUser = { name: "Peter" };
 
         // Act
-        let foundUser = User.getFirstUser();
+        let foundUser = User.findFirstUser();
 
         // Assert
         assert.deepStrictEqual( foundUser, expectedUser );
@@ -24,7 +36,7 @@ describe( 'User model', () => {
         const typeOfProperty = typeof User.findByName;
 
         // Assert
-        assert(typeOfProperty === "function");
+        assert( typeOfProperty === "function" );
         done()
     } );
 } );

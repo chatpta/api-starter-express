@@ -8,7 +8,7 @@ class User extends ActiveRecord {
         super(Database);
     }
 
-    getFirstUser() {
+    findFirstUser() {
         return { name: "Peter" }
     }
 
