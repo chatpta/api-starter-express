@@ -15,12 +15,13 @@ class ActiveRecord {
     }
 
     async findByName( name ) {
-        const query = await this._DatabaseFactory.getDbQuery()
-        const user = query( `
-                        SELECT * 
-                        FROM ${this._className}s 
-                        WHERE first_name = '${name}';
-                        ` )
+        const client = await this._DatabaseFactory.getDbClient()
+        const user = client.query( `
+            SELECT *
+            FROM ${ this._className }s
+            WHERE first_name = '${ name }';
+        ` );
+        await client.release();
         return user;
     }
 
