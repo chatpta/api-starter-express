@@ -4,60 +4,60 @@ const assert = require( "assert" );
 
 describe( "Active Record base class", () => {
 
-    it( "Contains getById function", done => {
+    it( "Contains findById function", done => {
         // Arrange
         const record = new ActiveRecord();
 
         // Act
-        const typeOfProperty = typeof record.getById;
+        const typeOfProperty = typeof record.findById;
 
         // Assert
         assert(typeOfProperty === "function");
         done();
     } );
 
-    it( "Contains getByName function", done => {
+    it( "Contains findByName function", done => {
         // Arrange
         const record = new ActiveRecord();
 
         // Act
-        const typeOfProperty = typeof record.getByName;
+        const typeOfProperty = typeof record.findByName;
 
         // Assert
         assert(typeOfProperty === "function");
         done();
     } );
 
-    it( "Contains saveInDb function", done => {
+    it( "Contains save function", done => {
         // Arrange
         const record = new ActiveRecord();
 
         // Act
-        const typeOfProperty = typeof record.saveInDb;
+        const typeOfProperty = typeof record.save;
 
         // Assert
         assert(typeOfProperty === "function");
         done();
     } );
 
-    it( "Contains updateInDb function", done => {
+    it( "Contains update function", done => {
         // Arrange
         const record = new ActiveRecord();
 
         // Act
-        const typeOfProperty = typeof record.updateInDb;
+        const typeOfProperty = typeof record.update;
 
         // Assert
         assert(typeOfProperty === "function");
         done();
     } );
 
-    it( "Contains deleteFromDb function", done => {
+    it( "Contains delete function", done => {
         // Arrange
         const record = new ActiveRecord();
 
         // Act
-        const typeOfProperty = typeof record.deleteFromDb;
+        const typeOfProperty = typeof record.delete;
 
         // Assert
         assert(typeOfProperty === "function");

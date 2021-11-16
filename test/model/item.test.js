@@ -11,7 +11,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             let expectedLine = { record: "Item" };
 
             // Act
-            let foundLine = item.saveInDb();
+            let foundLine = item.save();
 
             // Assert
             assert.deepStrictEqual( foundLine, expectedLine );

@@ -10,23 +10,23 @@ class ActiveRecord {
         this._dbConnection = dbConnection;
     }
 
-    getById( id ) {
+    findById( id ) {
         return { record: "HI I am here" }
     }
 
-    getByName( name ) {
+    findByName( name ) {
         return { record: "HI I am here" }
     }
 
-    saveInDb( object ) {
+    save( object ) {
         return { record: this._className }
     }
 
-    updateInDb( object ) {
+    update( object ) {
         return { record: "HI I am here" }
     }
 
-    deleteFromDb() {
+    delete() {
         return { record: "HI I am here" }
     }
 }

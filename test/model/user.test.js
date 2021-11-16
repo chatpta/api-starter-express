@@ -17,13 +17,13 @@ describe( 'User model', () => {
         done()
     } );
 
-    it( 'getUserById called by user_id finds user', ( done ) => {
+    it( 'findByName called by user_id finds user', ( done ) => {
         // Arrange
         let user = Factory.Model.getUser();
         let expectedUser = { name: "Peter", id: 4 };
 
         // Act
-        const typeOfProperty = typeof user.getByName;
+        const typeOfProperty = typeof user.findByName;
 
         // Assert
         assert(typeOfProperty === "function");
