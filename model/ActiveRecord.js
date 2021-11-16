@@ -14,8 +14,14 @@ class ActiveRecord {
         return { record: "HI I am here" }
     }
 
-    findByName( name ) {
-        return { record: "HI I am here" }
+    async findByName( name ) {
+        const query = await this._DatabaseFactory.getDbQuery()
+        const user = query( `
+                        SELECT * 
+                        FROM ${this._className}s 
+                        WHERE first_name = '${name}';
+                        ` )
+        return user;
     }
 
     save( object ) {
@@ -30,7 +36,7 @@ class ActiveRecord {
         return { record: "HI I am here" }
     }
 
-    getQuery( ) {
+    getQuery() {
         return this._DatabaseFactory.getDbQuery();
     }
 }

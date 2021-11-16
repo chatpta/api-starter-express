@@ -4,6 +4,14 @@ const { User } = require( "../../factory" );
 
 describe( 'User model', ( done ) => {
 
+    it( 'findByName', async () => {
+        // Act
+        const user = await User.findByName("Pankaj");
+
+        // Assert
+        assert.deepStrictEqual("Pankaj", user.rows[0].first_name);
+    } );
+
     it( 'getQuery', async () => {
         // Arrange
         const query = await User.getQuery();
