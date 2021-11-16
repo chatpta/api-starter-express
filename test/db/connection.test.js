@@ -63,17 +63,22 @@ if ( process.env?.DB_CONN !== "none" ) {
             let iteration = 0;
             let totalConnectionCount = 0
             let pool = Factory.getDbPool();
+            let clients = [];
 
             // Act
-            for ( let i = 0; i < 5; i++ ) {
+            for ( let i = 0; i < 20; i++ ) {
                 let client = await Factory.getDbClient();
+                clients.push( client );
                 totalConnectionCount = pool.totalCount;
                 iteration = i;
             }
 
             // Assert
-            assert( iteration === 4 );
-            assert( totalConnectionCount === 5 );
+            assert.deepStrictEqual( iteration, 19 );
+            assert.deepStrictEqual( totalConnectionCount, 20 );
+
+            // Release clients
+            clients.forEach( client => client.release() )
         } );
     } );
 }
