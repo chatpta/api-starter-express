@@ -1,20 +1,20 @@
 # starter json api expressjs with postgres
 
-To create a copy of this app run
+### Create my-api application
 
 ```shell
 npx @chatpta/starter-api-express my-api
 ```
 
-To run application in docker compose,
+### Run application in docker compose,
 
-Express runs at localhost:3000 and postgres runs at localhost:5432
+Express runs at ```localhost:3000``` and postgres runs at ```localhost:5432```
 
 ```shell
 docker-compose -f docker-compose.yaml up
 ```
 
-Start postgres database in container, available at host port 5432
+### Run postgres database alone in container, available at host port ```5432```
 
 ```shell
 docker-compose up db-starter-api-express
