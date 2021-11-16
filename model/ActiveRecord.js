@@ -86,7 +86,7 @@ class ActiveRecord {
 
         // Query database
         const record = await client.query( {
-            name: `save-${ this._modelName }`,
+            name: `update-${ this._modelName }`,
             text: `INSERT INTO ${ this._modelName }s (${ keys.join( ', ' ) })
                    VALUES (${ prompt.join( ', ' ) }) RETURNING *`,
             values: values
