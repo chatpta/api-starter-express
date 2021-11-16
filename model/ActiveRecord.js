@@ -21,7 +21,7 @@ class ActiveRecord {
         const client = await this._DatabaseFactory.getDbClient()
 
         // Query database
-        const user = await client.query( `
+        const record = await client.query( `
             SELECT *
             FROM ${ this._modelName }s
             WHERE ${ this._modelName }_id = '${ id }';
@@ -31,7 +31,7 @@ class ActiveRecord {
         await client.release();
 
         // Return result
-        return user;
+        return record;
     }
 
     /**
@@ -43,7 +43,7 @@ class ActiveRecord {
         const client = await this._DatabaseFactory.getDbClient()
 
         // Query database
-        const user = await client.query( `
+        const record = await client.query( `
             SELECT *
             FROM ${ this._modelName }s LIMIT 1;
         ` );
@@ -52,7 +52,7 @@ class ActiveRecord {
         await client.release();
 
         // Return result
-        return user;
+        return record;
     }
 
     async save( object ) {
@@ -63,7 +63,7 @@ class ActiveRecord {
         const client = await this._DatabaseFactory.getDbClient()
 
         // Query database
-        const user = await client.query( {
+        const record = await client.query( {
             name: `save-${ this._modelName }`,
             text: `INSERT INTO ${ this._modelName }s (${ keys.join( ', ' ) })
                    VALUES (${ prompt.join( ', ' ) }) RETURNING *`,
@@ -74,11 +74,29 @@ class ActiveRecord {
         await client.release();
 
         // Return result
-        return user;
+        return record;
     }
 
-    async update( user_id, updatedUser ) {
-        return user_id;
+    async update( record_id, updatedObject ) {
+        // Deconstruct the received object
+        let [ keys, prompt, values ] = this.extractKeyPromptValueArrays( updatedObject );
+
+        // Get database client
+        const client = await this._DatabaseFactory.getDbClient()
+
+        // Query database
+        const record = await client.query( {
+            name: `save-${ this._modelName }`,
+            text: `INSERT INTO ${ this._modelName }s (${ keys.join( ', ' ) })
+                   VALUES (${ prompt.join( ', ' ) }) RETURNING *`,
+            values: values
+        } );
+
+        // Release client ( necessary )
+        await client.release();
+
+        // Return result
+        return record;
     }
 
     delete() {

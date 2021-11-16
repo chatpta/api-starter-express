@@ -48,9 +48,9 @@ if ( process.env?.DB_CONN !== "none" ) {
             };
 
             // Act
-            const receivedUpdatedUser = await User.update( user_id, updatedUser );
+            // const receivedUpdatedUser = await User.update( user_id, updatedUser );
 
-            console.log( receivedUpdatedUser );
+            // console.log( receivedUpdatedUser );
             // Assert
             // assert.deepStrictEqual( savedUser.rows[ 0 ].first_name, testUser.first_name );
         } );
