@@ -25,10 +25,6 @@ class User extends ActiveRecord {
         // Return result
         return user;
     }
-
-    findFirstUser() {
-        return { name: "Peter" }
-    }
 }
 
 module.exports.User = User;

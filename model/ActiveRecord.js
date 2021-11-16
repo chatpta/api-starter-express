@@ -85,10 +85,6 @@ class ActiveRecord {
         return { record: "HI I am here" }
     }
 
-    getQuery() {
-        return this._DatabaseFactory.getDbQuery();
-    }
-
     // Private methods
     extractKeyPromptValueArrays( object ) {
         let keys = [];
