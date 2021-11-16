@@ -56,7 +56,8 @@ class ActiveRecord {
     }
 
     async save( object ) {
-        let [ keys, prompt, values ] = this.extractKeyValueArray( object );
+        // Deconstruct the received object
+        let [ keys, prompt, values ] = this.extractKeyPromptValueArrays( object );
 
         // Get database client
         const client = await this._DatabaseFactory.getDbClient()
@@ -64,7 +65,7 @@ class ActiveRecord {
         // Query database
         const user = await client.query( {
             name: `save-${ this._modelName }`,
-            text: `INSERT INTO ${ this._modelName }s ( ${ keys.join( ', ' ) } )
+            text: `INSERT INTO ${ this._modelName }s (${ keys.join( ', ' ) })
                    VALUES (${ prompt.join( ', ' ) }) RETURNING *`,
             values: values
         } );
@@ -89,7 +90,7 @@ class ActiveRecord {
     }
 
     // Private methods
-    extractKeyValueArray( object ) {
+    extractKeyPromptValueArrays( object ) {
         let keys = [];
         let values = [];
         let prompt = [];
