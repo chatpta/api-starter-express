@@ -16,17 +16,17 @@ describe( "Active Record base class", () => {
         done();
     } );
 
-    it( "Contains findByName function", done => {
-        // Arrange
-        const record = new ActiveRecord();
-
-        // Act
-        const typeOfProperty = typeof record.findByName;
-
-        // Assert
-        assert(typeOfProperty === "function");
-        done();
-    } );
+    // it( "Contains findByFirstName function", done => {
+    //     // Arrange
+    //     const record = new ActiveRecord();
+    //
+    //     // Act
+    //     const typeOfProperty = typeof record.findByFirstName;
+    //
+    //     // Assert
+    //     assert(typeOfProperty === "function");
+    //     done();
+    // } );
 
     it( "Contains save function", done => {
         // Arrange

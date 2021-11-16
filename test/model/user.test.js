@@ -4,9 +4,9 @@ const { User } = require( "../../factory" );
 
 describe( 'User model', ( done ) => {
 
-    it( 'findByName', async () => {
+    it( 'findByFirstName', async () => {
         // Act
-        const user = await User.findByName("Pankaj");
+        const user = await User.findByFirstName("Pankaj");
 
         // Assert
         assert.deepStrictEqual("Pankaj", user.rows[0].first_name);
@@ -48,12 +48,12 @@ describe( 'User model', ( done ) => {
         done()
     } );
 
-    it( 'findByName called by user_id finds user', ( done ) => {
+    it( 'findByFirstName called by user_id finds user', ( done ) => {
         // Arrange
         let expectedUser = { name: "Peter", id: 4 };
 
         // Act
-        const typeOfProperty = typeof User.findByName;
+        const typeOfProperty = typeof User.findByFirstName;
 
         // Assert
         assert( typeOfProperty === "function" );

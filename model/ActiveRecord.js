@@ -14,17 +14,6 @@ class ActiveRecord {
         return { record: "HI I am here" }
     }
 
-    async findByName( name ) {
-        const client = await this._DatabaseFactory.getDbClient()
-        const user = client.query( `
-            SELECT *
-            FROM ${ this._className }s
-            WHERE first_name = '${ name }';
-        ` );
-        await client.release();
-        return user;
-    }
-
     save( object ) {
         return { record: this._className }
     }
