@@ -4,15 +4,23 @@ const { User } = require( "../../factory" );
 
 describe( 'User model', ( done ) => {
 
-    it( 'findById', async () => {
-        // Arrange
-        let id = '7d14f1d5-2966-4296-b7df-eaac32c31983';
-
+    it( 'findOne', async () => {
         // Act
-        const user = await User.findById( id );
+        const user = await User.findOne();
 
         // Assert
-        assert.deepStrictEqual( "Umesh", user.rows[ 0 ].first_name );
+        assert.deepStrictEqual( user.rowCount, 1 );
+    } );
+
+    it( 'findById', async () => {
+        // Arrange
+        const testUser = await User.findOne();
+
+        // Act
+        const foundUser = await User.findById( testUser.rows[ 0 ].user_id );
+
+        // Assert
+        assert.deepStrictEqual( foundUser.rows[ 0 ].first_name, testUser.rows[ 0 ].first_name );
     } );
 
     it( 'findByFirstName', async () => {
@@ -20,7 +28,7 @@ describe( 'User model', ( done ) => {
         const user = await User.findByFirstName( "Pankaj" );
 
         // Assert
-        assert.deepStrictEqual( "Pankaj", user.rows[ 0 ].first_name );
+        assert.deepStrictEqual( user.rows[ 0 ].first_name, "Pankaj" );
     } );
 
     it( 'getQuery', async () => {

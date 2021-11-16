@@ -10,6 +10,11 @@ class ActiveRecord {
         this._DatabaseFactory = DatabaseFactory;
     }
 
+    /**
+     * Finds record by its id
+     * @param id
+     * @return {Promise<*>}
+     */
     async findById( id ) {
         // Get database client
         const client = await this._DatabaseFactory.getDbClient()
@@ -19,6 +24,27 @@ class ActiveRecord {
             SELECT *
             FROM ${ this._className }s
             WHERE ${ this._className }_id = '${ id }';
+        ` );
+
+        // Release client ( necessary )
+        await client.release();
+
+        // Return result
+        return user;
+    }
+
+    /**
+     * Finds one random record
+     * @return {Promise<*>}
+     */
+    async findOne() {
+        // Get database client
+        const client = await this._DatabaseFactory.getDbClient()
+
+        // Query database
+        const user = await client.query( `
+            SELECT *
+            FROM ${ this._className }s LIMIT 1;
         ` );
 
         // Release client ( necessary )
