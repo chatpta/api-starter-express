@@ -19,13 +19,10 @@ class ActiveRecord {
      * @return {Promise<*>}
      */
     async findById( id ) {
-        // Query database
-        const query = `
-            SELECT *
-            FROM ${ this._modelName }s
-            WHERE ${ this._modelName }_id = '${ id }';
-        `;
+        // Build query
+        const query = lib._findByIdQueryBuilder( id, this._modelName );
 
+        // Query database
         return await this.asyncClientQueryRun( query );
     }
 

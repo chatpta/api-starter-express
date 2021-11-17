@@ -32,7 +32,16 @@ function _extractUpdateKeysValues( object ) {
     return [ keys, values ];
 }
 
+function _findByIdQueryBuilder( id, modelName ) {
+    return ( `
+        SELECT *
+        FROM ${ modelName }s
+        WHERE ${ modelName }_id = '${ id }';
+    ` );
+}
+
 module.exports = {
     _extractKeyPromptValueArrays,
-    _extractUpdateKeysValues
+    _extractUpdateKeysValues,
+    _findByIdQueryBuilder
 };
