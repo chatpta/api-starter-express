@@ -64,7 +64,7 @@ class ActiveRecord {
 
         // Query database
         const record = await client.query( {
-            name: `save-${ this._modelName }`,
+            // name: `save-${ this._modelName }`,
             text: `INSERT INTO ${ this._modelName }s (${ keys.join( ', ' ) })
                    VALUES (${ prompt.join( ', ' ) }) RETURNING *`,
             values: values
@@ -79,17 +79,19 @@ class ActiveRecord {
 
     async update( record_id, updatedObject ) {
         // Deconstruct the received object
-        let [ keys, prompt, values ] = this.extractKeyPromptValueArrays( updatedObject );
+        let [ keys, values ] = this.extractUpdateKeysValues( updatedObject );
 
         // Get database client
         const client = await this._DatabaseFactory.getDbClient()
 
         // Query database
         const record = await client.query( {
-            name: `update-${ this._modelName }`,
-            text: `INSERT INTO ${ this._modelName }s (${ keys.join( ', ' ) })
-                   VALUES (${ prompt.join( ', ' ) }) RETURNING *`,
-            values: values
+            // name: `update-${ this._modelName }`,
+            text: `UPDATE ${ this._modelName }s
+                   SET ${ keys.join( ', ' ) }
+                   WHERE ${ this._modelName }_id=$1
+                       RETURNING *`,
+            values: [ record_id, ...values ]
         } );
 
         // Release client ( necessary )
@@ -118,6 +120,20 @@ class ActiveRecord {
         }
 
         return [ keys, prompt, values ];
+    }
+
+    extractUpdateKeysValues( object ) {
+        let keys = [];
+        let values = [];
+        let number = 1;
+
+        for ( let key of Object.keys( object ) ) {
+            number += 1;
+            keys.push( key.toString() + "=$" + number );
+            values.push( object[ key ] );
+        }
+
+        return [ keys, values ];
     }
 }
 
