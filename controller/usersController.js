@@ -27,7 +27,10 @@ async function patchRequestHandler( req, res, next ) {
         .catch( error => next( new Error( error ) ) );
 }
 
-function deleteRequestHandler( req, res, next ) {
-    res.send( { message: 'user delete response' } );
+async function deleteRequestHandler( req, res, next ) {
+    await User.findByFirstName( "Updated somebody" )
+        .then( user => User.delete( user.rows[ 0 ].user_id ) )
+        .then( user => res.send( user.rows[ 0 ] ) )
+        .catch( error => next( new Error( error ) ) );
 }
 

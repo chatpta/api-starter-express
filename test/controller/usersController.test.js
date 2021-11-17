@@ -61,7 +61,7 @@ describe( "Controller Users", function () {
         assert( res.body.first_name === "Updated somebody" );
     } );
 
-    it( "/delete request return message", function ( done ) {
+    it( "/delete request return message", async function ( ) {
 
         // Arrange
         const req = {};
@@ -74,10 +74,9 @@ describe( "Controller Users", function () {
         }
 
         // Act
-        user.deleteRequestHandler( req, res, next );
+        await user.deleteRequestHandler( req, res, next );
 
         // Assert
-        assert( res.body.message === "user delete response" );
-        done();
+        assert( res.body.first_name === "Updated somebody" );
     } );
 } );
