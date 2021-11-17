@@ -19,21 +19,14 @@ class ActiveRecord {
      * @return {Promise<*>}
      */
     async findById( id ) {
-        // Get database client
-        const client = await this._DatabaseFactory.getDbClient()
-
         // Query database
-        const record = await client.query( `
+        const query = `
             SELECT *
             FROM ${ this._modelName }s
             WHERE ${ this._modelName }_id = '${ id }';
-        ` );
+        `;
 
-        // Release client ( necessary )
-        await client.release();
-
-        // Return result
-        return record;
+        return await this.asyncClientQueryRun( query );
     }
 
     /**
@@ -41,82 +34,89 @@ class ActiveRecord {
      * @return {Promise<*>}
      */
     async findOne() {
-        // Get database client
-        const client = await this._DatabaseFactory.getDbClient()
-
         // Query database
-        const record = await client.query( `
+        const query = `
             SELECT *
             FROM ${ this._modelName }s LIMIT 1;
-        ` );
+        `;
 
-        // Release client ( necessary )
-        await client.release();
-
-        // Return result
-        return record;
+        return await this.asyncClientQueryRun( query );
     }
 
+    /**
+     * Saves the record
+     * @param object
+     * @return {Promise<*>}
+     */
     async save( object ) {
         // Deconstruct the received object
         let [ keys, prompt, values ] = lib._extractKeyPromptValueArrays( object );
 
-        // Get database client
-        const client = await this._DatabaseFactory.getDbClient()
-
         // Query database
-        const record = await client.query( {
+        const query = {
             // name: `save-${ this._modelName }`,
             text: `INSERT INTO ${ this._modelName }s (${ keys.join( ', ' ) })
                    VALUES (${ prompt.join( ', ' ) }) RETURNING *`,
             values: values
-        } );
+        };
 
-        // Release client ( necessary )
-        await client.release();
-
-        // Return result
-        return record;
+        return await this.asyncClientQueryRun( query );
     }
 
+    /**
+     * Update record
+     * @param record_id
+     * @param updatedObject
+     * @return {Promise<*>}
+     */
     async update( record_id, updatedObject ) {
         // Deconstruct the received object
         let [ keys, values ] = lib._extractUpdateKeysValues( updatedObject );
 
-        // Get database client
-        const client = await this._DatabaseFactory.getDbClient()
-
         // Query database
-        const record = await client.query( {
+        const query = {
             // name: `update-${ this._modelName }`,
             text: `UPDATE ${ this._modelName }s
                    SET ${ keys.join( ', ' ) }
                    WHERE ${ this._modelName }_id=$1
                        RETURNING *`,
             values: [ record_id, ...values ]
-        } );
+        };
 
-        // Release client ( necessary )
-        await client.release();
-
-        // Return result
-        return record;
+        return await this.asyncClientQueryRun( query );
     }
 
+    /**
+     * Delete record by id
+     * @param record_id
+     * @return {Promise<*>}
+     */
     async delete( record_id ) {
-
-        // Get database client
-        const client = await this._DatabaseFactory.getDbClient()
-
         // Query database
-        const record = await client.query( {
+        const query = {
             // name: `delete-${ this._modelName }`,
             text: `DELETE
                    FROM ${ this._modelName }s
                    WHERE ${ this._modelName }_id=$1
                        RETURNING *`,
             values: [ record_id ]
-        } );
+        };
+
+        return await this.asyncClientQueryRun( query );
+    }
+
+    /**
+     * Runs query on checked out client asynchronously.
+     * Client is release after each run, otherwise all clients will be exhausted.
+     * @param query
+     * @return {Promise<*>}
+     */
+    async asyncClientQueryRun( query ) {
+        // Get database client
+        const client = await this._DatabaseFactory.getDbClient()
+
+        // Query database
+        const record = await client.query( query );
 
         // Release client ( necessary )
         await client.release();
