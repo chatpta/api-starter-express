@@ -1,11 +1,22 @@
 const assert = require( 'assert' );
-const { describe, it } = require( "mocha" );
+const { describe, it, beforeEach, afterEach } = require( "mocha" );
 const { User } = require( "../../factory" );
 const { save } = require( "debug" );
 
 // Runs test only if DB_CONN is defined
 if ( process.env?.DB_CONN !== "none" ) {
     describe( 'User model', ( done ) => {
+        let testUserId = null;
+
+        beforeEach( async () => {
+            let testUser = await User.save( { first_name: "Test User" } );
+            testUserId = testUser.rows[ 0 ].user_id;
+        } );
+
+        afterEach( async () => {
+            await User.delete( testUserId );
+        } );
+
 
         it( 'findOne', async () => {
             // Act
@@ -16,63 +27,52 @@ if ( process.env?.DB_CONN !== "none" ) {
         } );
 
         it( 'findById', async () => {
-            // Arrange
-            const testUser = await User.findOne();
-
             // Act
-            const foundUser = await User.findById( testUser.rows[ 0 ].user_id );
+            const foundUser = await User.findById( testUserId );
 
             // Assert
-            assert.deepStrictEqual( foundUser.rows[ 0 ].first_name, testUser.rows[ 0 ].first_name );
+            assert.deepStrictEqual( foundUser.rows[ 0 ].user_id, testUserId );
         } );
 
         it( 'save', async () => {
             // Arrange
-            const testUser = {
-                first_name: "Good",
-                last_name: "Fellow"
-            };
+            const testUser = { first_name: "Save me" };
 
             // Act
             const savedUser = await User.save( testUser );
+            const savedUserFirstName = savedUser.rows[ 0 ].first_name;
+            await User.delete( savedUser.rows[ 0 ].user_id );
 
             // Assert
-            assert.deepStrictEqual( savedUser.rows[ 0 ].first_name, testUser.first_name );
+            assert.deepStrictEqual( savedUserFirstName, testUser.first_name );
         } );
 
         it( 'update', async () => {
             // Arrange
-            const originalUser = { first_name: "For update" };
-            const savedUser = await User.save( originalUser );
-            const user_id = savedUser.rows[ 0 ].user_id;
             const updateUser = { first_name: "Updated user" };
 
             // Act
-            const receivedUpdatedUser = await User.update( user_id, updateUser );
+            const receivedUpdatedUser = await User.update( testUserId, updateUser );
 
             // Assert
             assert.deepStrictEqual( receivedUpdatedUser.rows[ 0 ].first_name, updateUser.first_name );
         } );
 
         it( 'delete', async () => {
-            // Arrange
-            const originalUser = { first_name: "For delete" };
-            const savedUser = await User.save( originalUser );
-            const user_id = savedUser.rows[ 0 ].user_id;
 
             // Act
-            const receivedDeletedUser = await User.delete( user_id );
+            const receivedDeletedUser = await User.delete( testUserId );
 
             // Assert
-            assert.deepStrictEqual( receivedDeletedUser.rows[ 0 ].first_name, originalUser.first_name );
+            assert.deepStrictEqual( receivedDeletedUser.rows[ 0 ].first_name, "Test User" );
         } );
 
         it( 'findByFirstName', async () => {
             // Act
-            const user = await User.findByFirstName( "Master" );
+            const user = await User.findByFirstName( "Test User" );
 
             // Assert
-            assert.deepStrictEqual( user.rows[ 0 ].first_name, "Master" );
+            assert.deepStrictEqual( user.rows[ 0 ].first_name, "Test User" );
         } );
     } );
 }
