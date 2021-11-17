@@ -1,5 +1,6 @@
 'use strict';
 const DatabaseFactory = require( '../../factory/databaseFactory' );
+const lib = require( './lib/lib' );
 
 /**
  * This is base class for all model classes.
@@ -58,7 +59,7 @@ class ActiveRecord {
 
     async save( object ) {
         // Deconstruct the received object
-        let [ keys, prompt, values ] = this._extractKeyPromptValueArrays( object );
+        let [ keys, prompt, values ] = lib._extractKeyPromptValueArrays( object );
 
         // Get database client
         const client = await this._DatabaseFactory.getDbClient()
@@ -80,7 +81,7 @@ class ActiveRecord {
 
     async update( record_id, updatedObject ) {
         // Deconstruct the received object
-        let [ keys, values ] = this._extractUpdateKeysValues( updatedObject );
+        let [ keys, values ] = lib._extractUpdateKeysValues( updatedObject );
 
         // Get database client
         const client = await this._DatabaseFactory.getDbClient()
@@ -122,40 +123,6 @@ class ActiveRecord {
 
         // Return result
         return record;
-    }
-
-    /*************************************
-     * Methods below are private methods *
-     *************************************/
-
-    _extractKeyPromptValueArrays( object ) {
-        let keys = [];
-        let values = [];
-        let prompt = [];
-        let number = 0;
-
-        for ( let key of Object.keys( object ) ) {
-            number += 1;
-            keys.push( key );
-            values.push( object[ key ] );
-            prompt.push( `$${ number }` )
-        }
-
-        return [ keys, prompt, values ];
-    }
-
-    _extractUpdateKeysValues( object ) {
-        let keys = [];
-        let values = [];
-        let number = 1;
-
-        for ( let key of Object.keys( object ) ) {
-            number += 1;
-            keys.push( key.toString() + "=$" + number );
-            values.push( object[ key ] );
-        }
-
-        return [ keys, values ];
     }
 }
 
