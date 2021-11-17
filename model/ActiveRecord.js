@@ -57,7 +57,7 @@ class ActiveRecord {
 
     async save( object ) {
         // Deconstruct the received object
-        let [ keys, prompt, values ] = this.extractKeyPromptValueArrays( object );
+        let [ keys, prompt, values ] = this._extractKeyPromptValueArrays( object );
 
         // Get database client
         const client = await this._DatabaseFactory.getDbClient()
@@ -79,7 +79,7 @@ class ActiveRecord {
 
     async update( record_id, updatedObject ) {
         // Deconstruct the received object
-        let [ keys, values ] = this.extractUpdateKeysValues( updatedObject );
+        let [ keys, values ] = this._extractUpdateKeysValues( updatedObject );
 
         // Get database client
         const client = await this._DatabaseFactory.getDbClient()
@@ -127,7 +127,7 @@ class ActiveRecord {
      * Methods below are private methods *
      *************************************/
 
-    extractKeyPromptValueArrays( object ) {
+    _extractKeyPromptValueArrays( object ) {
         let keys = [];
         let values = [];
         let prompt = [];
@@ -143,7 +143,7 @@ class ActiveRecord {
         return [ keys, prompt, values ];
     }
 
-    extractUpdateKeysValues( object ) {
+    _extractUpdateKeysValues( object ) {
         let keys = [];
         let values = [];
         let number = 1;
