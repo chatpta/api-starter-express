@@ -57,7 +57,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             assert( totalConnectionCount === 1 );
         } );
 
-        it( "checkout without release, exhaust clients", async function () {
+        it( "checkout multiple client", async function () {
             // Every time create an additional connection, to get new client
             // Arrange
             let iteration = 0;
@@ -66,7 +66,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             let clients = [];
 
             // Act
-            for ( let i = 0; i < 20; i++ ) {
+            for ( let i = 0; i < 5; i++ ) {
                 let client = await Factory.getDbClient();
                 clients.push( client );
                 totalConnectionCount = pool.totalCount;
@@ -74,8 +74,8 @@ if ( process.env?.DB_CONN !== "none" ) {
             }
 
             // Assert
-            assert.deepStrictEqual( iteration, 19 );
-            assert.deepStrictEqual( totalConnectionCount, 20 );
+            assert.deepStrictEqual( iteration, 4 );
+            assert.deepStrictEqual( totalConnectionCount, 5 );
 
             // Release clients
             clients.forEach( client => client.release() )
