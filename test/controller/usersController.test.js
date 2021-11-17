@@ -4,7 +4,7 @@ const user = require( '../../controller' ).user;
 
 
 describe( "Controller Users", function () {
-    it( "/get request return message", function ( done ) {
+    it( "/get request return message", async function ( ) {
 
         // Arrange
         const req = {};
@@ -17,11 +17,10 @@ describe( "Controller Users", function () {
         }
 
         // Act
-        user.getRequestHandler( req, res, next );
+        await user.getRequestHandler( req, res, next );
 
         // Assert
-        assert( res.body.message === "user get response" );
-        done();
+        assert( res.body.first_name === "Pankaj" );
     } );
 
     it( "/post request return message", function ( done ) {

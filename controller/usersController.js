@@ -8,8 +8,8 @@ module.exports = {
 
 const { User } = require( '../factory' );
 
-function getRequestHandler( req, res, next ) {
-    User.findByFirstName( "Pankaj" )
+async function getRequestHandler( req, res, next ) {
+    await User.findByFirstName( "Pankaj" )
         .then( user => {
             res.send( user.rows[ 0 ] );
         } )
