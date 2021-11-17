@@ -1,5 +1,5 @@
 const { describe, it } = require( "mocha" );
-const ActiveRecord = require( '../../model/ActiveRecord' );
+const ActiveRecord = require( '../../model/ActiveRecord/ActiveRecord' );
 const assert = require( "assert" );
 
 describe( "Active Record base class", () => {

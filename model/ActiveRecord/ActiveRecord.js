@@ -1,5 +1,5 @@
 'use strict';
-const DatabaseFactory = require( '../factory/databaseFactory' );
+const DatabaseFactory = require( '../../factory/databaseFactory' );
 
 /**
  * This is base class for all model classes.
