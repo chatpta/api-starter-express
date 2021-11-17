@@ -6,8 +6,14 @@ module.exports = {
     deleteRequestHandler,
 }
 
+const { User } = require( '../factory' );
+
 function getRequestHandler( req, res, next ) {
-    res.send( { message: 'user get response' } );
+    User.findByFirstName( "Pankaj" )
+        .then( user => {
+            res.send( user.rows[ 0 ] );
+        } )
+        .catch( error => next( new Error( error ) ) );
 }
 
 function postRequestHandler( req, res, next ) {

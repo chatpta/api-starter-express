@@ -112,7 +112,7 @@ describe( "Application, requests user route", function () {
 
                 // Assert
                 assert( response.status === 200 );
-                assert( response.body.message === 'user get response' );
+                assert( response.body.first_name === 'Pankaj' );
                 done();
             } );
     } );
