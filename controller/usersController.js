@@ -10,22 +10,21 @@ const { User } = require( '../factory' );
 
 async function getRequestHandler( req, res, next ) {
     await User.findByFirstName( "Pankaj" )
-        .then( user => {
-            res.send( user.rows[ 0 ] );
-        } )
+        .then( user => res.send( user.rows[ 0 ] ) )
         .catch( error => next( new Error( error ) ) );
 }
 
 async function postRequestHandler( req, res, next ) {
     await User.save( { first_name: "Somebody" } )
-        .then( user => {
-            res.send( user.rows[ 0 ] );
-        } )
+        .then( user => res.send( user.rows[ 0 ] ) )
         .catch( error => next( new Error( error ) ) );
 }
 
-function patchRequestHandler( req, res, next ) {
-    res.send( { message: 'user patch response' } );
+async function patchRequestHandler( req, res, next ) {
+    await User.findByFirstName( "Somebody" )
+        .then( user => User.update( user.rows[ 0 ].user_id, { first_name: "Updated somebody" } ) )
+        .then( user => res.send( user.rows[ 0 ] ) )
+        .catch( error => next( new Error( error ) ) );
 }
 
 function deleteRequestHandler( req, res, next ) {

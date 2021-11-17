@@ -4,7 +4,7 @@ const user = require( '../../controller' ).user;
 
 
 describe( "Controller Users", function () {
-    it( "/get request return message", async function ( ) {
+    it( "/get request return message", async function () {
 
         // Arrange
         const req = {};
@@ -23,7 +23,7 @@ describe( "Controller Users", function () {
         assert( res.body.first_name === "Pankaj" );
     } );
 
-    it( "/post request return message", async function ( ) {
+    it( "/post request return message", async function () {
 
         // Arrange
         const req = {};
@@ -42,7 +42,7 @@ describe( "Controller Users", function () {
         assert( res.body.first_name === "Somebody" );
     } );
 
-    it( "/patch request return message", function ( done ) {
+    it( "/patch request return message", async function () {
 
         // Arrange
         const req = {};
@@ -55,11 +55,10 @@ describe( "Controller Users", function () {
         }
 
         // Act
-        user.patchRequestHandler( req, res, next );
+        await user.patchRequestHandler( req, res, next );
 
         // Assert
-        assert( res.body.message === "user patch response" );
-        done();
+        assert( res.body.first_name === "Updated somebody" );
     } );
 
     it( "/delete request return message", function ( done ) {
