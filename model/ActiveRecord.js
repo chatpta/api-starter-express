@@ -1,10 +1,11 @@
 'use strict';
+const DatabaseFactory = require( '../factory/databaseFactory' );
 
 /**
  * This is base class for all model classes.
  */
 class ActiveRecord {
-    constructor( DatabaseFactory ) {
+    constructor() {
         this._recordName = this.constructor.name;
         this._className = new.target.name;
         this._DatabaseFactory = DatabaseFactory;

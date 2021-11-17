@@ -6,12 +6,12 @@ const { Item, User } = require( '../model' );
  */
 class ModelFactory {
 
-    static getUser( DatabaseFactory ) {
-        return new User( DatabaseFactory );
+    static getUser() {
+        return new User();
     }
 
-    static getItem( DatabaseFactory ) {
-        return new Item( DatabaseFactory );
+    static getItem() {
+        return new Item();
     }
 }
 

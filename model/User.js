@@ -4,8 +4,8 @@ const ActiveRecord = require( './ActiveRecord' );
 
 class User extends ActiveRecord {
 
-    constructor( DatabaseFactory ) {
-        super( DatabaseFactory );
+    constructor() {
+        super();
     }
 
     async findByFirstName( name ) {
