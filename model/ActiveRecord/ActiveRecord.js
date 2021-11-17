@@ -1,5 +1,5 @@
 'use strict';
-const DatabaseFactory = require( '../../factory/databaseFactory' );
+const Db = require( '../../db' );
 const lib = require( './lib/lib' );
 
 /**
@@ -9,7 +9,8 @@ class ActiveRecord {
     constructor() {
         this._recordName = this.constructor.name;
         this._className = new.target.name;
-        this._DatabaseFactory = DatabaseFactory;
+        this._DatabaseFactory = Db;
+        this._sqlQueryRunner = Db.getSqlQueryRunner();
         this._modelName = this._className;
     }
 
@@ -23,7 +24,7 @@ class ActiveRecord {
         const query = lib._findByIdQueryBuilder( id, this._modelName );
 
         // Query database
-        return await this.asyncClientQueryRun( query );
+        return await this._sqlQueryRunner( query );
     }
 
     /**
@@ -37,7 +38,7 @@ class ActiveRecord {
             FROM ${ this._modelName }s LIMIT 1;
         `;
 
-        return await this.asyncClientQueryRun( query );
+        return await this._sqlQueryRunner( query );
     }
 
     /**
@@ -57,7 +58,7 @@ class ActiveRecord {
             values: values
         };
 
-        return await this.asyncClientQueryRun( query );
+        return await this._sqlQueryRunner( query );
     }
 
     /**
@@ -80,7 +81,7 @@ class ActiveRecord {
             values: [ record_id, ...values ]
         };
 
-        return await this.asyncClientQueryRun( query );
+        return await this._sqlQueryRunner( query );
     }
 
     /**
@@ -99,27 +100,7 @@ class ActiveRecord {
             values: [ record_id ]
         };
 
-        return await this.asyncClientQueryRun( query );
-    }
-
-    /**
-     * Runs query on checked out client asynchronously.
-     * Client is release after each run, otherwise all clients will be exhausted.
-     * @param query
-     * @return {Promise<*>}
-     */
-    async asyncClientQueryRun( query ) {
-        // Get database client
-        const client = await this._DatabaseFactory.getDbClient()
-
-        // Query database
-        const record = await client.query( query );
-
-        // Release client ( necessary )
-        await client.release();
-
-        // Return result
-        return record;
+        return await this._sqlQueryRunner( query );
     }
 }
 

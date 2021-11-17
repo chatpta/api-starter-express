@@ -1,7 +1,7 @@
 'use strict';
 const { describe, it, after } = require( "mocha" );
 const assert = require( "assert" );
-const Factory = require( '../../factory/databaseFactory' );
+const Factory = require( '../../db/databaseProvider' );
 
 // Runs test only if DB_CONN is defined
 if ( process.env?.DB_CONN !== "none" ) {

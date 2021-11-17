@@ -1,10 +1,10 @@
 'use strict';
-const { query, getClient, pool} = require( '../db' );
+const { query, getClient, sqlQueryRunner,  pool} = require( './db' );
 
 /**
  * Factory for database functionality
  */
-class DatabaseFactory {
+class DatabaseProvider {
 
     static getDbClient() {
         return getClient();
@@ -17,6 +17,10 @@ class DatabaseFactory {
     static getDbPool() {
         return pool;
     }
+
+    static getSqlQueryRunner() {
+        return sqlQueryRunner;
+    }
 }
 
-module.exports = DatabaseFactory;
+module.exports = DatabaseProvider;
