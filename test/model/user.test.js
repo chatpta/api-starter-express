@@ -54,6 +54,19 @@ if ( process.env?.DB_CONN !== "none" ) {
             assert.deepStrictEqual( receivedUpdatedUser.rows[ 0 ].first_name, updateUser.first_name );
         } );
 
+        it( 'delete', async () => {
+            // Arrange
+            const originalUser = { first_name: "For delete" };
+            const savedUser = await User.save( originalUser );
+            const user_id = savedUser.rows[ 0 ].user_id;
+
+            // Act
+            const receivedDeletedUser = await User.delete( user_id );
+
+            // Assert
+            assert.deepStrictEqual( receivedDeletedUser.rows[ 0 ].first_name, originalUser.first_name );
+        } );
+
         it( 'findByFirstName', async () => {
             // Act
             const user = await User.findByFirstName( "Master" );

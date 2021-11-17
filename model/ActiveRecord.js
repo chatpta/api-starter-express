@@ -101,8 +101,26 @@ class ActiveRecord {
         return record;
     }
 
-    delete() {
-        return { record: "HI I am here" }
+    async delete( record_id ) {
+
+        // Get database client
+        const client = await this._DatabaseFactory.getDbClient()
+
+        // Query database
+        const record = await client.query( {
+            // name: `delete-${ this._modelName }`,
+            text: `DELETE
+                   FROM ${ this._modelName }s
+                   WHERE ${ this._modelName }_id=$1
+                       RETURNING *`,
+            values: [ record_id ]
+        } );
+
+        // Release client ( necessary )
+        await client.release();
+
+        // Return result
+        return record;
     }
 
     // Private methods
