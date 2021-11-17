@@ -123,7 +123,10 @@ class ActiveRecord {
         return record;
     }
 
-    // Private methods
+    /*************************************
+     * Methods below are private methods *
+     *************************************/
+
     extractKeyPromptValueArrays( object ) {
         let keys = [];
         let values = [];
