@@ -23,7 +23,7 @@ describe( "Controller Users", function () {
         assert( res.body.first_name === "Pankaj" );
     } );
 
-    it( "/post request return message", function ( done ) {
+    it( "/post request return message", async function ( ) {
 
         // Arrange
         const req = {};
@@ -36,11 +36,10 @@ describe( "Controller Users", function () {
         }
 
         // Act
-        user.postRequestHandler( req, res, next );
+        await user.postRequestHandler( req, res, next );
 
         // Assert
-        assert( res.body.message === "user post response" );
-        done();
+        assert( res.body.first_name === "Somebody" );
     } );
 
     it( "/patch request return message", function ( done ) {

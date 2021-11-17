@@ -16,8 +16,12 @@ async function getRequestHandler( req, res, next ) {
         .catch( error => next( new Error( error ) ) );
 }
 
-function postRequestHandler( req, res, next ) {
-    res.send( { message: 'user post response' } );
+async function postRequestHandler( req, res, next ) {
+    await User.save( { first_name: "Somebody" } )
+        .then( user => {
+            res.send( user.rows[ 0 ] );
+        } )
+        .catch( error => next( new Error( error ) ) );
 }
 
 function patchRequestHandler( req, res, next ) {
