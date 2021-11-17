@@ -40,8 +40,39 @@ function _findByIdQueryBuilder( id, modelName ) {
     ` );
 }
 
+function _findOneQueryBuilder( modelName ) {
+    return ( `
+        SELECT *
+        FROM ${ modelName }s LIMIT 1;
+    ` );
+}
+
+function _saveQueryBuilder( object, modelName ) {
+    let [ keys, prompt, values ] = _extractKeyPromptValueArrays( object );
+
+    return ( {
+        text: `INSERT INTO ${ modelName }s (${ keys.join( ', ' ) })
+               VALUES (${ prompt.join( ', ' ) }) RETURNING *`,
+        values: values
+    } );
+}
+
+function _updateQueryBuilder( record_id, updatedObject, modelName ) {
+    let [ keys, values ] = _extractUpdateKeysValues( updatedObject );
+
+    return ( {
+        // name: `update-${ this._modelName }`,
+        text: `UPDATE ${ modelName }s
+               SET ${ keys.join( ', ' ) }
+               WHERE ${ modelName }_id=$1
+                   RETURNING *`,
+        values: [ record_id, ...values ]
+    } );
+}
+
 module.exports = {
-    _extractKeyPromptValueArrays,
-    _extractUpdateKeysValues,
-    _findByIdQueryBuilder
+    _findByIdQueryBuilder,
+    _findOneQueryBuilder,
+    _saveQueryBuilder,
+    _updateQueryBuilder
 };

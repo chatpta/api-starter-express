@@ -32,12 +32,10 @@ class ActiveRecord {
      * @return {Promise<*>}
      */
     async findOne() {
-        // Query database
-        const query = `
-            SELECT *
-            FROM ${ this._modelName }s LIMIT 1;
-        `;
+        // Build query
+        const query = lib._findOneQueryBuilder( this._modelName );
 
+        // Query database
         return await this._sqlQueryRunner( query );
     }
 
@@ -47,17 +45,10 @@ class ActiveRecord {
      * @return {Promise<*>}
      */
     async save( object ) {
-        // Deconstruct the received object
-        let [ keys, prompt, values ] = lib._extractKeyPromptValueArrays( object );
+        // Build query
+        const query = lib._saveQueryBuilder( object, this._modelName );
 
         // Query database
-        const query = {
-            // name: `save-${ this._modelName }`,
-            text: `INSERT INTO ${ this._modelName }s (${ keys.join( ', ' ) })
-                   VALUES (${ prompt.join( ', ' ) }) RETURNING *`,
-            values: values
-        };
-
         return await this._sqlQueryRunner( query );
     }
 
@@ -68,19 +59,10 @@ class ActiveRecord {
      * @return {Promise<*>}
      */
     async update( record_id, updatedObject ) {
-        // Deconstruct the received object
-        let [ keys, values ] = lib._extractUpdateKeysValues( updatedObject );
+        // Build query
+        const query = lib._updateQueryBuilder( record_id, updatedObject, this._modelName );
 
         // Query database
-        const query = {
-            // name: `update-${ this._modelName }`,
-            text: `UPDATE ${ this._modelName }s
-                   SET ${ keys.join( ', ' ) }
-                   WHERE ${ this._modelName }_id=$1
-                       RETURNING *`,
-            values: [ record_id, ...values ]
-        };
-
         return await this._sqlQueryRunner( query );
     }
 
