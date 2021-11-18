@@ -1,5 +1,5 @@
 'use strict';
-class DTO {
+class Dto {
     #success = false;
     #length = null;
     #record = null;
@@ -29,4 +29,10 @@ class DTO {
     }
 }
 
-module.exports = DTO;
+class DtoProvider {
+    static getDTO() {
+        return new Dto();
+    }
+}
+
+module.exports = DtoProvider;

@@ -1,2 +1,2 @@
 'use strict';
-module.exports = require( './DTO' );
+module.exports = require( './Dto' );
