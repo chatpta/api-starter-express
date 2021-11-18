@@ -7,7 +7,9 @@ describe( "Controller Users", function () {
     it( "/get request return message", async function () {
 
         // Arrange
-        const req = {};
+        const req = {
+            query: {first_name: "Pankaj"}
+        };
         const res = {
             send( message ) {
                 this.body = message

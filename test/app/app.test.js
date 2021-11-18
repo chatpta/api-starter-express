@@ -106,7 +106,7 @@ describe( "Application, requests user route", function () {
 
         // Act
         request( app )
-            .get( '/users' )
+            .get( '/users?first_name=Pankaj' )
             .end( ( err, response ) => {
                 if ( err ) return;
 

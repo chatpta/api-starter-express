@@ -9,7 +9,7 @@ module.exports = {
 const { User } = require( '../factory' );
 
 async function getRequestHandler( req, res, next ) {
-    await User.findByFirstName( "Pankaj" )
+    await User.findByFirstName( req.query.first_name )
         .then( user => res.send( user.rows[ 0 ] ) )
         .catch( error => next( new Error( error ) ) );
 }

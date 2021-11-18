@@ -10,12 +10,13 @@ const Factory = require( "./factory" );
 const app = express();
 
 // Setup application processing
+app.use( Factory.CommonMiddleware.appLogger() );
 app.use( cors() );
 app.use( helmet() );
-app.use( Factory.CommonMiddleware.appLogger() );
+app.use( cookieParser() );
 app.use( express.json() );
 app.use( express.urlencoded( { extended: false } ) );
-app.use( cookieParser() );
+app.set('title', 'chatpta starter api');
 
 // Add routers
 app.use( indexRouter );
