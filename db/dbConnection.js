@@ -1,14 +1,10 @@
 'use strict';
 const { Pool } = require( 'pg' );
 const Dto = require( '../interfaces' );
+const config = require( '../config' );
 
 
-const pool = new Pool( {
-    max: 20,  // Clients in pool
-    idleTimeoutMillis: 10000,
-    connectionTimeoutMillis: 2000,
-    allowExitOnIdle: false
-} );
+const pool = new Pool( config.dbConfig.connectionConfig );
 
 // Pool connection output
 pool.on( 'connect', ( client ) => {
