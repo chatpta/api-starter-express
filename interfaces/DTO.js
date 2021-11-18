@@ -1,13 +1,7 @@
-class DbRecord {
+class DTO {
     #success = false;
     #length = null;
     #record = null;
-
-    constructor( success, length, record ) {
-        this.#success = success;
-        this.#length = length;
-        this.#record = record;
-    }
 
     get success() {
         return this.#success;
@@ -34,4 +28,4 @@ class DbRecord {
     }
 }
 
-module.exports = DbRecord;
+module.exports = DTO;

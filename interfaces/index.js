@@ -1,5 +1,1 @@
-const DbRecord = require( './dbRecord' );
-
-module.exports = {
-    DbRecord
-}
+module.exports = require( './DTO' );

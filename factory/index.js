@@ -1,9 +1,9 @@
 'use strict';
 const Model = require( './modelFactory' );
-const { DbRecord } = require( '../interfaces' );
+const DTO = require( './dtoFactory' );
 
 module.exports = {
     User: Model.getUser(),
     Item: Model.getItem(),
-    DbRecord: DbRecord
+    DTO: DTO.getDTO()
 }
