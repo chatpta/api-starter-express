@@ -9,6 +9,7 @@
     "migrateDb": "node db/dbMigration.js",
     "seedDb": "node db/dbSeed.js",
     "test": "export NODE_ENV=test && mocha --watch --reporter spec --bail --check-leaks test/**/*.test.js",
+    "testCoverage": "export NODE_ENV=test && npx nyc@latest mocha test/**/*.test.js",
     "testWithoutDb": "export NODE_ENV=test && export DB_CONN=none && mocha --watch --reporter spec --bail --check-leaks test/**/*.test.js"
   },
   "dependencies": {
@@ -25,6 +26,7 @@
   "devDependencies": {
     "mocha": "^9.1.3",
     "nodemon": "^2.0.14",
+    "nyc": "^15.1.0",
     "supertest": "^6.1.6"
   }
 }
