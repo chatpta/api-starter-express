@@ -61,13 +61,21 @@ async function getSqlClient() {
 async function asyncClientQueryRun( query ) {
     // Get database client
     const client = await pool.connect();
+    let record = null;
 
-    // Query database
-    const record = await client.query( query );
+    try {
+        // Query database
+        record = await client.query( query );
 
-    // Release client ( necessary )
-    await client.release();
+    } catch ( err ) {
+        // Return error
+        return err;
 
+    } finally {
+        // Release client ( necessary )
+        await client.release();
+
+    }
     // Return result
     return record;
 }
