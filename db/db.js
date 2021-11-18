@@ -60,7 +60,7 @@ async function getSqlClient() {
 
 async function asyncClientQueryRun( query ) {
     // Get database client
-    const client = await getSqlClient()
+    const client = await pool.connect();
 
     // Query database
     const record = await client.query( query );

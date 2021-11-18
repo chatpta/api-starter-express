@@ -2,6 +2,7 @@
 const { describe, it, after } = require( "mocha" );
 const assert = require( "assert" );
 const Factory = require( '../../db/databaseProvider' );
+const { User } = require( '../../factory' );
 
 // Runs test only if DB_CONN is defined
 if ( process.env?.DB_CONN !== "none" ) {
@@ -79,6 +80,19 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Release clients
             clients.forEach( client => client.release() )
+        } );
+
+        it( "run query multiple times", async function () {
+            // Arrange
+            let iteration = 0;
+
+            // Act
+            for ( let i = 0; i < 50; i++ ) {
+                iteration = i;
+                await User.findOne();
+            }
+
+            assert.deepStrictEqual(iteration, 49);
         } );
     } );
 }
