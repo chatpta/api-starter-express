@@ -1,8 +1,7 @@
 'use strict';
-const { describe, it, after } = require( "mocha" );
+const { describe, it } = require( "mocha" );
 const assert = require( "assert" );
-const Factory = require( '../../db/databaseProvider' );
-const { User } = require( '../../factory' );
+const Db = require( '../../db' );
 
 // Runs test only if DB_CONN is defined
 if ( process.env?.DB_CONN !== "none" ) {
@@ -14,7 +13,7 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Arrange
             let time = null;
-            let query = Factory.getDbQuery();
+            let query = Db.getDbQuery();
 
             // Act
             time = await query( 'SELECT NOW()' );
@@ -27,7 +26,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             // Good for running transactions
 
             // Arrange
-            let client = await Factory.getDbClient();
+            let client = await Db.getDbClient();
             let time = null;
 
             // Act
@@ -43,11 +42,11 @@ if ( process.env?.DB_CONN !== "none" ) {
             // Arrange
             let iteration = 0;
             let totalConnectionCount = 0
-            let pool = Factory.getDbPool();
+            let pool = Db.getDbPool();
 
             // Act
             for ( let i = 0; i < 20; i++ ) {
-                let client = await Factory.getDbClient();
+                let client = await Db.getDbClient();
                 totalConnectionCount = pool.totalCount;
                 client.release();
                 iteration = i;
@@ -63,12 +62,12 @@ if ( process.env?.DB_CONN !== "none" ) {
             // Arrange
             let iteration = 0;
             let totalConnectionCount = 0
-            let pool = Factory.getDbPool();
+            let pool = Db.getDbPool();
             let clients = [];
 
             // Act
             for ( let i = 0; i < 5; i++ ) {
-                let client = await Factory.getDbClient();
+                let client = await Db.getDbClient();
                 clients.push( client );
                 totalConnectionCount = pool.totalCount;
                 iteration = i;
@@ -80,19 +79,6 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Release clients
             clients.forEach( client => client.release() )
-        } );
-
-        it( "run query multiple times", async function () {
-            // Arrange
-            let iteration = 0;
-
-            // Act
-            for ( let i = 0; i < 50; i++ ) {
-                iteration = i;
-                await User.findOne();
-            }
-
-            assert.deepStrictEqual(iteration, 49);
         } );
     } );
 }

@@ -1,7 +1,7 @@
 const assert = require( 'assert' );
 const { describe, it, beforeEach, afterEach } = require( "mocha" );
 const { User } = require( "../../factory" );
-const { save } = require( "debug" );
+
 
 // Runs test only if DB_CONN is defined
 if ( process.env?.DB_CONN !== "none" ) {
@@ -73,6 +73,19 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Assert
             assert.deepStrictEqual( user.rows[ 0 ].first_name, "Test User" );
+        } );
+
+        it( "run query multiple times", async function () {
+            // Arrange
+            let iteration = 0;
+
+            // Act
+            for ( let i = 0; i < 50; i++ ) {
+                iteration = i;
+                await User.findOne();
+            }
+
+            assert.deepStrictEqual( iteration, 49 );
         } );
     } );
 }
