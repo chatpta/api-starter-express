@@ -122,12 +122,13 @@ describe( "Application, requests user route", function () {
         // Act
         request( app )
             .post( '/users' )
+            .send( { user: { first_name: "App post test" } } )
             .end( ( err, response ) => {
                 if ( err ) return;
 
                 // Assert
                 assert( response.status === 200 );
-                assert( response?.body?.first_name === 'Somebody' );
+                assert( response?.body?.first_name === "App post test" );
                 done();
             } );
     } );
@@ -137,12 +138,16 @@ describe( "Application, requests user route", function () {
         // Act
         request( app )
             .patch( '/users' )
+            .send( {
+                user: { first_name: "App post test" },
+                updated_user: { first_name: "App patch test" }
+            } )
             .end( ( err, response ) => {
                 if ( err ) return;
 
                 // Assert
                 assert( response.status === 200 );
-                assert( response?.body?.first_name === "Updated somebody" );
+                assert( response?.body?.first_name === "App patch test" );
                 done();
             } );
     } );
@@ -152,12 +157,15 @@ describe( "Application, requests user route", function () {
         // Act
         request( app )
             .delete( '/users' )
+            .send( {
+                user: { first_name: "App patch test" }
+            } )
             .end( ( err, response ) => {
                 if ( err ) return;
 
                 // Assert
                 assert( response.status === 200 );
-                assert( response.body.first_name === 'Updated somebody' );
+                assert( response.body.first_name === "App patch test" );
                 done();
             } );
     } );

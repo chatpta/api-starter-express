@@ -15,20 +15,20 @@ async function getRequestHandler( req, res, next ) {
 }
 
 async function postRequestHandler( req, res, next ) {
-    await User.save( { first_name: "Somebody" } )
+    await User.save( req.body.user )
         .then( user => res.send( user.rows[ 0 ] ) )
         .catch( error => next( new Error( error ) ) );
 }
 
 async function patchRequestHandler( req, res, next ) {
-    await User.findByFirstName( "Somebody" )
-        .then( user => User.update( user.rows[ 0 ].user_id, { first_name: "Updated somebody" } ) )
+    await User.findByFirstName( req.body.user.first_name )
+        .then( user => User.update( user.rows[ 0 ].user_id, req.body.updated_user ) )
         .then( user => res.send( user.rows[ 0 ] ) )
         .catch( error => next( new Error( error ) ) );
 }
 
 async function deleteRequestHandler( req, res, next ) {
-    await User.findByFirstName( "Updated somebody" )
+    await User.findByFirstName( req.body.user.first_name )
         .then( user => User.delete( user.rows[ 0 ].user_id ) )
         .then( user => res.send( user.rows[ 0 ] ) )
         .catch( error => next( new Error( error ) ) );

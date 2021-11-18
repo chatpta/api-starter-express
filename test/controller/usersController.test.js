@@ -8,7 +8,7 @@ describe( "Controller Users", function () {
 
         // Arrange
         const req = {
-            query: {first_name: "Pankaj"}
+            query: { first_name: "Pankaj" }
         };
         const res = {
             send( message ) {
@@ -28,7 +28,7 @@ describe( "Controller Users", function () {
     it( "/post request return message", async function () {
 
         // Arrange
-        const req = {};
+        const req = { body: { user: { first_name: "Controller post test" } } };
         const res = {
             send( message ) {
                 this.body = message
@@ -39,15 +39,21 @@ describe( "Controller Users", function () {
 
         // Act
         await user.postRequestHandler( req, res, next );
+        let first_name = await res?.body?.first_name;
 
         // Assert
-        assert( res.body.first_name === "Somebody" );
+        assert( first_name === "Controller post test" );
     } );
 
     it( "/patch request return message", async function () {
 
         // Arrange
-        const req = {};
+        const req = {
+            body: {
+                user: { first_name: "Controller post test" },
+                updated_user: { first_name: "Controller patch test" }
+            }
+        };
         const res = {
             send( message ) {
                 this.body = message
@@ -58,15 +64,15 @@ describe( "Controller Users", function () {
 
         // Act
         await user.patchRequestHandler( req, res, next );
-
+        let first_name = await res?.body?.first_name;
         // Assert
-        assert( res.body.first_name === "Updated somebody" );
+        assert( first_name === "Controller patch test" );
     } );
 
-    it( "/delete request return message", async function ( ) {
+    it( "/delete request return message", async function () {
 
         // Arrange
-        const req = {};
+        const req = { body: { user: { first_name: "Controller patch test" } } };
         const res = {
             send( message ) {
                 this.body = message
@@ -79,6 +85,6 @@ describe( "Controller Users", function () {
         await user.deleteRequestHandler( req, res, next );
 
         // Assert
-        assert( res.body.first_name === "Updated somebody" );
+        assert( res.body.first_name === "Controller patch test" );
     } );
 } );
