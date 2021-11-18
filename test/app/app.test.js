@@ -103,33 +103,34 @@ describe( "Application, requests root route", function () {
 
 
 describe( "Application, requests user route", function () {
-    it( "/users route get", function ( done ) {
-
-        // Act
-        request( app )
-            .get( '/users?first_name=Pankaj' )
-            .end( ( err, response ) => {
-                if ( err ) return;
-
-                // Assert
-                assert( response.status === 200 );
-                assert( response.body.first_name === 'Pankaj' );
-                done();
-            } );
-    } );
 
     it( "/users route post", function ( done ) {
 
         // Act
         request( app )
             .post( '/users' )
-            .send( { user: { first_name: "App post test" } } )
+            .send( { user: { first_name: "App_post_test" } } )
             .end( ( err, response ) => {
                 if ( err ) return;
 
                 // Assert
                 assert( response.status === 200 );
-                assert( response?.body?.first_name === "App post test" );
+                assert( response?.body?.first_name === "App_post_test" );
+                done();
+            } );
+    } );
+
+    it( "/users route get", function ( done ) {
+
+        // Act
+        request( app )
+            .get( '/users?first_name=App_post_test' )
+            .end( ( err, response ) => {
+                if ( err ) return;
+
+                // Assert
+                assert( response.status === 200 );
+                assert( response.body.first_name === 'App_post_test' );
                 done();
             } );
     } );
@@ -140,7 +141,7 @@ describe( "Application, requests user route", function () {
         request( app )
             .patch( '/users' )
             .send( {
-                user: { first_name: "App post test" },
+                user: { first_name: "App_post_test" },
                 updated_user: { first_name: "App patch test" }
             } )
             .end( ( err, response ) => {
