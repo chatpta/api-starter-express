@@ -1,3 +1,4 @@
+'use strict';
 const { before, after } = require( "mocha" );
 const db = require( '../../db' );
 

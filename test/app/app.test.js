@@ -1,3 +1,4 @@
+'use strict';
 const { describe, it } = require( "mocha" );
 const assert = require( "assert" );
 const request = require( 'supertest' );
