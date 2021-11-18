@@ -3,14 +3,14 @@ const morgan = require( 'morgan' );
 const path = require( 'path' );
 const rotatingFileStream = require( 'rotating-file-stream' );
 
-module.exports = Logger;
+module.exports = AppLogger;
 
 /**
- * Creates application logger, write logs to logs directory in app root directory.
- * @return morgan logger
+ * Creates application appLogger, write logs to logs directory in app root directory.
+ * @return morgan appLogger
  * @constructor
  */
-function Logger() {
+function AppLogger() {
     // Create a rotating write stream
     const accessLogStream = rotatingFileStream.createStream( 'access.log', {
         interval: '1d', // rotate daily
