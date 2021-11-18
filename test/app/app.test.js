@@ -26,7 +26,7 @@ describe( "Application, req not found", function () {
 
             // Act
             request( app )
-                .get( '/users?first_name=Pankaj' )
+                .get( '/users?first_name=Not_exist' )
                 .end( ( err, response ) => {
                     if ( err ) return;
 
