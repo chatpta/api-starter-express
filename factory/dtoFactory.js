@@ -1,3 +1,4 @@
+'use strict';
 const DTO  = require( '../interfaces' );
 
 class DtoFactory {

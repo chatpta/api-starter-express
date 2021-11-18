@@ -12,11 +12,10 @@ if ( process.env?.DB_CONN !== "none" ) {
             // Can not be used for transactions
 
             // Arrange
-            let time = null;
             let query = Db.getDbQuery();
 
             // Act
-            time = await query( 'SELECT NOW()' );
+            let time = await query( 'SELECT NOW()' );
 
             // Assert
             assert( time.rowCount === 1 );
@@ -27,10 +26,9 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Arrange
             let client = await Db.getDbClient();
-            let time = null;
 
             // Act
-            time = await client.query( 'SELECT NOW()' )
+            let time = await client.query( 'SELECT NOW()' )
             client.release(); // Client must be released each time after use
 
             // Assert

@@ -1,6 +1,8 @@
+'use strict';
 const { describe, it } = require( "mocha" );
 const { DTO } = require( '../../factory' );
 const assert = require( "assert" );
+
 
 describe( "Database connection", async function () {
 
