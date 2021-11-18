@@ -20,6 +20,23 @@ describe( "Application, req not found", function () {
                 done()
             } );
     } );
+
+    if ( process.env?.DB_CONN !== "none" ) {
+        it( "returns server error 404", function ( done ) {
+
+            // Act
+            request( app )
+                .get( '/users?first_name=Pankaj' )
+                .end( ( err, response ) => {
+                    if ( err ) return;
+
+                    // Assert
+                    assert( response.status === 404 );
+                    assert( response.body.type === "not found" );
+                    done();
+                } );
+        } );
+    }
 } );
 
 describe( "Application, req server error", function () {
