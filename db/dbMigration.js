@@ -14,7 +14,7 @@ require( 'dotenv' ).config();
 /**
  * Connect to database and test it.
  */
-const Factory = require( './databaseProvider' );
+const Factory = require( './dbProvider' );
 
 Factory.getDbClient()
     .then( client => client.query( `
