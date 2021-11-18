@@ -11,7 +11,7 @@ if ( process.env?.DB_CONN !== "none" ) {
 
         beforeEach( async () => {
             let testItem = await Item.save( { title: "Test Item" } );
-            testItemId = testItem.rows[ 0 ].item_id;
+            testItemId = testItem.record[ 0 ].item_id;
         } );
 
         afterEach( async () => {
@@ -24,8 +24,8 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Act
             let savedItem = await Item.save( testItem );
-            let savedItemTitle = savedItem.rows[ 0 ].title;
-            let savedItemId = savedItem.rows[ 0 ].item_id;
+            let savedItemTitle = savedItem.record[ 0 ].title;
+            let savedItemId = savedItem.record[ 0 ].item_id;
             await Item.delete( savedItemId );
 
             // Assert
@@ -38,13 +38,13 @@ if ( process.env?.DB_CONN !== "none" ) {
             const item = await Item.findOne();
 
             // Assert
-            assert.deepStrictEqual( item.rowCount, 1 );
+            assert.deepStrictEqual( item.length, 1 );
         } );
 
         it( 'findById', async () => {
             // Act
             const foundItem = await Item.findById( testItemId );
-            const foundItemId = foundItem.rows[ 0 ].item_id;
+            const foundItemId = foundItem.record[ 0 ].item_id;
 
             // Assert
             assert.deepStrictEqual( foundItemId, testItemId );
@@ -56,8 +56,8 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Act
             const updatedItem = await Item.update( testItemId, updateItem );
-            const updateItemId = updatedItem.rows[ 0 ].item_id;
-            const updateItemTitle = updatedItem.rows[ 0 ].title;
+            const updateItemId = updatedItem.record[ 0 ].item_id;
+            const updateItemTitle = updatedItem.record[ 0 ].title;
 
             // Assert
             assert.deepStrictEqual( updateItemId, testItemId );

@@ -1,5 +1,6 @@
 'use strict';
 const { Pool } = require( 'pg' );
+const Dto = require( '../interfaces' );
 
 
 const pool = new Pool( {
@@ -62,10 +63,18 @@ async function asyncClientQueryRun( query ) {
     // Get database client
     const client = await pool.connect();
     let record = null;
+    const dto = await Dto.getDTO();
 
     try {
         // Query database
         record = await client.query( query );
+
+        // Create data transfer object ( Interface )
+        if ( record.rowCount >= 1 ) {
+            dto.success = true;
+            dto.length = record?.rowCount;
+            dto.record = record?.rows;
+        }
 
     } catch ( err ) {
         // Return error
@@ -77,7 +86,7 @@ async function asyncClientQueryRun( query ) {
 
     }
     // Return result
-    return record;
+    return dto;
 }
 
 module.exports = {

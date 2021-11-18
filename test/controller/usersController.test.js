@@ -66,6 +66,7 @@ describe( "Controller Users", function () {
         // Act
         await user.patchRequestHandler( req, res, next );
         let first_name = await res?.body?.first_name;
+
         // Assert
         assert( first_name === "Controller patch test" );
     } );
