@@ -7,7 +7,7 @@ module.exports = {
 }
 
 const { Item } = require( '../factory' );
-const lib = require( "./lib/libController" );
+const lib = require( "./lib/libCommon" );
 
 async function getRequestHandler( req, res, next ) {
     await Item.findById( req.query.item_id )

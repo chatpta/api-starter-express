@@ -7,7 +7,7 @@ module.exports = {
 }
 
 const { User } = require( '../factory' );
-const lib = require( './lib/libController' );
+const lib = require( './lib/libCommon' );
 
 async function getRequestHandler( req, res, next ) {
     await User.findByFirstName( req.query.first_name )

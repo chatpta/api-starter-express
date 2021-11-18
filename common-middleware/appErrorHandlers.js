@@ -1,4 +1,8 @@
 'use strict';
+/**
+ * These are application level error handlers. All error responses should be send using these functions.
+ * @type {{notFound404: notFound404, appError500: appError500, appError400: appError400}}
+ */
 module.exports = {
     notFound404,
     appError400,
