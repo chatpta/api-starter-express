@@ -11,7 +11,7 @@ if ( process.env?.DB_CONN !== "none" ) {
 
         beforeEach( async () => {
             let testUser = await User.save( { first_name: "Test User" } );
-            testUserId = testUser.record[ 0 ].user_id;
+            testUserId = testUser.data[ 0 ].user_id;
         } );
 
         afterEach( async () => {
@@ -32,7 +32,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             const foundUser = await User.findById( testUserId );
 
             // Assert
-            assert.deepStrictEqual( foundUser.record[ 0 ].user_id, testUserId );
+            assert.deepStrictEqual( foundUser.data[ 0 ].user_id, testUserId );
         } );
 
         it( 'save', async () => {
@@ -41,8 +41,8 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Act
             const savedUser = await User.save( testUser );
-            const savedUserFirstName = savedUser.record[ 0 ].first_name;
-            await User.delete( savedUser.record[ 0 ].user_id );
+            const savedUserFirstName = savedUser.data[ 0 ].first_name;
+            await User.delete( savedUser.data[ 0 ].user_id );
 
             // Assert
             assert.deepStrictEqual( savedUserFirstName, testUser.first_name );
@@ -56,7 +56,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             const receivedUpdatedUser = await User.update( testUserId, updateUser );
 
             // Assert
-            assert.deepStrictEqual( receivedUpdatedUser.record[ 0 ].first_name, updateUser.first_name );
+            assert.deepStrictEqual( receivedUpdatedUser.data[ 0 ].first_name, updateUser.first_name );
         } );
 
         it( 'delete', async () => {
@@ -65,7 +65,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             const receivedDeletedUser = await User.delete( testUserId );
 
             // Assert
-            assert.deepStrictEqual( receivedDeletedUser.record[ 0 ].first_name, "Test User" );
+            assert.deepStrictEqual( receivedDeletedUser.data[ 0 ].first_name, "Test User" );
         } );
 
         it( 'findByFirstName', async () => {
@@ -73,7 +73,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             const user = await User.findByFirstName( "Test User" );
 
             // Assert
-            assert.deepStrictEqual( user.record[ 0 ].first_name, "Test User" );
+            assert.deepStrictEqual( user.data[ 0 ].first_name, "Test User" );
         } );
 
         it( "run query multiple times", async function () {

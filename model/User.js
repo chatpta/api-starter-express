@@ -26,7 +26,7 @@ class User extends ActiveRecord {
         if ( user.rowCount >= 1 ) {
             dto.success = true;
             dto.length = user?.rowCount;
-            dto.record = user?.rows;
+            dto.data = user?.rows;
         }
 
         // Release client ( necessary )

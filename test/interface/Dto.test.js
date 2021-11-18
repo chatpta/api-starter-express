@@ -11,11 +11,11 @@ describe( "Database connection", async function () {
         let record = DtoProvider.getDTO();
         record.length = 3;
         record.success = true;
-        record.record = { title: "happy" }
+        record.data = { title: "happy" }
 
         // Assert
         assert.deepStrictEqual( record.length, 3 );
         assert.deepStrictEqual( record.success, true );
-        assert.deepStrictEqual( record.record, { title: "happy" });
+        assert.deepStrictEqual( record.data, { title: "happy" });
     } );
 } );

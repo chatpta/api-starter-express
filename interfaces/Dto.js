@@ -2,7 +2,7 @@
 class Dto {
     #success = false;
     #length = null;
-    #record = null;
+    #data = null;
 
     get success() {
         return this.#success;
@@ -20,12 +20,12 @@ class Dto {
         this.#length = value;
     }
 
-    get record() {
-        return this.#record;
+    get data() {
+        return this.#data;
     }
 
-    set record( value ) {
-        this.#record = value;
+    set data( value ) {
+        this.#data = value;
     }
 }
 

@@ -15,7 +15,7 @@ class ActiveRecord {
     }
 
     /**
-     * Finds record by its id
+     * Finds data by its id
      * @param id
      * @return {Promise<*>}
      */
@@ -28,7 +28,7 @@ class ActiveRecord {
     }
 
     /**
-     * Finds one random record
+     * Finds one random data
      * @return {Promise<*>}
      */
     async findOne() {
@@ -40,7 +40,7 @@ class ActiveRecord {
     }
 
     /**
-     * Saves the record
+     * Saves the data
      * @param object
      * @return {Promise<*>}
      */
@@ -53,7 +53,7 @@ class ActiveRecord {
     }
 
     /**
-     * Update record
+     * Update data
      * @param record_id
      * @param updatedObject
      * @return {Promise<*>}
@@ -67,7 +67,7 @@ class ActiveRecord {
     }
 
     /**
-     * Delete record by id
+     * Delete data by id
      * @param record_id
      * @return {Promise<*>}
      */

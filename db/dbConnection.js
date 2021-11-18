@@ -73,7 +73,7 @@ async function asyncClientQueryRun( query ) {
         if ( record.rowCount >= 1 ) {
             dto.success = true;
             dto.length = record?.rowCount;
-            dto.record = record?.rows;
+            dto.data = record?.rows;
         }
 
     } catch ( err ) {
