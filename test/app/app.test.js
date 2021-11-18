@@ -101,74 +101,149 @@ describe( "Application, requests root route", function () {
     } );
 } );
 
+if ( process.env?.DB_CONN !== "none" ) {
+    describe( "Application, requests users route", function () {
 
-describe( "Application, requests user route", function () {
+        it( "/users route post", function ( done ) {
 
-    it( "/users route post", function ( done ) {
+            // Act
+            request( app )
+                .post( '/users' )
+                .send( { user: { first_name: "App_post_test" } } )
+                .end( ( err, response ) => {
+                    if ( err ) return;
 
-        // Act
-        request( app )
-            .post( '/users' )
-            .send( { user: { first_name: "App_post_test" } } )
-            .end( ( err, response ) => {
-                if ( err ) return;
+                    // Assert
+                    assert( response.status === 200 );
+                    assert( response?.body?.first_name === "App_post_test" );
+                    done();
+                } );
+        } );
 
-                // Assert
-                assert( response.status === 200 );
-                assert( response?.body?.first_name === "App_post_test" );
-                done();
-            } );
+        it( "/users route get", function ( done ) {
+
+            // Act
+            request( app )
+                .get( '/users?first_name=App_post_test' )
+                .end( ( err, response ) => {
+                    if ( err ) return;
+
+                    // Assert
+                    assert( response.status === 200 );
+                    assert( response.body.first_name === 'App_post_test' );
+                    done();
+                } );
+        } );
+
+        it( "/user route patch", function ( done ) {
+
+            // Act
+            request( app )
+                .patch( '/users' )
+                .send( {
+                    user: { first_name: "App_post_test" },
+                    updated_user: { first_name: "App patch test" }
+                } )
+                .end( ( err, response ) => {
+                    if ( err ) return;
+
+                    // Assert
+                    assert( response.status === 200 );
+                    assert( response?.body?.first_name === "App patch test" );
+                    done();
+                } );
+        } );
+
+        it( "/users route delete", function ( done ) {
+
+            // Act
+            request( app )
+                .delete( '/users' )
+                .send( {
+                    user: { first_name: "App patch test" }
+                } )
+                .end( ( err, response ) => {
+                    if ( err ) return;
+
+                    // Assert
+                    assert( response.status === 200 );
+                    assert( response.body.first_name === "App patch test" );
+                    done();
+                } );
+        } );
     } );
 
-    it( "/users route get", function ( done ) {
+    describe( "Application, requests items route", function () {
 
-        // Act
-        request( app )
-            .get( '/users?first_name=App_post_test' )
-            .end( ( err, response ) => {
-                if ( err ) return;
+        let item_id = null;
+        it( "/items route post", function ( done ) {
 
-                // Assert
-                assert( response.status === 200 );
-                assert( response.body.first_name === 'App_post_test' );
-                done();
-            } );
+            // Act
+            request( app )
+                .post( '/items' )
+                .send( { item: { title: "Items_app_post_test" } } )
+                .end( ( err, response ) => {
+                    if ( err ) return;
+                    // Save for later use
+                    item_id = response?.body?.item_id;
+
+                    // Assert
+                    assert( response.status === 200 );
+                    assert( response?.body?.title === "Items_app_post_test" );
+                    done();
+                } );
+        } );
+
+        it( "/items route get", function ( done ) {
+
+            // Act
+            request( app )
+                .get( `/items?item_id=${ item_id }` )
+                .end( ( err, response ) => {
+                    if ( err ) return;
+
+                    // Assert
+                    assert( response.status === 200 );
+                    assert( response.body.title === 'Items_app_post_test' );
+                    done();
+                } );
+        } );
+
+        it( "/items route patch", function ( done ) {
+
+            // Act
+            request( app )
+                .patch( '/items' )
+                .send( {
+                    item: { item_id: item_id },
+                    updated_item: { title: "Item app patch test" }
+                } )
+                .end( ( err, response ) => {
+                    if ( err ) return;
+
+                    // Assert
+                    assert( response.status === 200 );
+                    assert( response?.body?.title === "Item app patch test" );
+                    done();
+                } );
+        } );
+
+        it( "/items route delete", function ( done ) {
+
+            // Act
+            request( app )
+                .delete( '/items' )
+                .send( {
+                    item: { item_id: item_id }
+                } )
+                .end( ( err, response ) => {
+                    if ( err ) return;
+
+                    // Assert
+                    assert( response.status === 200 );
+                    assert( response.body.title === "Item app patch test" );
+                    done();
+                } );
+        } );
     } );
-
-    it( "/user route patch", function ( done ) {
-
-        // Act
-        request( app )
-            .patch( '/users' )
-            .send( {
-                user: { first_name: "App_post_test" },
-                updated_user: { first_name: "App patch test" }
-            } )
-            .end( ( err, response ) => {
-                if ( err ) return;
-
-                // Assert
-                assert( response.status === 200 );
-                assert( response?.body?.first_name === "App patch test" );
-                done();
-            } );
-    } );
-
-    it( "/users route delete", function ( done ) {
-
-        // Act
-        request( app )
-            .delete( '/users' )
-            .send( {
-                user: { first_name: "App patch test" }
-            } )
-            .end( ( err, response ) => {
-                if ( err ) return;
-
-                // Assert
-                assert( response.status === 200 );
-                assert( response.body.first_name === "App patch test" );
-                done();
-            } );
-    } );
-} );
+}
