@@ -7,11 +7,15 @@
  * These scripts should not be part of main application.
  */
 const { Pool } = require( 'pg' );
-const Dto = require( '../interfaces' );
 const config = require( '../config' );
+const lib = require( './lib/lib' );
 
 
+/**
+ * Create connection pool.
+ */
 const pool = new Pool( config.dbConfig.connectionConfig );
+
 
 // Pool connection output
 pool.on( 'connect', ( client ) => {
@@ -66,26 +70,22 @@ async function asyncClientQueryRun( query ) {
     // Get database client
     const client = await pool.connect();
     let record = null;
-    const dto = await Dto.getDTO();
+    let dto = null;
 
     try {
         // Query database
         record = await client.query( query );
 
         // Create data transfer object ( Interface )
-        if ( record?.rowCount >= 1 ) {
-            dto.success = true;
-            dto.length = record?.rowCount;
-            dto.data = record?.rows;
-        }
+        dto = lib._createDto( record );
 
     } catch ( err ) {
-        // Return error
-        return err;
+        // Throw error
+        throw err;
 
     } finally {
         // Release client ( necessary )
-        await client.release();
+        client.release();
 
     }
     // Return result
