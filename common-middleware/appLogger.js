@@ -7,6 +7,7 @@ module.exports = AppLogger;
 
 /**
  * Creates application appLogger, write logs to logs directory in app root directory.
+ * Logs are written to a new file each day.
  * @return morgan appLogger
  * @constructor
  */
