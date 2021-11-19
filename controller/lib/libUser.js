@@ -16,4 +16,19 @@ function checkFirstname( req ) {
     } );
 }
 
-module.exports = { checkFirstname };
+function checkUser( req ) {
+
+    return new Promise( function ( resolve, reject ) {
+
+        if ( req?.body?.user ) {
+            resolve( req?.body?.user );
+        } else {
+            reject( null );
+        }
+    } );
+}
+
+module.exports = {
+    checkFirstname,
+    checkUser
+};

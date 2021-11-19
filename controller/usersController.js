@@ -23,14 +23,16 @@ async function getRequestHandler( req, res, next ) {
 }
 
 async function postRequestHandler( req, res, next ) {
-    await User.save( req?.body?.user )
+    await UserLib.checkUser( req )
+        .then( user => User.save( user ) )
         .then( user => lib.checkSuccess( user, next ) )
         .then( user => res?.send( user?.data[ 0 ] ) )
         .catch( next );
 }
 
 async function patchRequestHandler( req, res, next ) {
-    await User.findByFirstName( req?.body?.user?.first_name )
+    await UserLib.checkUser( req )
+        .then( user => User.findByFirstName( user?.first_name ) )
         .then( user => lib.checkSuccess( user, next ) )
         .then( user => User.update( user?.data[ 0 ]?.user_id, req?.body?.updated_user ) )
         .then( user => lib.checkSuccess( user, next ) )
@@ -39,7 +41,8 @@ async function patchRequestHandler( req, res, next ) {
 }
 
 async function deleteRequestHandler( req, res, next ) {
-    await User.findByFirstName( req?.body?.user?.first_name )
+    await UserLib.checkUser( req )
+        .then( user => User.findByFirstName( user?.first_name ) )
         .then( user => lib.checkSuccess( user, next ) )
         .then( user => User.delete( user?.data[ 0 ]?.user_id ) )
         .then( user => lib.checkSuccess( user, next ) )
