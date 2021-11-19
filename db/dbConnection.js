@@ -1,4 +1,11 @@
 'use strict';
+
+/**
+ * Creates connection and provides, database clients.
+ * This application should connect to this module only by ActiveRecord.js file.
+ * It can also be used in scripts to migrate and seed database.
+ * These scripts should not be part of main application.
+ */
 const { Pool } = require( 'pg' );
 const Dto = require( '../interfaces' );
 const config = require( '../config' );

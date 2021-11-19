@@ -1,4 +1,9 @@
 'use strict';
+
+/**
+ * Data transfer object is meant to transfer data to models from database connections.
+ * This is interface all consumer of data from database should depend on.
+ */
 class Dto {
     #success = false;
     #length = null;
