@@ -6,7 +6,7 @@
  */
 class Dto {
     #success = false;
-    #length = null;
+    #length = -1;
     #data = null;
 
     get success() {

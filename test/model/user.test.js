@@ -8,16 +8,29 @@ const { User } = require( "../../factory" );
 if ( process.env?.DB_CONN !== "none" ) {
     describe( 'User model', ( done ) => {
         let testUserId = null;
+        let testUser2Id = null;
 
         beforeEach( async () => {
             let testUser = await User.save( { first_name: "Test User" } );
             testUserId = testUser.data[ 0 ].user_id;
+
+            let testUser2 = await User.save( { first_name: "Test User two" } );
+            testUser2Id = testUser2.data[ 0 ].user_id;
         } );
 
         afterEach( async () => {
             await User.delete( testUserId );
+            await User.delete( testUser2Id );
         } );
 
+
+        it( 'findById', async () => {
+            // Act
+            const foundUser = await User.findById( testUserId );
+
+            // Assert
+            assert.deepStrictEqual( foundUser.data[ 0 ].user_id, testUserId );
+        } );
 
         it( 'findOne', async () => {
             // Act
@@ -27,12 +40,12 @@ if ( process.env?.DB_CONN !== "none" ) {
             assert.deepStrictEqual( user.length, 1 );
         } );
 
-        it( 'findById', async () => {
+        it( 'findLastTen', async () => {
             // Act
-            const foundUser = await User.findById( testUserId );
+            const foundUsers = await User.findLastTen();
 
             // Assert
-            assert.deepStrictEqual( foundUser.data[ 0 ].user_id, testUserId );
+            assert( foundUsers.length > 2 );
         } );
 
         it( 'save', async () => {

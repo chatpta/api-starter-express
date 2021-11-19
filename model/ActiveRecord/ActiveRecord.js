@@ -41,6 +41,14 @@ class ActiveRecord {
         return await this._sqlQueryRunner( query );
     }
 
+    async findLastTen() {
+        // Build query
+        const query = lib._findLastTenQueryBuilder( this._modelName );
+
+        // Query database
+        return await this._sqlQueryRunner( query );
+    }
+
     /**
      * Saves the data
      * @param object

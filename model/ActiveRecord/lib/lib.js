@@ -49,6 +49,15 @@ function _findOneQueryBuilder( modelName ) {
     ` );
 }
 
+function _findLastTenQueryBuilder( modelName ) {
+    return ( `
+        SELECT *
+        FROM ${ modelName }s
+        ORDER BY updated_at ASC LIMIT 10
+        OFFSET 0;
+    ` );
+}
+
 function _saveQueryBuilder( object, modelName ) {
     let [ keys, prompt, values ] = _extractKeyPromptValueArrays( object );
 
@@ -76,5 +85,6 @@ module.exports = {
     _findByIdQueryBuilder,
     _findOneQueryBuilder,
     _saveQueryBuilder,
-    _updateQueryBuilder
+    _updateQueryBuilder,
+    _findLastTenQueryBuilder
 };
