@@ -67,16 +67,17 @@ Contains express entry point script www, this script runs in response to ```npm 
 
 Application wide middleware, like error handlers and loggers.
 
-### config
+## config
 
 Configuration file, which does not change frequently. Should not include password or database names etc..
 
-### controller
+## controller
 
-Name is self-explanatory. Controller files should not define functions, but should only call functions. 
-Definition of functions should be in the ```controller/lib``` directory.
+Name is self-explanatory. Controller files should not define functions, but should only call functions. Definition of
+functions should be in the ```controller/lib``` directory.
 
-Todo::
+## db
 
-2. Create and run migration to create development, test and production database.
-3. Setup pg database connection and disconnect.
+All database connection and related files. In the main application should be used only in ActiveRecord.js module. Other
+places it can be used is in migration and seed scripts.
+
