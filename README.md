@@ -78,6 +78,37 @@ functions should be in the ```controller/lib``` directory.
 
 ## db
 
-All database connection and related files. In the main application should be used only in ```ActiveRecord.js``` module. Other
-places it can be used is in migration and seed scripts.
+All database connection and related files. In the main application should be used only in ```ActiveRecord.js``` module.
+Other places it can be used is in migration and seed scripts.
 
+## factory
+
+Factory creates the objects and supplies to the modules dependent on them.
+
+## interfaces
+
+Interfaces on which other modules are dependent for sending messages to each other.
+
+## lib
+
+Library of application functions.
+
+## logs
+
+Application log files, one file each day.
+
+## model
+
+All models.
+
+## routes
+
+All routes.
+
+## secrets
+
+All secret keys.
+
+## test
+
+All application tests.
