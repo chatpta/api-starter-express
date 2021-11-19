@@ -23,13 +23,6 @@ async function getRequestFirstNameHandler( req, res, next ) {
         .catch( next );
 }
 
-async function getRequestMostRecentHandler( req, res, next ) {
-    await User.findLastTen()
-        .then( user => lib.checkSuccess( user, next ) )
-        .then( user => res?.send( user?.data ) )
-        .catch( next );
-}
-
 async function postRequestHandler( req, res, next ) {
     await UserLib.checkUser( req )
         .then( user => User.save( user ) )
@@ -55,5 +48,12 @@ async function deleteRequestHandler( req, res, next ) {
         .then( user => User.delete( user?.data[ 0 ]?.user_id ) )
         .then( user => lib.checkSuccess( user, next ) )
         .then( user => res?.send( user?.data[ 0 ] ) )
+        .catch( next );
+}
+
+async function getRequestMostRecentHandler( req, res, next ) {
+    await User.findLastTen()
+        .then( user => lib.checkSuccess( user, next ) )
+        .then( user => res?.send( user?.data ) )
         .catch( next );
 }

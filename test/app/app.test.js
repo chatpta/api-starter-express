@@ -152,7 +152,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                 } );
         } );
 
-        it( "/user route patch", function ( done ) {
+        it( "/users route patch", function ( done ) {
 
             // Act
             request( app )
@@ -185,6 +185,21 @@ if ( process.env?.DB_CONN !== "none" ) {
                     // Assert
                     assert( response.status === 200 );
                     assert( response.body.first_name === "App patch test" );
+                    done();
+                } );
+        } );
+
+        it( "/users/recent route delete", function ( done ) {
+
+            // Act
+            request( app )
+                .get( '/users/recent' )
+                .end( ( err, response ) => {
+                    if ( err ) return;
+
+                    // Assert
+                    assert( response.status === 200 );
+                    assert( response.body.length >= 1 );
                     done();
                 } );
         } );
