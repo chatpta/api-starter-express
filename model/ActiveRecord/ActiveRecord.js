@@ -41,6 +41,10 @@ class ActiveRecord {
         return await this._sqlQueryRunner( query );
     }
 
+    /**
+     * Finds last updated 10 records.
+     * @return {Promise<null>}
+     */
     async findLastTen() {
         // Build query
         const query = lib._findLastTenQueryBuilder( this._modelName );
