@@ -12,9 +12,11 @@ module.exports = {
 
 const { User } = require( '../factory' );
 const lib = require( './lib/libCommon' );
+const UserLib = require( './lib/libUser' );
 
 async function getRequestHandler( req, res, next ) {
-    await User.findByFirstName( req?.query?.first_name )
+    await UserLib.checkFirstname( req )
+        .then( firstName => User.findByFirstName( firstName ) )
         .then( user => lib.checkSuccess( user, next ) )
         .then( user => res?.send( user?.data[ 0 ] ) )
         .catch( next );
