@@ -8,7 +8,7 @@ if ( process.env?.DB_CONN !== "none" ) {
 
         let itemId = null;
 
-        it( "/post request create item", async function () {
+        it( "postRequestHandler", async function () {
 
             // Arrange
             const req = { body: { item: { title: "itemsController post test" } } };
@@ -29,7 +29,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             assert( first_name === "itemsController post test" );
         } );
 
-        it( "/get request returns item", async function () {
+        it( "getRequestHandler", async function () {
 
             // Arrange
             const req = {
@@ -50,7 +50,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             assert( res.body.title === "itemsController post test" );
         } );
 
-        it( "/patch request return item", async function () {
+        it( "patchRequestHandler", async function () {
 
             // Arrange
             const req = {
@@ -75,7 +75,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             assert( title === "itemsController patch test" );
         } );
 
-        it( "/delete request return item", async function () {
+        it( "deleteRequestHandler", async function () {
 
             // Arrange
             const req = { body: { item: { item_id: itemId } } };
