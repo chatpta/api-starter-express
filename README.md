@@ -78,6 +78,6 @@ functions should be in the ```controller/lib``` directory.
 
 ## db
 
-All database connection and related files. In the main application should be used only in ActiveRecord.js module. Other
+All database connection and related files. In the main application should be used only in ```ActiveRecord.js``` module. Other
 places it can be used is in migration and seed scripts.
 
