@@ -4,7 +4,8 @@
  * This file should only call functions, all functions specific to ItemsController should be defined in ./lib/libUser.js.
  */
 module.exports = {
-    getRequestHandler,
+    getRequestFirstNameHandler,
+    getRequestMostRecentHandler,
     postRequestHandler,
     patchRequestHandler,
     deleteRequestHandler,
@@ -14,11 +15,18 @@ const { User } = require( '../factory' );
 const lib = require( './lib/libCommon' );
 const UserLib = require( './lib/libUser' );
 
-async function getRequestHandler( req, res, next ) {
+async function getRequestFirstNameHandler( req, res, next ) {
     await UserLib.checkFirstname( req )
         .then( firstName => User.findByFirstName( firstName ) )
         .then( user => lib.checkSuccess( user, next ) )
         .then( user => res?.send( user?.data[ 0 ] ) )
+        .catch( next );
+}
+
+async function getRequestMostRecentHandler( req, res, next ) {
+    await User.findLastTen()
+        .then( user => lib.checkSuccess( user, next ) )
+        .then( user => res?.send( user?.data ) )
         .catch( next );
 }
 

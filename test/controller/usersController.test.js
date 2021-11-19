@@ -5,7 +5,7 @@ const user = require( '../../controller' ).user;
 if ( process.env?.DB_CONN !== "none" ) {
     describe( "Controller Users", function () {
 
-        it( "/post request return message", async function () {
+        it( "postRequestHandler", async function () {
 
             // Arrange
             const req = { body: { user: { first_name: "Controller post test" } } };
@@ -25,7 +25,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             assert( first_name === "Controller post test" );
         } );
 
-        it( "/get request return message", async function () {
+        it( "getRequestFirstNameHandler", async function () {
 
             // Arrange
             const req = {
@@ -40,13 +40,32 @@ if ( process.env?.DB_CONN !== "none" ) {
             }
 
             // Act
-            await user.getRequestHandler( req, res, next );
+            await user.getRequestFirstNameHandler( req, res, next );
 
             // Assert
             assert( res.body.first_name === "Controller post test" );
         } );
 
-        it( "/patch request return message", async function () {
+        it( "getRequestMostRecentHandler", async function () {
+
+            // Arrange
+            const req = {};
+            const res = {
+                send( message ) {
+                    this.body = message
+                }
+            };
+            const next = () => {
+            }
+
+            // Act
+            await user.getRequestMostRecentHandler( req, res, next );
+
+            // Assert
+            assert( res.body.length >= 1 );
+        } );
+
+        it( "patchRequestHandler", async function () {
 
             // Arrange
             const req = {
@@ -71,7 +90,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             assert( first_name === "Controller patch test" );
         } );
 
-        it( "/delete request return message", async function () {
+        it( "deleteRequestHandler", async function () {
 
             // Arrange
             const req = { body: { user: { first_name: "Controller patch test" } } };
