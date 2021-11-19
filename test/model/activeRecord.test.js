@@ -5,7 +5,7 @@ const assert = require( "assert" );
 
 describe( "Active Record base class", () => {
 
-    it( "Contains findById function", done => {
+    it( "Contains findById", done => {
         // Arrange
         const record = new ActiveRecord();
 
@@ -17,7 +17,31 @@ describe( "Active Record base class", () => {
         done();
     } );
 
-    it( "Contains save function", done => {
+    it( "Contains findOne", done => {
+        // Arrange
+        const record = new ActiveRecord();
+
+        // Act
+        const typeOfProperty = typeof record.findOne;
+
+        // Assert
+        assert( typeOfProperty === "function" );
+        done();
+    } );
+
+    it( "Contains findLastTen", done => {
+        // Arrange
+        const record = new ActiveRecord();
+
+        // Act
+        const typeOfProperty = typeof record.findLastTen;
+
+        // Assert
+        assert( typeOfProperty === "function" );
+        done();
+    } );
+
+    it( "Contains save", done => {
         // Arrange
         const record = new ActiveRecord();
 
@@ -29,7 +53,7 @@ describe( "Active Record base class", () => {
         done();
     } );
 
-    it( "Contains update function", done => {
+    it( "Contains update", done => {
         // Arrange
         const record = new ActiveRecord();
 
@@ -41,7 +65,7 @@ describe( "Active Record base class", () => {
         done();
     } );
 
-    it( "Contains delete function", done => {
+    it( "Contains delete", done => {
         // Arrange
         const record = new ActiveRecord();
 

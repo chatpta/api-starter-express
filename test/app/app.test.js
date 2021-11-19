@@ -56,8 +56,8 @@ describe( "Application, req server error", function () {
     } );
 } );
 
-describe( "Application, requests root route", function () {
-    it( "/ route get", function ( done ) {
+describe( "Application, route /", function () {
+    it( "get", function ( done ) {
 
         // Act
         request( app )
@@ -72,7 +72,7 @@ describe( "Application, requests root route", function () {
             } );
     } );
 
-    it( "/ route post", function ( done ) {
+    it( "post", function ( done ) {
 
         // Act
         request( app )
@@ -87,7 +87,7 @@ describe( "Application, requests root route", function () {
             } );
     } );
 
-    it( "/ route patch", function ( done ) {
+    it( "patch", function ( done ) {
 
         // Act
         request( app )
@@ -102,7 +102,7 @@ describe( "Application, requests root route", function () {
             } );
     } );
 
-    it( "/ route delete", function ( done ) {
+    it( "delete", function ( done ) {
 
         // Act
         request( app )
@@ -119,9 +119,9 @@ describe( "Application, requests root route", function () {
 } );
 
 if ( process.env?.DB_CONN !== "none" ) {
-    describe( "Application, requests users route", function () {
+    describe( "Application route /users", function () {
 
-        it( "/users route post", function ( done ) {
+        it( "post", function ( done ) {
 
             // Act
             request( app )
@@ -137,7 +137,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                 } );
         } );
 
-        it( "/users route get", function ( done ) {
+        it( "get", function ( done ) {
 
             // Act
             request( app )
@@ -152,7 +152,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                 } );
         } );
 
-        it( "/users route patch", function ( done ) {
+        it( "patch", function ( done ) {
 
             // Act
             request( app )
@@ -171,7 +171,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                 } );
         } );
 
-        it( "/users route delete", function ( done ) {
+        it( "delete", function ( done ) {
 
             // Act
             request( app )
@@ -189,7 +189,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                 } );
         } );
 
-        it( "/users/recent route delete", function ( done ) {
+        it( "/recent get", function ( done ) {
 
             // Act
             request( app )
@@ -205,10 +205,10 @@ if ( process.env?.DB_CONN !== "none" ) {
         } );
     } );
 
-    describe( "Application, requests items route", function () {
+    describe( "Application route /items", function () {
 
         let item_id = null;
-        it( "/items route post", function ( done ) {
+        it( "post", function ( done ) {
 
             // Act
             request( app )
@@ -226,7 +226,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                 } );
         } );
 
-        it( "/items route get", function ( done ) {
+        it( "get", function ( done ) {
 
             // Act
             request( app )
@@ -241,7 +241,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                 } );
         } );
 
-        it( "/items route patch", function ( done ) {
+        it( "patch", function ( done ) {
 
             // Act
             request( app )
@@ -260,7 +260,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                 } );
         } );
 
-        it( "/items route delete", function ( done ) {
+        it( "delete", function ( done ) {
 
             // Act
             request( app )
