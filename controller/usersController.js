@@ -1,4 +1,8 @@
 'use strict';
+
+/**
+ * This file should only call functions, all functions specific to ItemsController should be defined in ./lib/libUser.js.
+ */
 module.exports = {
     getRequestHandler,
     postRequestHandler,
