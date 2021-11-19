@@ -1,6 +1,6 @@
 'use strict';
-const ActiveRecord = require( './ActiveRecord/ActiveRecord' );
 
+const ActiveRecord = require( './ActiveRecord/ActiveRecord' );
 
 class Item extends ActiveRecord {
 

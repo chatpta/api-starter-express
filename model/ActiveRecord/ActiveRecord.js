@@ -1,10 +1,12 @@
 'use strict';
-const Db = require( '../../db' );
-const lib = require( './lib/lib' );
 
 /**
  * This is base class for all model classes.
+ * This class provides database clients and few basic functions.
  */
+const Db = require( '../../db' );
+const lib = require( './lib/lib' );
+
 class ActiveRecord {
     constructor() {
         this._recordName = this.constructor.name;
