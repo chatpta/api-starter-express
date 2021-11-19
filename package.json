@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "export NODE_ENV=development && export PORT=3002 && node ./bin/www",
-    "devstart": "export NODE_ENV=development && export PORT=3002 &&  nodemon ./bin/www",
+    "start": "export NODE_ENV=development && export PORT=3000 && node ./bin/www",
+    "devstart": "export NODE_ENV=development && export PORT=3000 &&  nodemon ./bin/www",
     "production": "export NODE_ENV=production && node ./bin/www",
     "migrateDb": "node db/dbMigration.js",
     "seedDb": "node db/dbSeed.js",
