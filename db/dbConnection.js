@@ -73,7 +73,7 @@ async function asyncClientQueryRun( query ) {
         record = await client.query( query );
 
         // Create data transfer object ( Interface )
-        if ( record.rowCount >= 1 ) {
+        if ( record?.rowCount >= 1 ) {
             dto.success = true;
             dto.length = record?.rowCount;
             dto.data = record?.rows;
