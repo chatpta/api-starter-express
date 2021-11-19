@@ -65,6 +65,17 @@ Contains express entry point script www, this script runs in response to ```npm 
 
 ## common-middleware
 
+Application wide middleware, like error handlers and loggers.
+
+### config
+
+Configuration file, which does not change frequently. Should not include password or database names etc..
+
+### controller
+
+Name is self-explanatory. Controller files should not define functions, but should only call functions. 
+Definition of functions should be in the ```controller/lib``` directory.
+
 Todo::
 
 2. Create and run migration to create development, test and production database.
