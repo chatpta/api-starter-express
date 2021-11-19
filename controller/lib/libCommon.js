@@ -11,7 +11,7 @@
  * @return {{success}|*}
  */
 function checkSuccess( dto, next ) {
-    if ( dto.success ) {
+    if ( dto?.success ) {
         return dto;
     } else {
         next( 'route' );
