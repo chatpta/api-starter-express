@@ -6,7 +6,26 @@
 npx @chatpta/starter-api-express my-api
 ```
 
-### Run application in docker compose,
+### Before running application make sure
+
+system has
+```node 16.4 or higher```
+```docker 3.6.0 or higher```
+
+create ```my-api/.env``` file and paste the content of ```my-api/dev.env``` into this file.
+
+### Run postgres database in container and application on local machine in development mode
+
+Docker runs on ```localhost:5432``` and express api runs on ```localhost:3000```
+
+```shell
+docker-compose up db-starter-api-express
+npm install
+npm run migrateDb
+npm run devstart
+```
+
+### To run application and database both using docker compose
 
 Express runs at ```localhost:3000``` and postgres runs at ```localhost:5432```
 
@@ -14,13 +33,9 @@ Express runs at ```localhost:3000``` and postgres runs at ```localhost:5432```
 docker-compose -f docker-compose.yaml up
 ```
 
-### Run postgres database alone in container, available at host port ```5432```
+### Other commands
 
-```shell
-docker-compose up db-starter-api-express
-```
-
-Test connection to db
+Test connection to db need ```psql``` client installed on machine
 
 ```shell
 psql "postgresql://user:password@localhost/chatpta_db"
@@ -55,6 +70,18 @@ Run database migration to create database tables
 
 ```shell
  npm run migrateDb
+```
+
+Seed database with some data
+
+```shell
+ npm run seedDb
+```
+
+Check test coverage
+
+```shell
+ npm run testCoverage
 ```
 
 # Directory structure
