@@ -1,6 +1,6 @@
 const { describe, it } = require( "mocha" );
 const assert = require( "assert" );
-const user = require( '../../controller' ).user;
+const userController = require( '../../controller' ).user;
 
 if ( process.env?.DB_CONN !== "none" ) {
     describe( "Controller Users", function () {
@@ -18,7 +18,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             }
 
             // Act
-            await user.postRequestHandler( req, res, next );
+            await userController.postRequestHandler( req, res, next );
             let first_name = await res?.body?.first_name;
 
             // Assert
@@ -40,7 +40,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             }
 
             // Act
-            await user.getRequestFirstNameHandler( req, res, next );
+            await userController.getRequestFirstNameHandler( req, res, next );
 
             // Assert
             assert( res.body.first_name === "Controller post test" );
@@ -59,7 +59,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             }
 
             // Act
-            await user.getRequestMostRecentHandler( req, res, next );
+            await userController.getRequestMostRecentHandler( req, res, next );
 
             // Assert
             assert( res.body.length >= 1 );
@@ -83,7 +83,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             }
 
             // Act
-            await user.patchRequestHandler( req, res, next );
+            await userController.patchRequestHandler( req, res, next );
             let first_name = await res?.body?.first_name;
 
             // Assert
@@ -103,7 +103,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             }
 
             // Act
-            await user.deleteRequestHandler( req, res, next );
+            await userController.deleteRequestHandler( req, res, next );
 
             // Assert
             assert( res.body.first_name === "Controller patch test" );
