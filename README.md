@@ -138,4 +138,4 @@ All secret keys.
 
 ## test
 
-All application tests.
+All application tests. Each test file correspond to a file of same name. For example ```user.test.js``` tests ```user.js``` file.
