@@ -12,5 +12,4 @@ module.exports = {
     User: Model.getUser(),
     Item: Model.getItem(),
     CommonMiddleware: CommonMiddleware
-
 }
