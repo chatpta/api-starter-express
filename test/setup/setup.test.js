@@ -23,6 +23,5 @@ after( "Disconnect pool", async function () {
     await User.delete( testUser2IdSetup );
 
     await db.getEndPool()
-        .then( console.log )
         .catch( console.error );
 } );

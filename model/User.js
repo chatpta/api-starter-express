@@ -1,39 +1,20 @@
 'use strict';
+
+/**
+ * This class executes functions for the User Model
+ */
 const ActiveRecord = require( './ActiveRecord/ActiveRecord' );
-const Dto = require( "../interfaces" );
+const libUser = require("./lib/libUser");
 
 
 class User extends ActiveRecord {
 
-    constructor() {
-        super();
-    }
-
     async findByFirstName( name ) {
-        const dto = await Dto.getDTO();
+        // Build Query
+        const query = libUser._findByFirstNameQueryBuilder(name, this._className);
 
-        // Get database client
-        const client = await this._DatabaseFactory.getDbClient()
-
-        // Query database
-        const user = await client.query( `
-            SELECT *
-            FROM ${ this._className }s
-            WHERE first_name = '${ name }';
-        ` );
-
-        // Create data transfer object ( Interface )
-        if ( user.rowCount >= 1 ) {
-            dto.success = true;
-            dto.length = user?.rowCount;
-            dto.data = user?.rows;
-        }
-
-        // Release client ( necessary )
-        await client.release();
-
-        // Return result
-        return dto;
+        // Query Database
+        return await this._sqlQueryRunner( query );
     }
 }
 

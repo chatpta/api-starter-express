@@ -11,7 +11,6 @@ class ActiveRecord {
     constructor() {
         this._recordName = this.constructor.name;
         this._className = new.target.name;
-        this._DatabaseFactory = Db;
         this._sqlQueryRunner = Db.getSqlQueryRunner();
         this._modelName = this._className;
     }
