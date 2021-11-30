@@ -1,8 +1,8 @@
 module.exports = {
     connectionConfig: {
         max: 20,  // Clients in pool
-        idleTimeoutMillis: 60000, // After 60 sec of idle time close connection.
-        connectionTimeoutMillis: 2000,
+        idleTimeoutMillis: 2000, // After 2 sec of idle time close connection.
+        connectionTimeoutMillis: 200, // After 200 ms of trying to connect time out.
         allowExitOnIdle: false
     }
 };

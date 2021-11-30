@@ -33,10 +33,8 @@ pool.on( 'acquire', ( client ) => {
     // console.log( 'Client acquired from pool' )
 } )
 
-pool.on( 'remove', ( client ) => {
-    client.query( 'SELECT NOW()' )
-        .then( res => console.log( "Client closed and removed from pool" ) )
-        .catch( console.error );
+pool.on( 'remove', () => {
+    console.log( "Db connection pool has ended." )
 } );
 
 // disconnect

@@ -24,7 +24,7 @@ if ( process.env?.DB_CONN !== "none" ) {
         await User.delete( testUser2IdSetup );
 
         // Close database pool after teach test
-        // await db.getEndPool()
-        //     .catch( console.error );
+        await db.getEndPool()
+            .catch( console.error );
     } );
 }
