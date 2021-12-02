@@ -7,7 +7,8 @@
 module.exports = {
     notFound404,
     appError400,
-    appError500
+    appError500,
+    validationError
 }
 
 
@@ -27,6 +28,19 @@ function appError400( req, res, next ) {
         type: "data error",
         error: "data format error"
     } )
+}
+
+function validationError( err, req, res, next ) {
+    if ( err.message === "Validation_Failure" ) {
+        res.status( 200 );
+        res.send( {
+            code: 200,
+            type: "validation error",
+            error: "validation failed"
+        } )
+    } else {
+        next( err );
+    }
 }
 
 function appError500( err, req, res, next ) {

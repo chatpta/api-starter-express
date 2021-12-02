@@ -24,6 +24,9 @@ app.use( indexRouter );
 // Not found json response
 app.use( Factory.CommonMiddleware.appErrorHandlers.notFound404 );
 
+// Validation error json response
+app.use( Factory.CommonMiddleware.appErrorHandlers.validationError );
+
 // Server error json response
 app.use( Factory.CommonMiddleware.appErrorHandlers.appError500 );
 
