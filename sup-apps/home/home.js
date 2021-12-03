@@ -1,12 +1,12 @@
 'use strict';
 const express = require( 'express' );
 const router = express.Router();
-const controller = require( '../../controller' );
+const controller = require( './homeController' );
 
 
-router.get( '/', controller.home.getRequestHandler );
-router.post( '/', controller.home.postRequestHandler );
-router.patch( '/', controller.home.patchRequestHandler );
-router.delete( '/', controller.home.deleteRequestHandler );
+router.get( '/', controller.getRequestHandler );
+router.post( '/', controller.postRequestHandler );
+router.patch( '/', controller.patchRequestHandler );
+router.delete( '/', controller.deleteRequestHandler );
 
 module.exports = router;

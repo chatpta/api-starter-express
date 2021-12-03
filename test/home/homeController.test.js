@@ -1,6 +1,6 @@
 const { describe, it } = require( "mocha" );
 const assert = require( "assert" );
-const home = require( '../../controller' ).home;
+const home = require( '../../sup-apps/home/homeController' );
 
 
 describe( "Controller Home", function () {
