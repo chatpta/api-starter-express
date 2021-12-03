@@ -5,12 +5,14 @@ const cors = require( "cors" );
 const helmet = require( "helmet" );
 
 const indexRouter = require( './routes' );
-const Factory = require( "./factory" );
+const { appErrorHandlers } = require( './errors' );
+const commonMiddleware = require('./logger')
+
 
 const app = express();
 
 // Setup application processing
-app.use( Factory.CommonMiddleware.appLogger() );
+app.use( commonMiddleware.appLogger() );
 app.use( cors() );
 app.use( helmet() );
 app.use( cookieParser() );
@@ -22,12 +24,12 @@ app.set('title', 'chatpta starter api');
 app.use( indexRouter );
 
 // Not found json response
-app.use( Factory.CommonMiddleware.appErrorHandlers.notFound404 );
+app.use( appErrorHandlers.notFound404 );
 
 // Validation error json response
-app.use( Factory.CommonMiddleware.appErrorHandlers.validationError );
+app.use( appErrorHandlers.validationError );
 
 // Server error json response
-app.use( Factory.CommonMiddleware.appErrorHandlers.appError500 );
+app.use( appErrorHandlers.appError500 );
 
 module.exports = app;

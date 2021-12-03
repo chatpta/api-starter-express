@@ -2,7 +2,7 @@ const { describe, it } = require( "mocha" );
 const assert = require( "assert" );
 const request = require( 'supertest' );
 const express = require( 'express' );
-const commonMiddleware = require( '../../common-middleware' );
+const commonMiddleware = require( '../../errors' );
 
 
 describe( "Common-middleware error handler", function () {
