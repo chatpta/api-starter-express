@@ -1,5 +1,5 @@
 'use strict';
-const User = require( './User' );
+const User = require( './UserModel' );
 
 /**
  * Factory for database functionality
