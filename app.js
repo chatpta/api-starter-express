@@ -4,7 +4,7 @@ const cookieParser = require( 'cookie-parser' );
 const cors = require( "cors" );
 const helmet = require( "helmet" );
 
-const indexRouter = require( './routes' );
+const indexRouter = require( './sup-apps' );
 const { appErrorHandlers } = require( './errors' );
 const commonMiddleware = require('./logger')
 
