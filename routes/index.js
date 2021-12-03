@@ -3,7 +3,7 @@ const express = require( 'express' );
 const home = require( './home' );
 const users = require( '../sup-apps/user/users' );
 const items = require( '../sup-apps/item/items' );
-const createErrorRouter = require( './createErrorRouter' );
+const createErrorRouter = require( '../errors/createErrorRouter' );
 
 const router = express.Router();
 
