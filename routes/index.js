@@ -1,7 +1,7 @@
 'use strict';
 const express = require( 'express' );
 const home = require( '../sup-apps/home/home' );
-const users = require( '../sup-apps/user/users' );
+const users = require( '../sup-apps/user/userRouter' );
 const items = require( '../sup-apps/item/items' );
 const createErrorRouter = require( '../errors/createErrorRouter' );
 
