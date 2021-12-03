@@ -5,6 +5,6 @@
  */
 module.exports = {
     home: require( './homeController' ),
-    user: require( './usersController' ),
-    item: require( './itemsController' )
+    user: require( '../sup-apps/user/usersController' ),
+    item: require( '../sup-apps/item/itemsController' )
 }
