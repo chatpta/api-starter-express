@@ -1,7 +1,7 @@
 'use strict';
 const { before, after } = require( "mocha" );
-const db = require( '../../db' );
 const { User } = require( "../../factory" );
+const Db = require( "../../db" );
 
 let testUserIdSetup = null;
 let testUser2IdSetup = null;
@@ -20,11 +20,22 @@ if ( process.env?.DB_CONN !== "none" ) {
 
     after( "Disconnect pool", async function () {
 
-        await User.delete( testUserIdSetup );
-        await User.delete( testUser2IdSetup );
+        let queryRunner = await Db.getSqlQueryRunner()
+        // Delete all data
+        await queryRunner( `
+                  BEGIN;
+                       DELETE FROM Users;
+                       DELETE FROM Items;
+                  COMMIT;` )
+            .then( result => {
+                console.log( "== Deleted all data from Database ==" );
+            } )
+            .catch( console.error )
+            .finally( process.exit );
+
 
         // Close database pool after teach test
-        await db.getEndPool()
+        await Db.getEndPool()
             .catch( console.error );
     } );
 }
