@@ -1,6 +1,6 @@
 'use strict';
-const appErrorHandlers = require( './appErrorHandlers' );
-const AppLogger = require( './appLogger' );
+const appErrorHandlers = require( '../errors/appErrorHandlers' );
+const AppLogger = require( '../logger/appLogger' );
 
 module.exports = {
     appErrorHandlers,

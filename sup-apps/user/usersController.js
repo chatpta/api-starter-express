@@ -12,7 +12,7 @@ module.exports = {
 }
 
 const { User } = require( '../../factory' );
-const lib = require( '../../controller/lib/libCommon' );
+const lib = require( '../../lib/controller/libCommon' );
 const UserLib = require( './libUser' );
 
 async function getRequestFirstNameHandler( req, res, next ) {
