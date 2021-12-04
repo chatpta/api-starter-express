@@ -2,7 +2,7 @@
 const express = require( 'express' );
 const home = require( './home/home' );
 const users = require( './user/userRouter' );
-const items = require( './item/items' );
+const items = require( './item/itemRouter' );
 const createErrorRouter = require( '../errors/createErrorRouter' );
 
 const router = express.Router();
