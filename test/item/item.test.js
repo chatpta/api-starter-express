@@ -1,7 +1,8 @@
 'use strict';
 const assert = require( 'assert' );
 const { describe, it, beforeEach, afterEach } = require( "mocha" );
-const { Item } = require( "../../factory" );
+const  Item  = require( "../../sup-apps/item/itemModelFactory" ).getItem();
+
 
 // Runs test only if DB_CONN is defined
 if ( process.env?.DB_CONN !== "none" ) {
