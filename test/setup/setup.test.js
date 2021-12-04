@@ -1,6 +1,6 @@
 'use strict';
 const { before, after } = require( "mocha" );
-const { User } = require( "../../factory" );
+const User = require( "../../sup-apps/user/userModelFactory" ).getUser();
 const Db = require( "../../db" );
 
 let testUserIdSetup = null;

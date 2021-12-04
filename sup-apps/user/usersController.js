@@ -11,7 +11,7 @@ module.exports = {
     deleteRequestHandler,
 }
 
-const { User } = require( '../../factory' );
+const User = require( './userModelFactory' ).getUser();
 const lib = require( '../lib/controller/libCommon' );
 const UserLib = require( './libUserController' );
 
