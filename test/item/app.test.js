@@ -22,7 +22,7 @@ if ( process.env?.DB_CONN !== "none" ) {
 
                     // Assert
                     assert( response.status === 200 );
-                    assert( response?.body?.title === "Items_app_post_test" );
+                    assert.deepStrictEqual( response?.body?.title, "Items_app_post_test" );
                     done();
                 } );
         } );

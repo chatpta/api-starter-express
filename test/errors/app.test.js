@@ -16,7 +16,7 @@ describe( "Application, req not found", function () {
 
                 // Assert
                 assert( response.status === 404 );
-                assert( response.body.type === "not found" );
+                assert( response.body.error === "not found" );
                 done()
             } );
     } );
@@ -31,8 +31,8 @@ describe( "Application, req not found", function () {
                     if ( err ) return;
 
                     // Assert
-                    assert( response.status === 404 );
-                    assert( response.body.type === "not found" );
+                    assert( response.status === 200 );
+                    assert.deepStrictEqual( response.body.error, "record not found" );
                     done();
                 } );
         } );
@@ -50,7 +50,7 @@ describe( "Application, req server error", function () {
 
                 // Assert
                 assert( response.status === 500 );
-                assert( response.body.type === 'app error' );
+                assert.deepStrictEqual( response.body.error, 'application error' );
                 done();
             } );
     } );

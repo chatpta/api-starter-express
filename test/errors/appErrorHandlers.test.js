@@ -2,7 +2,7 @@ const { describe, it } = require( "mocha" );
 const assert = require( "assert" );
 const request = require( 'supertest' );
 const express = require( 'express' );
-const commonMiddleware = require( '../../errors' );
+const error = require( '../../errors' );
 
 
 describe( "Common-middleware error handler", function () {
@@ -10,7 +10,7 @@ describe( "Common-middleware error handler", function () {
         // Arrange
         let app = express();
         // noinspection JSCheckFunctionSignatures
-        app.use( commonMiddleware.appErrorHandlers.notFound404 );
+        app.use( error.appErrorHandlers.notFound404 );
 
         // Act
         request( app )
@@ -20,26 +20,7 @@ describe( "Common-middleware error handler", function () {
 
                 // Assert
                 assert( response.status === 404 );
-                assert( response.body.type === "not found" );
-                done();
-            } );
-    } );
-
-    it( "appErrorHandlers.appError400", function ( done ) {
-        // Arrange
-        let app = express();
-        // noinspection JSCheckFunctionSignatures
-        app.use( commonMiddleware.appErrorHandlers.appError400 );
-
-        // Act
-        request( app )
-            .get( '/' )
-            .end( ( err, response ) => {
-                if ( err ) return;
-
-                // Assert
-                assert( response.status === 400 );
-                assert( response.body.type === "data error" );
+                assert( response.body.error === "not found" );
                 done();
             } );
     } );
@@ -51,7 +32,7 @@ describe( "Common-middleware error handler", function () {
             throw new Error( "Application broke" )
         } );
         // noinspection JSCheckFunctionSignatures
-        app.use( commonMiddleware.appErrorHandlers.appError500 );
+        app.use( error.appErrorHandlers.appErrorHandler );
 
         // Act
         request( app )
@@ -61,7 +42,7 @@ describe( "Common-middleware error handler", function () {
 
                 // Assert
                 assert( response.statusCode === 500 );
-                assert( response.body.type === "app error" );
+                assert.deepStrictEqual( response.body.error, "application error" );
                 done();
             } );
     } );

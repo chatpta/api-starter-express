@@ -4,7 +4,7 @@ const cookieParser = require( 'cookie-parser' );
 const cors = require( "cors" );
 const helmet = require( "helmet" );
 
-const indexRouter = require( './sup-apps' );
+const subApps = require( './sup-apps' );
 const { appErrorHandlers } = require( './errors' );
 const commonMiddleware = require('./logger')
 
@@ -21,15 +21,12 @@ app.use( express.urlencoded( { extended: false } ) );
 app.set('title', 'chatpta starter api');
 
 // Add routers
-app.use( indexRouter );
+app.use( subApps );
 
-// Not found json response
+// Not found json response.
 app.use( appErrorHandlers.notFound404 );
 
-// Validation error json response
-app.use( appErrorHandlers.validationError );
-
-// Server error json response
-app.use( appErrorHandlers.appError500 );
+// Server error json response.
+app.use( appErrorHandlers.appErrorHandler );
 
 module.exports = app;

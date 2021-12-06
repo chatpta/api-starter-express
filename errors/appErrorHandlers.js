@@ -2,52 +2,84 @@
 /**
  * These are application level error handlers. All error responses should be send using these functions.
  * These should be use in app.js file, not in controller files.
- * @type {{notFound404: notFound404, appError500: appError500, appError400: appError400}}
  */
 module.exports = {
     notFound404,
-    appError400,
-    appError500,
-    validationError
+    appErrorHandler,
+    throwValidationFailureError,
+    throwRecordExistError,
+    throwWrongCredentialsError,
+    throwLoginRequiredError,
+    throwRecordNotFoundError,
+    throwUpdateFailedError,
+    throwTransactionFailedError
 }
 
 
 function notFound404( req, res, next ) {
     res.status( 404 );
-    res.send( {
-        code: 404,
-        type: "not found",
-        error: "not found location main app"
-    } )
+    res.send( { error: "not found" } )
 }
 
-function appError400( req, res, next ) {
-    res.status( 400 );
-    res.send( {
-        code: 400,
-        type: "data error",
-        error: "data format error"
-    } )
-}
+function appErrorHandler( err, req, res, next ) {
+    switch ( err?.message ) {
 
-function validationError( err, req, res, next ) {
-    if ( err.message === "Validation_Failure" ) {
-        res.status( 200 );
-        res.send( {
-            code: 200,
-            type: "validation error",
-            error: "validation failed"
-        } )
-    } else {
-        next( err );
+        case "Validation_Failure":
+        case "Wrong_Credentials":
+            res.send( { error: "wrong credentials" } )
+            break;
+
+        case "Record_Exist":
+            res.send( { error: "record exist" } )
+            break;
+
+        case "Record_NotFound":
+            res.send( { error: "record not found" } )
+            break;
+
+        case "Update_Failed":
+            res.send( { error: "update failed" } )
+            break;
+
+        case "Login_Required":
+            res.send( { error: "login required" } )
+            break;
+
+        case "Transaction_Failed":
+            res.send( { error: "transaction failed" } )
+            break;
+
+        default:
+            res.status( 500 );
+            res.send( { error: "application error" } )
     }
 }
 
-function appError500( err, req, res, next ) {
-    res.status( 500 );
-    res.send( {
-        code: 500,
-        type: "app error",
-        error: "something serious happened"
-    } )
+
+function throwValidationFailureError() {
+    throw new Error( "Validation_Failure" );
+}
+
+function throwWrongCredentialsError() {
+    throw new Error( "Wrong_Credentials" );
+}
+
+function throwRecordExistError() {
+    throw new Error( "Record_Exist" );
+}
+
+function throwRecordNotFoundError() {
+    throw new Error( "Record_NotFound" );
+}
+
+function throwLoginRequiredError() {
+    throw new Error( "Login_Required" );
+}
+
+function throwUpdateFailedError() {
+    throw new Error( "Update_Failed" );
+}
+
+function throwTransactionFailedError() {
+    throw new Error( "Transaction_Failed" );
 }
