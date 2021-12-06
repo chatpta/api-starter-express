@@ -60,14 +60,9 @@ function _isPhoneNumber( str ) {
     return ( /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test( str ) );
 }
 
-function _throwValidationFailureError() {
-    throw new Error( "Validation_Failure" );
-}
-
 module.exports = {
     checkSuccess: _checkSuccess,
     _verifyObjectProperties,
     _validateProperties,
     _isPhoneNumber,
-    throwValidationFailureError: _throwValidationFailureError
 };

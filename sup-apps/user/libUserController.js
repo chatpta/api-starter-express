@@ -1,5 +1,7 @@
 'use strict';
 
+const { throwValidationFailureError } = require( "../../errors/appErrorHandlers" );
+
 /**
  * This file contains functions of User controller.
  */
@@ -11,7 +13,7 @@ function checkFirstname( req ) {
         if ( req?.query?.first_name ) {
             resolve( req?.query?.first_name );
         } else {
-            reject( null );
+            throwValidationFailureError();
         }
     } );
 }
@@ -23,7 +25,7 @@ function checkUser( req ) {
         if ( req?.body?.user ) {
             resolve( req?.body?.user );
         } else {
-            reject( null );
+            throwValidationFailureError();
         }
     } );
 }
