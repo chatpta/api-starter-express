@@ -12,7 +12,8 @@ module.exports = {
     throwLoginRequiredError,
     throwRecordNotFoundError,
     throwUpdateFailedError,
-    throwTransactionFailedError
+    throwTransactionFailedError,
+    throwUsedTokenError
 }
 
 
@@ -24,6 +25,7 @@ function notFound404( req, res, next ) {
 function appErrorHandler( err, req, res, next ) {
     switch ( err?.message ) {
 
+        case "Used_Token":
         case "Validation_Failure":
         case "Wrong_Credentials":
             res.send( { error: "wrong credentials" } )
@@ -82,4 +84,8 @@ function throwUpdateFailedError() {
 
 function throwTransactionFailedError() {
     throw new Error( "Transaction_Failed" );
+}
+
+function throwUsedTokenError() {
+    throw new Error( "Used_Token" );
 }
