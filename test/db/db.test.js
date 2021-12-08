@@ -38,9 +38,10 @@ if ( process.env?.DB_CONN !== "none" ) {
         it( "checkout with release does not exhaust clients", async function () {
             // Just one client is used, no additional connection created
             // Arrange
+            let pool = Db.getDbPool();
+            let totalConnectionCountBeforeTest = pool.totalCount;
             let iteration = 0;
             let totalConnectionCount = 0
-            let pool = Db.getDbPool();
 
             // Act
             for ( let i = 0; i < 20; i++ ) {
@@ -52,7 +53,7 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Assert
             assert( iteration === 19 );
-            assert( totalConnectionCount === 1 );
+            assert.deepStrictEqual( totalConnectionCount, totalConnectionCountBeforeTest );
         } );
 
         it( "checkout multiple client", async function () {
