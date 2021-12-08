@@ -41,9 +41,10 @@ if ( process.env?.DB_CONN !== "none" ) {
             let pool = Db.getDbPool();
             let totalCheckoutClientsBeforeTest = pool.totalCount;
             let totalCheckoutClientsAfterTest = 0
+            let checkoutTimes = 25;
 
             // Act
-            for ( let i = 0; i < 20; i++ ) {
+            for ( let i = 0; i < checkoutTimes; i++ ) {
                 let client = await Db.getDbClient();
                 client.release();
             }
