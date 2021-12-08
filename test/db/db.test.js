@@ -39,21 +39,21 @@ if ( process.env?.DB_CONN !== "none" ) {
             // Just one client is used, no additional connection created
             // Arrange
             let pool = Db.getDbPool();
-            let totalConnectionCountBeforeTest = pool.totalCount;
+            let totalCheckoutClientsBeforeTest = pool.totalCount;
             let iteration = 0;
-            let totalConnectionCount = 0
+            let totalCheckoutClientsAfterTest = 0
 
             // Act
             for ( let i = 0; i < 20; i++ ) {
                 let client = await Db.getDbClient();
-                totalConnectionCount = pool.totalCount;
+                totalCheckoutClientsAfterTest = pool.totalCount;
                 client.release();
                 iteration = i;
             }
 
             // Assert
             assert( iteration === 19 );
-            assert.deepStrictEqual( totalConnectionCount, totalConnectionCountBeforeTest );
+            assert.deepStrictEqual( totalCheckoutClientsAfterTest, totalCheckoutClientsBeforeTest );
         } );
 
         it( "checkout multiple client", async function () {
