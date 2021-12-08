@@ -57,22 +57,21 @@ if ( process.env?.DB_CONN !== "none" ) {
         it( "checkout multiple client", async function () {
             // Every time create an additional connection, to get new client
             // Arrange
-            let iteration = 0;
-            let totalConnectionCount = 0
-            let pool = Db.getDbPool();
             let clients = [];
+            let pool = Db.getDbPool();
+            let totalCheckoutClientsAfterTest = 0
+            let numberOfIteration = 5
 
             // Act
-            for ( let i = 0; i < 5; i++ ) {
+            for ( let i = 0; i < numberOfIteration; i++ ) {
                 let client = await Db.getDbClient();
                 clients.push( client );
-                totalConnectionCount = pool.totalCount;
-                iteration = i;
             }
 
+            totalCheckoutClientsAfterTest = pool.totalCount;
+
             // Assert
-            assert.deepStrictEqual( iteration, 4 );
-            assert.deepStrictEqual( totalConnectionCount, 5 );
+            assert.deepStrictEqual( totalCheckoutClientsAfterTest, numberOfIteration );
 
             // Release clients
             clients.forEach( client => client.release() )
