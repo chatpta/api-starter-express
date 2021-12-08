@@ -40,19 +40,17 @@ if ( process.env?.DB_CONN !== "none" ) {
             // Arrange
             let pool = Db.getDbPool();
             let totalCheckoutClientsBeforeTest = pool.totalCount;
-            let iteration = 0;
             let totalCheckoutClientsAfterTest = 0
 
             // Act
             for ( let i = 0; i < 20; i++ ) {
                 let client = await Db.getDbClient();
-                totalCheckoutClientsAfterTest = pool.totalCount;
                 client.release();
-                iteration = i;
             }
 
+            totalCheckoutClientsAfterTest = pool.totalCount;
+
             // Assert
-            assert( iteration === 19 );
             assert.deepStrictEqual( totalCheckoutClientsAfterTest, totalCheckoutClientsBeforeTest );
         } );
 
