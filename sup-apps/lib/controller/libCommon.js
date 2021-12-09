@@ -25,7 +25,7 @@ function _verifyObjectProperties( obj, arrayOfProperties ) {
     let returnObj = {};
 
     arrayOfProperties.forEach( nameOfProperty => {
-        if ( obj.hasOwnProperty( nameOfProperty ) ) {
+        if ( obj?.hasOwnProperty( nameOfProperty ) ) {
             returnObj[ nameOfProperty ] = obj[ nameOfProperty ];
         }
     } );
@@ -47,7 +47,11 @@ function _validateProperties( obj ) {
                 validate.isEmailString( value ) ? returnObj[ key ] = value : null;
                 break;
             case "phone_number":
-                _isPhoneNumber( value ) ? returnObj[ key ] = value : null;
+                validate.isPhoneNumber( value ) ? returnObj[ key ] = value : null;
+                break;
+            case "token":
+                validate.isUrlSafeString( value ) ?
+                    returnObj[ key ] = value : null;
                 break;
         }
     }
@@ -55,14 +59,9 @@ function _validateProperties( obj ) {
     return returnObj;
 }
 
-function _isPhoneNumber( str ) {
-    if ( str === undefined || typeof str !== "string" || str.length === 0 ) return false;
-    return ( /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test( str ) );
-}
 
 module.exports = {
     checkSuccess: _checkSuccess,
     _verifyObjectProperties,
     _validateProperties,
-    _isPhoneNumber,
 };
