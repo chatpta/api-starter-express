@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Methods below are private methods  for ActiveRecords.js
+ * Methods below are private-area methods  for ActiveRecords.js
  */
 
 function _extractKeyPromptValueArrays( object ) {
