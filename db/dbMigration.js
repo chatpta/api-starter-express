@@ -23,9 +23,12 @@ Factory.getDbClient()
                DROP TABLE IF EXISTS Users;
                CREATE TABLE Users (
                     user_id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
+                    
                     first_name text,
                     last_name text,
                     main_body json,
+                    roles text[] DEFAULT '{ user }',
+                    
                     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
                     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
                );
@@ -33,9 +36,11 @@ Factory.getDbClient()
                DROP TABLE IF EXISTS Items;
                CREATE TABLE Items (
                     item_id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
+                    
                     title text,
                     description text,
                     main_body json,
+                    
                     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
                     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
                );
