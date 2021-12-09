@@ -36,7 +36,7 @@ function _verifyObjectProperties( obj, arrayOfProperties ) {
 function _validateProperties( obj ) {
     let returnObj = {};
 
-    for ( let [ key, value ] of Object.entries( obj ) ) {
+    for ( let [ key, value ] of Object.entries( obj || {} ) ) {
 
         switch ( key ) {
             case "first_name" :
