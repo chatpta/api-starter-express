@@ -1,3 +1,1 @@
-module.exports = {
-    router: require( './itemRouter' )
-}
+module.exports = require( './itemRouter' );

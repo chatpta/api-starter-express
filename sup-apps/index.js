@@ -1,9 +1,9 @@
 'use strict';
 const express = require( 'express' );
-const home = require( './home/home' );
-const users = require( './user/userRouter' );
-const items = require( './item/itemRouter' );
-const createErrorRouter = require( '../errors/createErrorRouter' );
+const home = require( './home' );
+const users = require( './user' );
+const items = require( './item' );
+const { createErrorRouter } = require( '../errors' );
 
 const router = express.Router();
 
