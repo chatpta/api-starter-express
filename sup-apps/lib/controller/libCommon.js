@@ -25,8 +25,8 @@ function _verifyObjectProperties( obj, arrayOfProperties ) {
     let returnObj = {};
 
     arrayOfProperties.forEach( nameOfProperty => {
-        if ( obj?.hasOwnProperty( nameOfProperty ) ) {
-            returnObj[ nameOfProperty ] = obj[ nameOfProperty ];
+        if ( obj?.[ nameOfProperty ] ) {
+            returnObj[ nameOfProperty ] = obj?.[ nameOfProperty ];
         }
     } );
 
