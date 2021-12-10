@@ -8,8 +8,8 @@ const { appErrorHandlers } = require( "../../errors" );
 
 
 // Verify jwt and role here.
-// Private admin paths only user with user role allowed.
-router.use( jwtRead.verifyJwtAndRole( "user", publicKey, appErrorHandlers.throwUsedTokenError ) );
+// Private admin paths only user with seller role allowed.
+router.use( jwtRead.verifyJwtAndRole( "seller", publicKey, appErrorHandlers.throwUsedTokenError ) );
 router.get( '/', controller.getRequestHandler );
 router.post( '/', controller.postRequestHandler );
 router.patch( '/', controller.patchRequestHandler );

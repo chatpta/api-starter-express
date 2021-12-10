@@ -15,7 +15,7 @@ describe( "Application route /private", function () {
         // Act
         request( app )
             .post( '/private' )
-            .set( 'Authorization', validJwtUser )
+            .set( 'Authorization', validJwtUserSeller )
             .end( ( err, response ) => {
                 if ( err ) return;
 
@@ -47,7 +47,7 @@ describe( "Application route /private", function () {
         // Act
         request( app )
             .get( '/private' )
-            .set( 'Authorization', validJwtUser )
+            .set( 'Authorization', validJwtUserSeller )
             .end( ( err, response ) => {
                 if ( err ) return;
 
