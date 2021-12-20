@@ -7,6 +7,7 @@
     "devstart": "export NODE_ENV=development && export PORT=3000 &&  nodemon ./bin/www",
     "production": "export NODE_ENV=production && node ./bin/www",
     "migrateDb": "node db/dbMigration.js",
+    "resetDb": "node db/dbReset.js",
     "seedDb": "node db/dbSeed.js",
     "test": "export NODE_ENV=test && mocha --watch --reporter spec --bail --check-leaks test/**/*.test.js",
     "testCoverage": "export NODE_ENV=test && npx nyc@latest mocha test/**/*.test.js",
