@@ -22,7 +22,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             let first_name = await res?.body?.first_name;
 
             // Assert
-            assert( first_name === "Controller post test" );
+            assert.deepStrictEqual( first_name, "Controller post test" );
         } );
 
         it( "getRequestFirstNameHandler", async function () {
@@ -43,7 +43,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             await userController.getRequestFirstNameHandler( req, res, next );
 
             // Assert
-            assert( res.body.first_name === "Controller post test" );
+            assert.deepStrictEqual( res.body.first_name, "Controller post test" );
         } );
 
         it( "getRequestMostRecentHandler", async function () {
@@ -87,7 +87,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             let first_name = await res?.body?.first_name;
 
             // Assert
-            assert( first_name === "Controller patch test" );
+            assert.deepStrictEqual( first_name, "Controller patch test" );
         } );
 
         it( "deleteRequestHandler", async function () {
@@ -106,7 +106,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             await userController.deleteRequestHandler( req, res, next );
 
             // Assert
-            assert( res.body.first_name === "Controller patch test" );
+            assert.deepStrictEqual( res.body.first_name, "Controller patch test" );
         } );
     } );
 }
