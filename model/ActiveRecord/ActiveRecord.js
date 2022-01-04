@@ -8,11 +8,12 @@ const Db = require( '../../db' );
 const lib = require( './lib/lib' );
 
 class ActiveRecord {
-    constructor() {
+    constructor( tableName, idColumnName ) {
         this._recordName = this.constructor.name;
         this._className = new.target.name;
         this._sqlQueryRunner = Db.getSqlQueryRunner();
-        this._modelName = this._className;
+        this._tableName = tableName || this._className + "s";
+        this._idName = idColumnName || ( new.target.name + "_id" );
     }
 
     /**
@@ -22,7 +23,7 @@ class ActiveRecord {
      */
     async findById( id ) {
         // Build query
-        const query = lib._findByIdQueryBuilder( id, this._modelName );
+        const query = lib._findByIdQueryBuilder( this, id );
 
         // Query database
         return await this._sqlQueryRunner( query );
@@ -34,7 +35,7 @@ class ActiveRecord {
      */
     async findOne() {
         // Build query
-        const query = lib._findOneQueryBuilder( this._modelName );
+        const query = lib._findOneQueryBuilder( this );
 
         // Query database
         return await this._sqlQueryRunner( query );
@@ -46,7 +47,7 @@ class ActiveRecord {
      */
     async findLastTen() {
         // Build query
-        const query = lib._findLastTenQueryBuilder( this._modelName );
+        const query = lib._findLastTenQueryBuilder( this );
 
         // Query database
         return await this._sqlQueryRunner( query );
@@ -59,7 +60,7 @@ class ActiveRecord {
      */
     async save( object ) {
         // Build query
-        const query = lib._saveQueryBuilder( object, this._modelName );
+        const query = lib._saveQueryBuilder( this, object );
 
         // Query database
         return await this._sqlQueryRunner( query );
@@ -73,7 +74,7 @@ class ActiveRecord {
      */
     async update( record_id, updatedObject ) {
         // Build query
-        const query = lib._updateQueryBuilder( record_id, updatedObject, this._modelName );
+        const query = lib._updateQueryBuilder( this, record_id, updatedObject );
 
         // Query database
         return await this._sqlQueryRunner( query );
@@ -85,16 +86,10 @@ class ActiveRecord {
      * @return {Promise<*>}
      */
     async delete( record_id ) {
-        // Query database
-        const query = {
-            // name: `delete-${ this._modelName }`,
-            text: `DELETE
-                   FROM ${ this._modelName }s
-                   WHERE ${ this._modelName }_id=$1
-                       RETURNING *`,
-            values: [ record_id ]
-        };
+        // Build query
+        const query = lib._deleteQueryBuilder( this, record_id );
 
+        // Query database
         return await this._sqlQueryRunner( query );
     }
 }

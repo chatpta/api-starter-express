@@ -34,50 +34,57 @@ function _extractUpdateKeysValues( object ) {
     return [ keys, values ];
 }
 
-function _findByIdQueryBuilder( id, modelName ) {
+function _findByIdQueryBuilder( model, id ) {
     return ( `
         SELECT *
-        FROM ${ modelName }s
-        WHERE ${ modelName }_id = '${ id }';
+        FROM ${ model._tableName }
+        WHERE ${ model._idName } = '${ id }';
     ` );
 }
 
-function _findOneQueryBuilder( modelName ) {
+function _findOneQueryBuilder( model ) {
     return ( `
         SELECT *
-        FROM ${ modelName }s LIMIT 1;
+        FROM ${ model._tableName } LIMIT 1;
     ` );
 }
 
-function _findLastTenQueryBuilder( modelName ) {
+function _findLastTenQueryBuilder( model ) {
     return ( `
         SELECT *
-        FROM ${ modelName }s
-        ORDER BY updated_at ASC LIMIT 10
+        FROM ${ model._tableName }
+        ORDER BY updated_at LIMIT 10
         OFFSET 0;
     ` );
 }
 
-function _saveQueryBuilder( object, modelName ) {
+function _saveQueryBuilder( model, object ) {
     let [ keys, prompt, values ] = _extractKeyPromptValueArrays( object );
 
     return ( {
-        text: `INSERT INTO ${ modelName }s (${ keys.join( ', ' ) })
+        text: `INSERT INTO ${ model._tableName } (${ keys.join( ', ' ) })
                VALUES (${ prompt.join( ', ' ) }) RETURNING *`,
         values: values
     } );
 }
 
-function _updateQueryBuilder( record_id, updatedObject, modelName ) {
+function _updateQueryBuilder( model, record_id, updatedObject ) {
     let [ keys, values ] = _extractUpdateKeysValues( updatedObject );
 
     return ( {
-        // name: `update-${ this._modelName }`,
-        text: `UPDATE ${ modelName }s
+        text: `UPDATE ${ model._tableName }
                SET ${ keys.join( ', ' ) }
-               WHERE ${ modelName }_id=$1
-                   RETURNING *`,
+               WHERE ${ model._idName } = $1 RETURNING *`,
         values: [ record_id, ...values ]
+    } );
+}
+
+function _deleteQueryBuilder( model, record_id ) {
+    return ( {
+        text: `DELETE
+               FROM ${ model._tableName }
+               WHERE ${ model._idName } = $1 RETURNING *`,
+        values: [ record_id ]
     } );
 }
 
@@ -86,5 +93,6 @@ module.exports = {
     _findOneQueryBuilder,
     _saveQueryBuilder,
     _updateQueryBuilder,
-    _findLastTenQueryBuilder
+    _findLastTenQueryBuilder,
+    _deleteQueryBuilder
 };
