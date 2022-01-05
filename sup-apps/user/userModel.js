@@ -3,7 +3,7 @@
 /**
  * This class executes functions for the User Model
  */
-const ActiveRecord = require( '../../model/ActiveRecord/ActiveRecord' );
+const ActiveRecord = require( '../../model' );
 const libUser = require("./libUserModel");
 
 
