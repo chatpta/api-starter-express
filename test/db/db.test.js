@@ -40,7 +40,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             // Arrange
             let pool = Db.getDbPool();
             let totalCheckoutClientsBeforeTest = pool.totalCount;
-            let totalCheckoutClientsAfterTest = 0
+            let totalCheckoutClientsAfterTest;
             let checkoutTimes = 25;
 
             // Act
@@ -60,7 +60,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             // Arrange
             let clients = [];
             let pool = Db.getDbPool();
-            let totalCheckoutClientsAfterTest = 0
+            let totalCheckoutClientsAfterTest;
             let numberOfIteration = 5
 
             // Act
@@ -76,6 +76,23 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Release clients
             clients.forEach( client => client.release() )
+        } );
+
+        it( "sqlTransactionQueryArrayRunner test", async function () {
+            // Query uses next available client
+            // Can not be used for transactions
+
+            // Arrange
+            let transactionRunner = Db.getSqlTransactionQueryArrayRunner();
+
+            // Act
+            let timeArray = await transactionRunner( [ 'SELECT NOW();', 'SELECT NOW();' ] );
+
+            // Assert
+
+            timeArray.forEach( dto => {
+                assert.ok( dto.success );
+            } );
         } );
     } );
 }

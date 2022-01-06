@@ -111,8 +111,8 @@ async function asyncClientQueryTransactionRun( queryArray ) {
         client.release();
 
     }
-    // Return result
-    return dtoArray;
+    // Resolve all promise and result
+    return await Promise.all( dtoArray );
 }
 
 async function runQuery( query, client ) {
@@ -120,7 +120,7 @@ async function runQuery( query, client ) {
     const record = await client.query( query );
 
     // Create data transfer object ( Interface )
-    return lib._createDto( record );
+    return await lib._createDto( record );
 }
 
 module.exports = {
