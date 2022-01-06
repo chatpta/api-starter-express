@@ -12,6 +12,7 @@ class ActiveRecord {
         this._recordName = this.constructor.name;
         this._className = new.target.name;
         this._sqlQueryRunner = Db.getSqlQueryRunner();
+        this._sqlTransactionQueryArrayRunner = Db.getSqlTransactionQueryArrayRunner();
         this._tableName = tableName || this._className + "s";
         this._idName = idColumnName || ( new.target.name + "_id" );
     }
