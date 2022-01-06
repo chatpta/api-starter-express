@@ -90,10 +90,44 @@ async function asyncClientQueryRun( query ) {
     return dto;
 }
 
+async function asyncClientQueryTransactionRun( queryArray ) {
+    // Get database client
+    const client = await pool.connect();
+    let dtoArray = null;
+
+    try {
+
+        await client.query( 'BEGIN' );
+        dtoArray = await queryArray.map( async query => await runQuery( query, client ) );
+        await client.query( 'COMMIT' );
+
+    } catch ( err ) {
+        // Rollback transaction and throw error
+        await client.query( 'ROLLBACK' );
+        throw err;
+
+    } finally {
+        // Release client ( necessary )
+        client.release();
+
+    }
+    // Return result
+    return dtoArray;
+}
+
+async function runQuery( query, client ) {
+    // Query database
+    const record = await client.query( query );
+
+    // Create data transfer object ( Interface )
+    return lib._createDto( record );
+}
+
 module.exports = {
     pool: pool,
     query: queryObject => pool.query( queryObject ),
     endPool: async () => await pool.end(),
     getClient: getSqlClient,
-    sqlQueryRunner: asyncClientQueryRun
+    sqlQueryRunner: asyncClientQueryRun,
+    sqlTransactionQueryArrayRunner: asyncClientQueryTransactionRun
 }
