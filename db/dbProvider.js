@@ -1,5 +1,12 @@
 'use strict';
-const { query, getClient, sqlQueryRunner, pool, endPool } = require( './dbConnection' );
+const {
+    query,
+    getClient,
+    sqlQueryRunner,
+    pool,
+    endPool,
+    sqlTransactionQueryArrayRunner
+} = require( './dbConnection' );
 
 /**
  * Factory for database functionality
@@ -24,6 +31,10 @@ class DbProvider {
 
     static getSqlQueryRunner() {
         return sqlQueryRunner;
+    }
+
+    static getSqlTransactionQueryArrayRunner() {
+        return sqlTransactionQueryArrayRunner;
     }
 }
 
