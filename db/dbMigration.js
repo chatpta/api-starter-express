@@ -20,7 +20,7 @@ Factory.getDbClient()
     .then( client => client.query( `
           BEGIN;
                CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-               DROP TABLE IF EXISTS Users;
+               DROP TABLE IF EXISTS Users cascade;
                CREATE TABLE Users (
                     user_id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
                     
@@ -33,7 +33,7 @@ Factory.getDbClient()
                     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
                );
                
-               DROP TABLE IF EXISTS Items;
+               DROP TABLE IF EXISTS Items cascade;
                CREATE TABLE Items (
                     item_id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
                     

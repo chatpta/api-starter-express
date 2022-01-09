@@ -6,14 +6,20 @@ const { customHelmet } = require( "./security" );
 
 const subApps = require( './sup-apps' );
 const { appErrorHandlers } = require( './errors' );
-const commonMiddleware = require('./logger')
+const commonMiddleware = require('./logger');
 
 
 const app = express();
 
+const corsOptions = {
+    origin: [ /\.chatpta\.ca$/, /localhost:3000$/ ],
+    optionsSuccessStatus: 200
+}
+
 // Setup application processing
 app.use( commonMiddleware.appLogger() );
-app.use( cors() );
+app.options( '*', cors( corsOptions ) );
+app.use( cors( corsOptions ) );
 app.use( customHelmet );
 app.use( cookieParser() );
 app.use( express.json() );
