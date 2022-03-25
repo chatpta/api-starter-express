@@ -9,11 +9,11 @@ services:
     restart: always
     ports:
       - target: 5432
-        published: 5432
+        published: 5400
     environment:
-      POSTGRES_USER: user
+      POSTGRES_DB: chatpta_starter_db
+      POSTGRES_USER: chatpta_starter_user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: chatpta_db
 
   starter-api-express:
     build: .
