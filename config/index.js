@@ -1,9 +1,14 @@
 'use strict';
 /**
- * This file exports all of the permanent configurations of all of the application.
+ * This file exports all permanent configurations of the application.
  * It should not export username, dbname and passwords.
  */
 
 const dbConfig = require( './dbConfig' );
+const secretConfig = require( './secretConfig' );
 
-module.exports = { dbConfig };
+
+module.exports = {
+    dbConfig,
+    secretConfig
+};

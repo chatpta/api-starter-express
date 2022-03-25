@@ -6,12 +6,6 @@
  */
 
 /**
- * Load .env file.
- * Required for database connection.
- */
-require( 'dotenv' ).config();
-
-/**
  * Connect to database and test it.
  */
 const Factory = require( './dbProvider' );

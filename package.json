@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "export NODE_ENV=development && export PORT=3000 && node ./bin/www",
-    "devstart": "export NODE_ENV=development && export PORT=3000 &&  nodemon ./bin/www",
-    "production": "export NODE_ENV=production && node ./bin/www",
-    "migrateDb": "node db/dbMigration.js",
-    "resetDb": "node db/dbReset.js",
-    "seedDb": "node db/dbSeed.js",
-    "test": "export NODE_ENV=test && mocha --watch --reporter spec --bail --check-leaks test/**/*.test.js",
-    "testCoverage": "export NODE_ENV=test && npx nyc@latest mocha test/**/*.test.js",
-    "testWithoutDb": "export NODE_ENV=test && export DB_CONN=none && mocha --watch --reporter spec --bail --check-leaks test/**/*.test.js"
+    "start": "export NODE_ENV=development && export PORT=3000 && node -r dotenv/config ./bin/www",
+    "devstart": "export NODE_ENV=development && export PORT=3000 &&  nodemon -r dotenv/config ./bin/www",
+    "production": "export NODE_ENV=production && node -r dotenv/config ./bin/www",
+    "migrateDb": "node -r dotenv/config db/dbMigration.js",
+    "resetDb": "node -r dotenv/config db/dbReset.js",
+    "seedDb": "node -r dotenv/config db/dbSeed.js",
+    "test": "export NODE_ENV=test && mocha -r dotenv/config --watch --reporter spec --bail --check-leaks test/**/*.test.js",
+    "testCoverage": "export NODE_ENV=test && npx nyc@latest mocha -r dotenv/config test/**/*.test.js",
+    "testWithoutDb": "export NODE_ENV=test && export DB_CONN=none && mocha -r dotenv/config --watch --reporter spec --bail --check-leaks test/**/*.test.js"
   },
   "dependencies": {
     "@chatpta/validate": "^2.0.2",
