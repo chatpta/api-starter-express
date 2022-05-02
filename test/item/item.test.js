@@ -6,7 +6,7 @@ const  Item  = require( "../../sup-apps/item/itemModelFactory" ).getItem();
 
 // Runs test only if DB_CONN is defined
 if ( process.env?.DB_CONN !== "none" ) {
-    describe( 'Item model', () => {
+    describe( 'Item/item', () => {
 
         let testItemId = null;
 

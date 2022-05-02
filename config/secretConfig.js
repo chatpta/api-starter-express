@@ -3,11 +3,11 @@ const {
     privateKey,
     hashKey,
     passEmail,
-    pgHost,
-    pgPort,
     pgUser,
     pgDatabase,
-    pgPassword
+    pgPassword,
+    pgHost,
+    pgPort
 } = require( process?.env?.SECRET_PATH );
 
 function getPublicKey() {
@@ -26,14 +26,6 @@ function getEmailPassword() {
     return process?.env?.EMAIL_PASSWORD || passEmail;
 }
 
-function getPgHost() {
-    return process?.env?.PGHOST || pgHost;
-}
-
-function getPgPort() {
-    return process?.env?.PGPORT || pgPort;
-}
-
 function getPgUser() {
     return process?.env?.PGUSER || pgUser;
 }
@@ -46,15 +38,22 @@ function getPgPassword() {
     return process?.env?.PGPASSWORD || pgPassword;
 }
 
+function getPgHost() {
+    return process?.env?.PGHOST || pgHost;
+}
+
+function getPgPort() {
+    return process?.env?.PGPORT || pgPort;
+}
 
 module.exports = {
     getPublicKey,
     getPrivateKey,
     getHashKey,
     getEmailPassword,
-    getPgHost,
-    getPgPort,
     getPgUser,
     getPgDatabase,
-    getPgPassword
+    getPgPassword,
+    getPgHost,
+    getPgPort
 };

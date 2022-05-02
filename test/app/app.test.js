@@ -5,8 +5,8 @@ const request = require( 'supertest' );
 const app = require( '../../app' );
 
 
-describe( "Application, route /", function () {
-    it( "get", function ( done ) {
+describe( "App/app", function () {
+    it( "get /", function ( done ) {
 
         // Act
         request( app )
@@ -21,7 +21,7 @@ describe( "Application, route /", function () {
             } );
     } );
 
-    it( "post", function ( done ) {
+    it( "post /", function ( done ) {
 
         // Act
         request( app )
@@ -36,7 +36,7 @@ describe( "Application, route /", function () {
             } );
     } );
 
-    it( "patch", function ( done ) {
+    it( "patch /", function ( done ) {
 
         // Act
         request( app )
@@ -51,7 +51,7 @@ describe( "Application, route /", function () {
             } );
     } );
 
-    it( "delete", function ( done ) {
+    it( "delete /", function ( done ) {
 
         // Act
         request( app )

@@ -5,8 +5,8 @@ const request = require( 'supertest' );
 const app = require( '../../app' );
 
 
-describe( "Application, req not found", function () {
-    it( "returns not found 404 message", function ( done ) {
+describe( "Errors/app", function () {
+    it( "/not-exist returns 'not_found' 404", function ( done ) {
 
         // Act
         request( app )
@@ -16,13 +16,13 @@ describe( "Application, req not found", function () {
 
                 // Assert
                 assert( response.status === 404 );
-                assert( response.body.error === "not found" );
+                assert( response.body.error === "not_found" );
                 done()
             } );
     } );
 
     if ( process.env?.DB_CONN !== "none" ) {
-        it( "returns server error 404", function ( done ) {
+        it( "/users?first_name=Not_exist returns 'record_not_found' 404", function ( done ) {
 
             // Act
             request( app )
@@ -32,15 +32,15 @@ describe( "Application, req not found", function () {
 
                     // Assert
                     assert( response.status === 200 );
-                    assert.deepStrictEqual( response.body.error, "record not found" );
+                    assert.deepStrictEqual( response.body.error, "record_not_found" );
                     done();
                 } );
         } );
     }
 } );
 
-describe( "Application, req server error", function () {
-    it( "returns server error 500 message", function ( done ) {
+describe( "Errors/app", function () {
+    it( "/error returns 'application_error' 500", function ( done ) {
 
         // Act
         request( app )
@@ -50,7 +50,7 @@ describe( "Application, req server error", function () {
 
                 // Assert
                 assert( response.status === 500 );
-                assert.deepStrictEqual( response.body.error, 'application error' );
+                assert.deepStrictEqual( response.body.error, 'application_error' );
                 done();
             } );
     } );

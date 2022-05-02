@@ -6,7 +6,7 @@ const User = require( "../../sup-apps/user/userModelFactory" ).getUser();
 
 // Runs test only if DB_CONN is defined
 if ( process.env?.DB_CONN !== "none" ) {
-    describe( 'User model', ( done ) => {
+    describe( 'User/user', ( done ) => {
         let testUserId = null;
         let testUser2Id = null;
 

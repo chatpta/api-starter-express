@@ -5,7 +5,7 @@ const Db = require( '../../db' );
 
 // Runs test only if DB_CONN is defined
 if ( process.env?.DB_CONN !== "none" ) {
-    describe( "Database connection", async function () {
+    describe( "Db/db", async function () {
 
         it( "database query should get time", async function () {
             // Query uses next available client

@@ -1,6 +1,6 @@
 'use strict';
 
-const { throwValidationFailureError } = require( "../../errors/appErrorHandlers" );
+const error = require( "@chatpta/common-util" ).error;
 
 /**
  * This file contains functions of User controller.
@@ -13,7 +13,7 @@ function checkFirstname( req ) {
         if ( req?.query?.first_name ) {
             resolve( req?.query?.first_name );
         } else {
-            throwValidationFailureError();
+            error.throwValidationFailureError();
         }
     } );
 }
@@ -25,7 +25,7 @@ function checkUser( req ) {
         if ( req?.body?.user ) {
             resolve( req?.body?.user );
         } else {
-            throwValidationFailureError();
+            error.throwValidationFailureError();
         }
     } );
 }

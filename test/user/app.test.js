@@ -6,7 +6,7 @@ const app = require( '../../app' );
 
 
 if ( process.env?.DB_CONN !== "none" ) {
-    describe( "Application route /users", function () {
+    describe( "User/app", function () {
 
         it( "post", function ( done ) {
 

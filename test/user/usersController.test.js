@@ -3,7 +3,7 @@ const assert = require( "assert" );
 const userController = require( '../../sup-apps/user/usersController' );
 
 if ( process.env?.DB_CONN !== "none" ) {
-    describe( "Controller Users", function () {
+    describe( "User/usersController", function () {
 
         it( "postRequestHandler", async function () {
 

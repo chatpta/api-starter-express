@@ -1,9 +1,9 @@
 const {
-    getPgHost,
-    getPgPort,
     getPgUser,
     getPgDatabase,
-    getPgPassword
+    getPgPassword,
+    getPgHost,
+    getPgPort
 } = require( './secretConfig' );
 
 module.exports = {

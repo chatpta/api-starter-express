@@ -1,4 +1,4 @@
 module.exports = exports = {
-    passEmail: "password"
+    passEmail: "not_required"
 };
 

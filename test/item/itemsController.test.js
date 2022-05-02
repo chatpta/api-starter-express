@@ -4,7 +4,7 @@ const assert = require( "assert" );
 const item = require( '../../sup-apps/item/itemsController' );
 
 if ( process.env?.DB_CONN !== "none" ) {
-    describe( "Controller Items", function () {
+    describe( "Item/itemsController", function () {
 
         let itemId = null;
 

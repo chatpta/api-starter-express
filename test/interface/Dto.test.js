@@ -4,7 +4,7 @@ const DtoProvider = require( '../../interfaces' );
 const assert = require( "assert" );
 
 
-describe( "Database connection", async function () {
+describe( "Interface/Dto", async function () {
 
     it( "database query should get time", async function () {
         // Arrange

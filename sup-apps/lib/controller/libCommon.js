@@ -5,7 +5,7 @@
  */
 
 const validate = require( "@chatpta/validate" );
-const { throwRecordNotFoundError } = require( "../../../errors/appErrorHandlers" );
+const error = require( "@chatpta/common-util" ).error;
 
 /**
  * Skips the route if does not receive data in dto
@@ -14,10 +14,11 @@ const { throwRecordNotFoundError } = require( "../../../errors/appErrorHandlers"
  * @return {{success}|*}
  */
 function _checkSuccess( dto, next ) {
+
     if ( dto?.success ) {
         return dto;
     } else {
-        throwRecordNotFoundError();
+        error.throwRecordNotFoundError();
     }
 }
 

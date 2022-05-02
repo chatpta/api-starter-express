@@ -2,15 +2,15 @@ const { describe, it } = require( "mocha" );
 const assert = require( "assert" );
 const request = require( 'supertest' );
 const express = require( 'express' );
-const error = require( '../../errors' );
+const error = require( '@chatpta/common-util' ).error;
 
 
-describe( "Common-middleware error handler", function () {
+describe( "Errors/appErrorHandlers", function () {
     it( "appErrorHandlers.notFound404", function ( done ) {
         // Arrange
         let app = express();
         // noinspection JSCheckFunctionSignatures
-        app.use( error.appErrorHandlers.notFound404 );
+        app.use( error.notFound404 );
 
         // Act
         request( app )
@@ -20,7 +20,7 @@ describe( "Common-middleware error handler", function () {
 
                 // Assert
                 assert( response.status === 404 );
-                assert( response.body.error === "not found" );
+                assert( response.body.error === "not_found" );
                 done();
             } );
     } );
@@ -29,10 +29,10 @@ describe( "Common-middleware error handler", function () {
         // Arrange
         let app = express();
         app.use( function ( req, res, next ) {
-            throw new Error( "Application broke" )
+            throw new Error( "Application_broke" )
         } );
         // noinspection JSCheckFunctionSignatures
-        app.use( error.appErrorHandlers.appErrorHandler );
+        app.use( error.appErrorHandler );
 
         // Act
         request( app )
@@ -42,7 +42,7 @@ describe( "Common-middleware error handler", function () {
 
                 // Assert
                 assert( response.statusCode === 500 );
-                assert.deepStrictEqual( response.body.error, "application error" );
+                assert.deepStrictEqual( response.body.error, "application_error" );
                 done();
             } );
     } );
