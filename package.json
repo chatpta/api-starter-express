@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@chatpta/common-util": "3.0.2",
-    "@chatpta/validate": "^2.0.2",
-    "@chatpta/jwt-read": "^0.0.3",
+    "@chatpta/validate": "^3.0.4",
+    "@chatpta/jwt-read": "^3.0.9",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
