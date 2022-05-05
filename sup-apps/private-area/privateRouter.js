@@ -9,7 +9,7 @@ const { secretConfig } = require( "../../config" );
 // Verify jwt and role here.
 // Private admin paths only user with seller role allowed.
 router.use( jwtRead.verifyJwtAndRole( "seller",
-    process?.env?.PUBLIC_KEY || secretConfig.getPublicKey(), error.throwUsedTokenError ) );
+    secretConfig.getPublicKey(), error.throwUsedTokenError ) );
 router.get( '/', controller.getRequestHandler );
 router.post( '/', controller.postRequestHandler );
 router.patch( '/', controller.patchRequestHandler );
