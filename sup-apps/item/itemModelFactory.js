@@ -4,11 +4,11 @@ const { Item } = require( './itemModel' );
 /**
  * Factory for database functionality
  */
-class ItemMoodelFactory {
+class ItemModelFactory {
 
     static getItem() {
         return new Item();
     }
 }
 
-module.exports = ItemMoodelFactory;
+module.exports = ItemModelFactory;
