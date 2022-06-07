@@ -1,8 +1,16 @@
-function _findByFirstNameQueryBuilder( name, className ) {
+function _findByFirstNameQueryBuilder( name, tableName ) {
     return ( `
-        SELECT *
-        FROM ${ className }s
-        WHERE first_name = '${ name }';
+
+        SELECT ${ tableName }.user_id,
+               ${ tableName }.first_name,
+               ${ tableName }.last_name,
+               ${ tableName }.roles,
+               ${ tableName }.updated_at
+
+        FROM ${ tableName }
+
+        WHERE ${ tableName }.first_name = '${ name }';
+
     ` );
 }
 
