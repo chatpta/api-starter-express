@@ -6,8 +6,15 @@ const controller = require( './privateController' );
 const error = require( "@chatpta/common-util" ).error;
 const { secretConfig } = require( "../../config" );
 
-// Verify jwt and role here.
-// Private admin paths only user with seller role allowed.
+
+/********************************************
+ * All routes below this level are private. *
+ ********************************************/
+/**
+ * Code on line 18 verifies jwt and role.
+ * Private admin paths only user with seller role allowed.
+ * If presented json web token is not valid error response will be returned
+ */
 router.use( jwtRead.verifyJwtAndRole( jwtRead.adminRole(), secretConfig.getPublicKey(), error.throwUsedTokenError ) );
 
 router.get( '/', controller.getRequestHandler );

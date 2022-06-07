@@ -2,97 +2,23 @@
 
 
 const validate = require( "@chatpta/validate" ).validate;
-const { jwtUtilAuth, pwdUtilAuth, stringUtilAuth } = require( "@chatpta/auth-util" );
-const { authConfig } = require( '../../../config' );
+const { stringUtilAuth } = require( "@chatpta/auth-util" );
 const {
     throwValidationFailureError,
     throwRecordExistError,
-    throwWrongCredentialsError,
     throwRecordNotFoundError
 } = require( "@chatpta/common-util" ).error;
 const { randomBytes } = require( "crypto" );
 
 
-async function _loginUser( dataBaseUser, receivedUser, hashKey ) {
+/***************************************
+ * This file contains helper functions *
+ ***************************************/
 
-    let receivedPwHash = await _createReceivedPasswordHash( dataBaseUser, receivedUser, hashKey );
-    let storedPwHash = dataBaseUser?.hash;
-
-    if ( _compareBothPasswordHash( storedPwHash, receivedPwHash ) ) {
-
-        if ( dataBaseUser?.email_confirmed ) {
-            return {
-                first_name: dataBaseUser?.first_name,
-                user_id: dataBaseUser?.user_id,
-                roles: dataBaseUser?.roles
-            };
-        } else {
-            return {
-                first_name: dataBaseUser?.first_name,
-                user_id: dataBaseUser?.user_id,
-                roles: dataBaseUser?.roles,
-                email_not_confirmed: true
-            };
-        }
-
-    } else {
-
-        throwWrongCredentialsError();
-
-    }
-}
-
-function _createJwtAndResponseObject( user, privateKey ) {
-
-    let jwtHeader = {
-        alg: authConfig.jwtSignatureAlgorithm,
-        typ: "JWT"
-    };
-
-    if ( user?.email_not_confirmed ) {
-
-        return _emailNotConfirmedJwtAndObject( user, jwtHeader, privateKey );
-
-    } else {
-
-        return _emailConfirmedJwtAndObject( user, jwtHeader, privateKey );
-
-    }
-}
-
-function _emailNotConfirmedJwtAndObject( user, jwtHeader, privateKey ) {
-
-    const payloadInput = {
-        iat: Date.now(),
-        client_id: user?.user_id,
-        roles: user?.roles || [],
-        email_not_confirmed: true
-    };
-
-    return {
-        jwt: jwtUtilAuth.createSignedJwtFromObject( jwtHeader, payloadInput, privateKey ),
-        name: user?.first_name,
-        email_not_confirmed: true,
-        roles: user?.roles || [],
-    };
-}
-
-function _emailConfirmedJwtAndObject( user, jwtHeader, privateKey ) {
-
-    const payloadInput = {
-        iat: Date.now(),
-        client_id: user?.user_id,
-        roles: user?.roles || []
-    };
-
-    return {
-        jwt: jwtUtilAuth.createSignedJwtFromObject( jwtHeader, payloadInput, privateKey ),
-        name: user?.first_name,
-        roles: user?.roles || [],
-    };
-}
-
-// Skips the route, if no data in dto,
+/**
+ * If no data in dto
+ * throw Record Not Found Error
+ * */
 function _checkSuccess( dto ) {
     if ( dto?.success ) {
         return dto;
@@ -101,9 +27,10 @@ function _checkSuccess( dto ) {
     }
 }
 
-// If database query has returned empty dto object.
-// Throws error dto does not contain success.
-// Error is handled in the app error handlers.
+/**
+ * If no data in dto
+ * throw Record Exist Error
+ * */
 function _failIfDtoDoesNotContainData( dto ) {
     if ( dto?.success ) {
         return dto;
@@ -112,7 +39,14 @@ function _failIfDtoDoesNotContainData( dto ) {
     }
 }
 
-// Validate each of the properties values are in correct format.
+/**
+ * Given the object with key names checks that format of value is correct or thorws
+ * appropriate error.
+ *
+ * @param obj
+ * @returns {{}}
+ * @private
+ */
 function _validateProperties( obj ) {
     let returnObj = {};
 
@@ -158,11 +92,16 @@ function _isUserValidForCreation( user ) {
     return ( username || email ) && password;
 }
 
-function _validateLoginCredentials( user ) {
+/**
+ * Validate properties
+ * @param object
+ * @returns {Promise<unknown>}
+ * @private
+ */
+function _validateReceivedObjectProperties( object ) {
     // verifiedUser has some or all of the properties in the array.
-    let verifiedUser = _extractObjectWithProperties( user, [
-        "password",
-        "email"
+    let verifiedUser = _extractObjectWithProperties( object, [
+        "property_name"
     ] );
 
     // If username contains email, change property name to email.
@@ -172,12 +111,12 @@ function _validateLoginCredentials( user ) {
     let validatedUser = _validateProperties( correctedUser );
 
     // Change email and first name to low case
-    let lowCaseUser = _changeObjectPropertiesToLowCase( validatedUser, [
-        "email"
+    let lowCaseProperties = _changeObjectPropertiesToLowCase( validatedUser, [
+        "property_name"
     ] );
 
     // Create promise.
-    return _createPromiseOfValidatedUser( lowCaseUser );
+    return _createPromiseOfValidatedUser( lowCaseProperties );
 }
 
 // Create new object only with properties given in array.
@@ -233,16 +172,6 @@ function createRandomUrlSafeToken( user ) {
     }
 }
 
-// Token to be sent to user for recovery
-function createEmailConfirmRandomUrlSafeToken( user ) {
-
-    const randomString = randomBytes( 256 ).toString( 'base64' );
-    return {
-        ...user,
-        email_confirm_token: stringUtilAuth.makeStringUrlSafe( randomString )
-    }
-}
-
 function createPromiseOfValidatedObjects( validatedUser ) {
     return new Promise( function ( resolve, reject ) {
 
@@ -258,21 +187,13 @@ function createPromiseOfValidatedObjects( validatedUser ) {
     } );
 }
 
-function createUsersSendObject( dto ) {
+function createSendObject( dto ) {
 
     return dto?.data?.map( user => {
         return _extractObjectWithProperties( user, [
             "user_id",
             "slug",
             "first_name",
-            "username",
-            "email",
-            "email_confirmed",
-            "roles",
-            "active",
-            "deleted",
-            "last_login",
-            "crated_at",
             "updated_at"
         ] );
     } );
@@ -301,37 +222,6 @@ function _correctPropertyName( user ) {
     return user;
 }
 
-function _compareBothPasswordHash( storedHash, receivedPwHash ) {
-
-    if ( receivedPwHash === storedHash ) {
-
-        return receivedPwHash === storedHash;
-
-    } else {
-
-        throwWrongCredentialsError();
-        return {};
-
-    }
-}
-
-async function _createReceivedPasswordHash( dataBaseUser, receivedUser, hashKey ) {
-    try {
-
-        let validReceivedUser = await _validateLoginCredentials( receivedUser );
-
-        return pwdUtilAuth.createPasswordHashBasedOnSavedAlgorithmSalt(
-            validReceivedUser?.password,
-            dataBaseUser?.hash,
-            hashKey
-        );
-
-    } catch ( error ) {
-        throwWrongCredentialsError();
-        return {};
-    }
-}
-
 function _verifyObjectProperties( obj, arrayOfProperties ) {
     let returnObj = {};
 
@@ -347,20 +237,17 @@ function _verifyObjectProperties( obj, arrayOfProperties ) {
 
 module.exports = {
     createPromiseOfValidatedObjects,
-    createEmailConfirmRandomUrlSafeToken,
     createRandomUrlSafeToken,
     throwRecordExistError,
-    createUsersSendObject,
-    loginUser: _loginUser,
-    createJwtAndResponseObject: _createJwtAndResponseObject,
+    createUsersSendObject: createSendObject,
     checkSuccess: _checkSuccess,
     validateProperties: _validateProperties,
     isUserValidForCreation: _isUserValidForCreation,
-    validateLoginCredentials: _validateLoginCredentials,
     failIfNewUserNotCreated: _failIfDtoDoesNotContainData,
     extractObjectWithProperties: _extractObjectWithProperties,
     createPromiseOfValidatedUser: _createPromiseOfValidatedUser,
     changeObjectPropertiesToLowCase: _changeObjectPropertiesToLowCase,
     _verifyObjectProperties,
     _validateProperties,
+    _validateReceivedObjectProperties
 };
