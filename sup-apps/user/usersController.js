@@ -20,15 +20,17 @@ async function getRequestFirstNameHandler( req, res, next ) {
     await lib.validateReceivedObjectProperties( req?.query, [ 'first_name' ] )
         .then( validObj => User.findByFirstName( validObj?.first_name ) )
         .then( user => lib.checkSuccess( user, next ) )
-        .then( user => res?.send( user?.data[ 0 ] ) )
+        .then( savedUserDto => lib.createSendObject( savedUserDto, [ 'first_name' ] ) )
+        .then( sendObject => res?.send( ...sendObject ) )
         .catch( next );
 }
 
 async function postRequestHandler( req, res, next ) {
-    await UserLib.checkUser( req )
+    await lib.validateReceivedObjectProperties( req?.body?.user, [ 'first_name' ] )
         .then( user => User.save( user ) )
-        .then( user => lib.checkSuccess( user, next ) )
-        .then( user => res?.send( user?.data[ 0 ] ) )
+        .then( savedUserDto => lib.checkSuccess( savedUserDto, next ) )
+        .then( savedUserDto => lib.createSendObject( savedUserDto, [ 'first_name' ] ) )
+        .then( sendObject => res?.send( ...sendObject ) )
         .catch( next );
 }
 

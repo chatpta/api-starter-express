@@ -171,15 +171,10 @@ function createPromiseOfValidatedObjects( validatedUser ) {
     } );
 }
 
-function createSendObject( dto ) {
+function createSendObject( dto, arrayOfProperties ) {
 
     return dto?.data?.map( user => {
-        return _extractObjectWithProperties( user, [
-            "user_id",
-            "slug",
-            "first_name",
-            "updated_at"
-        ] );
+        return _extractObjectWithProperties( user, arrayOfProperties );
     } );
 }
 
@@ -223,7 +218,7 @@ module.exports = {
     createPromiseOfValidatedObjects,
     createRandomUrlSafeToken,
     throwRecordExistError,
-    createUsersSendObject: createSendObject,
+    createSendObject: createSendObject,
     checkSuccess: _checkSuccess,
     validateProperties: _validateProperties,
     isUserValidForCreation: _isUserValidForCreation,
