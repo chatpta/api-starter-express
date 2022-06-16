@@ -110,6 +110,15 @@ function _validateReceivedObjectProperties( object, arrayOfPropertyNames ) {
     return _createPromiseOfValidatedUser( validatedObject );
 }
 
+function _validateUpdatedObject( object, arrayOfPropertyNames, passThoughObject ) {
+
+    return _validateReceivedObjectProperties( object, arrayOfPropertyNames )
+        .then( value => {
+            return { validatedObject: value, pass: passThoughObject }
+        } );
+
+}
+
 // Create new object only with properties given in array.
 function _extractObjectWithProperties( obj, arrayOfProperties ) {
     let returnObj = {};
@@ -173,6 +182,7 @@ function createPromiseOfValidatedObjects( validatedUser ) {
 
 function _createObjectToSend( dto, arrayOfProperties ) {
 
+    // console.log( dto.data );
     return dto?.data?.map( user => {
         return _extractObjectWithProperties( user, arrayOfProperties );
     } );
@@ -228,5 +238,6 @@ module.exports = {
     changeObjectPropertiesToLowCase: _changeObjectPropertiesToLowCase,
     _verifyObjectProperties,
     _validateProperties,
-    validateReceivedObjectProperties: _validateReceivedObjectProperties
+    validateReceivedObjectProperties: _validateReceivedObjectProperties,
+    validateUpdatedObject: _validateUpdatedObject
 };

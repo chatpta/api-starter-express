@@ -35,12 +35,14 @@ async function postRequestHandler( req, res, next ) {
 }
 
 async function patchRequestHandler( req, res, next ) {
-    await UserLib.checkUser( req )
-        .then( user => User.findByFirstName( user?.first_name ) )
-        .then( user => lib.checkSuccess( user, next ) )
-        .then( user => User.update( user?.data[ 0 ]?.user_id, req?.body?.updated_user ) )
-        .then( user => lib.checkSuccess( user, next ) )
-        .then( user => res?.send( user?.data[ 0 ] ) )
+    await lib.validateReceivedObjectProperties( req?.body?.user, [ 'first_name' ] )
+        .then( validObj => User.findByFirstName( validObj?.first_name ) )
+        .then( foundUserDto => lib.checkSuccess( foundUserDto, next ) )
+        .then( foundUserDto => lib.validateUpdatedObject( req?.body?.updated_user, [ 'first_name' ], foundUserDto ) )
+        .then( ( { validatedObject, pass } ) => User.update( pass?.data[ 0 ]?.user_id, validatedObject ) )
+        .then( updatedUserDto => lib.checkSuccess( updatedUserDto, next ) )
+        .then( updatedUserDto => lib.createObjectToSend( updatedUserDto, [ 'first_name' ] ) )
+        .then( objectToSend => res?.send( ...objectToSend ) )
         .catch( next );
 }
 

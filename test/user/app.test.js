@@ -13,7 +13,7 @@ if ( process.env?.DB_CONN !== "none" ) {
             // Act
             request( app )
                 .post( '/users' )
-                .send( { user: { first_name: "App_post_test" } } )
+                .send( { user: { first_name: "App_post_test", value_two: "I am two" } } )
                 .end( ( err, response ) => {
                     if ( err ) return;
 
