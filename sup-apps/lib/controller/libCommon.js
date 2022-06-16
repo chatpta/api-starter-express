@@ -171,7 +171,7 @@ function createPromiseOfValidatedObjects( validatedUser ) {
     } );
 }
 
-function createSendObject( dto, arrayOfProperties ) {
+function _createObjectToSend( dto, arrayOfProperties ) {
 
     return dto?.data?.map( user => {
         return _extractObjectWithProperties( user, arrayOfProperties );
@@ -218,7 +218,7 @@ module.exports = {
     createPromiseOfValidatedObjects,
     createRandomUrlSafeToken,
     throwRecordExistError,
-    createSendObject: createSendObject,
+    createObjectToSend: _createObjectToSend,
     checkSuccess: _checkSuccess,
     validateProperties: _validateProperties,
     isUserValidForCreation: _isUserValidForCreation,
