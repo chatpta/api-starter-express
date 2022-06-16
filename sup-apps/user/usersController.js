@@ -27,7 +27,7 @@ async function getRequestFirstNameHandler( req, res, next ) {
 
 async function postRequestHandler( req, res, next ) {
     await lib.validateReceivedObjectProperties( req?.body?.user, [ 'first_name' ] )
-        .then( user => User.save( user ) )
+        .then( validObj => User.save( validObj ) )
         .then( savedUserDto => lib.checkSuccess( savedUserDto, next ) )
         .then( savedUserDto => lib.createObjectToSend( savedUserDto, [ 'first_name' ] ) )
         .then( objectToSend => res?.send( ...objectToSend ) )
