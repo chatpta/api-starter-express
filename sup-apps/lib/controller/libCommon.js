@@ -95,28 +95,19 @@ function _isUserValidForCreation( user ) {
 /**
  * Validate properties
  * @param object
+ * @param arrayOfPropertyNames
  * @returns {Promise<unknown>}
  * @private
  */
-function _validateReceivedObjectProperties( object ) {
+function _validateReceivedObjectProperties( object, arrayOfPropertyNames ) {
     // verifiedUser has some or all of the properties in the array.
-    let verifiedUser = _extractObjectWithProperties( object, [
-        "property_name"
-    ] );
-
-    // If username contains email, change property name to email.
-    let correctedUser = _correctPropertyName( verifiedUser );
+    let extractedObject = _extractObjectWithProperties( object, arrayOfPropertyNames );
 
     // ValidatedUser has acceptable property values.
-    let validatedUser = _validateProperties( correctedUser );
-
-    // Change email and first name to low case
-    let lowCaseProperties = _changeObjectPropertiesToLowCase( validatedUser, [
-        "property_name"
-    ] );
+    let validatedObject = _validateProperties( extractedObject );
 
     // Create promise.
-    return _createPromiseOfValidatedUser( lowCaseProperties );
+    return _createPromiseOfValidatedUser( validatedObject );
 }
 
 // Create new object only with properties given in array.
@@ -148,15 +139,8 @@ function _changeObjectPropertiesToLowCase( obj, arrayOfProperties ) {
 function _createPromiseOfValidatedUser( validatedUser ) {
     return new Promise( function ( resolve ) {
 
-        // Check is ( username or email ) and password exist.
-        if ( _isUserValidForCreation( validatedUser ) ) {
-            resolve( validatedUser );
-        } else {
+        resolve( validatedUser );
 
-            // Throw error, to be handled in app error handler.
-            throwValidationFailureError();
-
-        }
     } );
 }
 
@@ -249,5 +233,5 @@ module.exports = {
     changeObjectPropertiesToLowCase: _changeObjectPropertiesToLowCase,
     _verifyObjectProperties,
     _validateProperties,
-    _validateReceivedObjectProperties
+    validateReceivedObjectProperties: _validateReceivedObjectProperties
 };

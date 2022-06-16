@@ -16,8 +16,9 @@ const lib = require( '../lib/controller/libCommon' );
 const UserLib = require( './libUserController' );
 
 async function getRequestFirstNameHandler( req, res, next ) {
-    await UserLib.checkFirstname( req )
-        .then( firstName => User.findByFirstName( firstName ) )
+
+    await lib.validateReceivedObjectProperties( req?.query, [ 'first_name' ] )
+        .then( validObj => User.findByFirstName( validObj?.first_name ) )
         .then( user => lib.checkSuccess( user, next ) )
         .then( user => res?.send( user?.data[ 0 ] ) )
         .catch( next );
