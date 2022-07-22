@@ -13,10 +13,17 @@ const app = express();
 
 const corsOptions = {
     origin: [ /\.chatpta\.ca$/, /localhost:3000$/ ],
-    optionsSuccessStatus: 200
+    optionsSuccessStatus: 200,
+    allowedHeaders: [
+        'access-control-allow-origin',
+        'authorization',
+        'content-type',
+        'visitor'
+    ]
 }
 
 // Setup application processing
+app.disable('x-powered-by');
 app.use( commonMiddleware.appLogger() );
 app.options( '*', cors( corsOptions ) );
 app.use( cors( corsOptions ) );
