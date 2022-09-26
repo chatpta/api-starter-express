@@ -1,32 +1,32 @@
 #Rund a postgres database with following values
-#   username: user
+#   username: chatpta_starter_user
+#   database: chatpta_starter_db
 #   password: password
-#   database: chatpta_db
 version: "3.9"
 services:
-  starter-api-express-test-db:
+  api-starter-express-test-db:
     image: postgres
     restart: always
     ports:
       - target: 5432
-        published: 1111
+        published: 3111
     environment:
       POSTGRES_DB: chatpta_starter_db
       POSTGRES_USER: chatpta_starter_user
       POSTGRES_PASSWORD: password
 
-  starter-api-express-development-db:
+  api-starter-express-development-db:
     image: postgres
     restart: always
     ports:
       - target: 5432
-        published: 1222
+        published: 3222
     environment:
       POSTGRES_DB: chatpta_starter_db
       POSTGRES_USER: chatpta_starter_user
       POSTGRES_PASSWORD: password
 
-  starter-api-express:
+  api-starter-express:
     build: .
     ports:
       - target: 3000

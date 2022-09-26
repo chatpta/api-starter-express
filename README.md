@@ -3,7 +3,7 @@
 ### Create my-api application
 
 ```shell
-npx @chatpta/starter-api-express my-api
+npx @chatpta/api-starter-express my-api
 ```
 
 ### Before running application make sure
@@ -19,7 +19,7 @@ create ```my-api/.env``` file and paste the content of ```my-api/dev.env``` into
 Docker runs on ```localhost:5400``` and express api runs on ```localhost:3000```
 
 ```shell
-docker-compose up db-starter-api-express
+docker-compose up db-api-starter-express
 npm install
 npm run migrateDb
 npm run devstart
