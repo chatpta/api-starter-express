@@ -1,6 +1,6 @@
 const { describe, it } = require( "mocha" );
 const assert = require( "assert" );
-const userController = require( '../../sup-apps/user/usersController' );
+const userController = require( '../../sup-apps/user/controller' );
 
 if ( process.env?.DB_CONN !== "none" ) {
     describe( "User/usersController", function () {

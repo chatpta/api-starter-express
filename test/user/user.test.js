@@ -1,7 +1,7 @@
 'use strict';
 const assert = require( 'assert' );
 const { describe, it, beforeEach, afterEach } = require( "mocha" );
-const User = require( "../../sup-apps/user/userModelFactory" ).getUser();
+const User = require( "../../sup-apps/user/modelFactory" ).getUser();
 
 
 // Runs test only if DB_CONN is defined

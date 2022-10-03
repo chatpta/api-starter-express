@@ -1,7 +1,7 @@
 'use strict';
 const express = require( 'express' );
 const router = express.Router();
-const item = require( './itemsController' );
+const item = require( './controller' );
 
 
 router.get( '/', item.getRequestHandler );

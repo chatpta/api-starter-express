@@ -1,14 +1,14 @@
 'use strict';
-const { User } = require( './userModel' );
+const { User } = require( './model' );
 
 /**
  * Factory for database functionality
  */
-class UserModelFactory {
+class ModelFactory {
 
     static getUser() {
         return new User();
     }
 }
 
-module.exports = UserModelFactory;
+module.exports = ModelFactory;

@@ -2,7 +2,7 @@
 const express = require( 'express' );
 const router = express.Router();
 const jwtRead = require( '@chatpta/jwt-read' );
-const controller = require( './privateController' );
+const controller = require( './controller' );
 const error = require( "@chatpta/common-util" ).error;
 const { secretConfig } = require( "../../config" );
 

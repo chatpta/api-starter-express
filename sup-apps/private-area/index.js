@@ -1,1 +1,1 @@
-module.exports = require( './privateRouter' );
+module.exports = require( './router' );

@@ -1,14 +1,14 @@
 'use strict';
-const { Item } = require( './itemModel' );
+const { Item } = require( './model' );
 
 /**
  * Factory for database functionality
  */
-class ItemModelFactory {
+class ModelFactory {
 
     static getItem() {
         return new Item();
     }
 }
 
-module.exports = ItemModelFactory;
+module.exports = ModelFactory;

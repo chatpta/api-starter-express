@@ -11,9 +11,9 @@ module.exports = {
     deleteRequestHandler,
 }
 
-const User = require( './userModelFactory' ).getUser();
+const User = require( './modelFactory' ).getUser();
 const lib = require( '../lib/controller/libCommon' );
-const UserLib = require( './libUserController' );
+const UserLib = require( './controllerLib' );
 
 async function getRequestFirstNameHandler( req, res, next ) {
 

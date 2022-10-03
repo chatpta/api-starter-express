@@ -1,1 +1,1 @@
-module.exports = require( './userRouter' );
+module.exports = require( './router' );

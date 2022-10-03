@@ -10,7 +10,7 @@ module.exports = {
     deleteRequestHandler,
 }
 
-const Item = require( './itemModelFactory' ).getItem();
+const Item = require( './modelFactory' ).getItem();
 const lib = require( "../lib/controller/libCommon" );
 
 async function getRequestHandler( req, res, next ) {

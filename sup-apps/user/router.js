@@ -1,7 +1,7 @@
 'use strict';
 const express = require( 'express' );
 const router = express.Router();
-const user = require( './usersController' );
+const user = require( './controller' );
 
 
 router.get( '/', user.getRequestFirstNameHandler );

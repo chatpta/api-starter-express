@@ -1,7 +1,7 @@
 'use strict';
 const { describe, it } = require( "mocha" );
 const assert = require( "assert" );
-const item = require( '../../sup-apps/item/itemsController' );
+const item = require( '../../sup-apps/item/controller' );
 
 if ( process.env?.DB_CONN !== "none" ) {
     describe( "Item/itemsController", function () {
