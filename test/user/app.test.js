@@ -9,7 +9,7 @@ const baseRoute = "/api/v1/starter";
 if ( process.env?.DB_CONN !== "none" ) {
     describe( "User/app", function () {
 
-        it( "post", function ( done ) {
+        it( "post /api/v1/starter/users", function ( done ) {
 
             // Act
             request( app )
@@ -25,7 +25,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                 } );
         } );
 
-        it( "get", function ( done ) {
+        it( "get /api/v1/starter/users", function ( done ) {
 
             // Act
             request( app )
@@ -40,7 +40,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                 } );
         } );
 
-        it( "patch", function ( done ) {
+        it( "patch /api/v1/starter/users", function ( done ) {
 
             // Act
             request( app )
@@ -59,7 +59,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                 } );
         } );
 
-        it( "delete", function ( done ) {
+        it( "delete /api/v1/starter/users", function ( done ) {
 
             // Act
             request( app )
@@ -77,7 +77,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                 } );
         } );
 
-        it( "/recent get", function ( done ) {
+        it( "get /api/v1/starter/users/recent", function ( done ) {
 
             // Act
             request( app )

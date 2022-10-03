@@ -7,7 +7,7 @@ const app = require( '../../app' );
 const baseRoute = "/api/v1/starter";
 
 describe( "App/app", function () {
-    it( "get /api/v1/profile/home", function ( done ) {
+    it( "get /api/v1/starter/home", function ( done ) {
 
         // Act
         request( app )
@@ -22,7 +22,7 @@ describe( "App/app", function () {
             } );
     } );
 
-    it( "post /api/v1/profile/home", function ( done ) {
+    it( "post /api/v1/starter/home", function ( done ) {
 
         // Act
         request( app )
@@ -37,7 +37,7 @@ describe( "App/app", function () {
             } );
     } );
 
-    it( "patch /api/v1/profile/home", function ( done ) {
+    it( "patch /api/v1/starter/home", function ( done ) {
 
         // Act
         request( app )
@@ -52,7 +52,7 @@ describe( "App/app", function () {
             } );
     } );
 
-    it( "delete /api/v1/profile/home", function ( done ) {
+    it( "delete /api/v1/starter/home", function ( done ) {
 
         // Act
         request( app )

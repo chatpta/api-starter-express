@@ -10,7 +10,7 @@ if ( process.env?.DB_CONN !== "none" ) {
     describe( "Item/app", function () {
 
         let item_id = null;
-        it( "post", function ( done ) {
+        it( "post /api/v1/starter/items", function ( done ) {
 
             // Act
             request( app )
@@ -28,7 +28,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                 } );
         } );
 
-        it( "get", function ( done ) {
+        it( "get /api/v1/starter/items", function ( done ) {
 
             // Act
             request( app )
@@ -43,7 +43,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                     } );
         } );
 
-        it( "patch", function ( done ) {
+        it( "patch /api/v1/starter/items", function ( done ) {
 
             // Act
             request( app )
@@ -62,7 +62,7 @@ if ( process.env?.DB_CONN !== "none" ) {
                 } );
         } );
 
-        it( "delete", function ( done ) {
+        it( "delete /api/v1/starter/items", function ( done ) {
 
             // Act
             request( app )

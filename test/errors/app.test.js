@@ -7,7 +7,7 @@ const app = require( '../../app' );
 const baseRoute = "/api/v1/starter";
 
 describe( "Errors/app", function () {
-    it( "/not-exist returns 'not_found' 404", function ( done ) {
+    it( "/api/v1/starter/not-exist returns 'not_found' 404", function ( done ) {
 
         // Act
         request( app )
@@ -23,7 +23,7 @@ describe( "Errors/app", function () {
     } );
 
     if ( process.env?.DB_CONN !== "none" ) {
-        it( "/users?first_name=Not_exist returns 'record_not_found' 404", function ( done ) {
+        it( "/api/v1/starter/users?first_name=Not_exist returns 'record_not_found' 404", function ( done ) {
 
             // Act
             request( app )
@@ -41,7 +41,7 @@ describe( "Errors/app", function () {
 } );
 
 describe( "Errors/app", function () {
-    it( "get /api/v1/profile/error returns 500 message", function ( done ) {
+    it( "get /api/v1/starter/error returns 500 message", function ( done ) {
 
         // Act
         request( app )
