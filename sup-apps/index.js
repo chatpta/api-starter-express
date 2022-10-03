@@ -9,10 +9,10 @@ const { createErrorRouter } = require( '../errors' );
 const router = express.Router();
 
 
-router.use( '/', home );
 router.use( '/users', users );
 router.use( '/items', items );
 router.use( '/private', privateArea );
+router.use( '/home', home );
 router.use( '/error', createErrorRouter );
 
 module.exports = router;

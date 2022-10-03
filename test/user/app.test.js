@@ -4,6 +4,7 @@ const assert = require( "assert" );
 const request = require( 'supertest' );
 const app = require( '../../app' );
 
+const baseRoute = "/api/v1/starter";
 
 if ( process.env?.DB_CONN !== "none" ) {
     describe( "User/app", function () {
@@ -12,7 +13,7 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Act
             request( app )
-                .post( '/users' )
+                .post( `${ baseRoute }/users` )
                 .send( { user: { first_name: "App_post_test", value_two: "I am two" } } )
                 .end( ( err, response ) => {
                     if ( err ) return;
@@ -28,7 +29,7 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Act
             request( app )
-                .get( '/users?first_name=App_post_test' )
+                .get( `${ baseRoute }/users?first_name=App_post_test` )
                 .end( ( err, response ) => {
                     if ( err ) return;
 
@@ -43,7 +44,7 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Act
             request( app )
-                .patch( '/users' )
+                .patch( `${ baseRoute }/users` )
                 .send( {
                     user: { first_name: "App_post_test" },
                     updated_user: { first_name: "App patch test" }
@@ -62,7 +63,7 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Act
             request( app )
-                .delete( '/users' )
+                .delete(`${ baseRoute }/users` )
                 .send( {
                     user: { first_name: "App patch test" }
                 } )
@@ -80,7 +81,7 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Act
             request( app )
-                .get( '/users/recent' )
+                .get( `${ baseRoute }/users/recent` )
                 .end( ( err, response ) => {
                     if ( err ) return;
 

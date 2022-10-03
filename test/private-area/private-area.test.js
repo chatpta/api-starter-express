@@ -5,14 +5,15 @@ const request = require( "supertest" );
 const app = require( "../../app" );
 const jwt = require( "../../test/fixture/token" );
 
+const baseRoute = "/api/v1/starter";
 
 describe( "Private-area/private-area", function () {
 
-    it( "get /private ['ad'] role", function ( done ) {
+    it( "get /api/v1/starter/private ['ad'] role", function ( done ) {
 
         // Act
         request( app )
-            .get( '/private' )
+            .get( `${ baseRoute }/private` )
             .set( 'Authorization', "bearer " + jwt.adminUser.jwt )
             .end( ( err, response ) => {
                 if ( err ) return;
@@ -24,11 +25,11 @@ describe( "Private-area/private-area", function () {
             } );
     } );
 
-    it( "post '/private ['ad'] role", function ( done ) {
+    it( "post /api/v1/starter/private ['ad'] role", function ( done ) {
 
         // Act
         request( app )
-            .post( '/private' )
+            .post( `${ baseRoute }/private` )
             .set( 'Authorization', "bearer " + jwt.adminUser.jwt )
             .end( ( err, response ) => {
                 if ( err ) return;
@@ -40,11 +41,11 @@ describe( "Private-area/private-area", function () {
             } );
     } );
 
-    it( "patch /private ['ad'] role", function ( done ) {
+    it( "patch /api/v1/starter/private ['ad'] role", function ( done ) {
 
         // Act
         request( app )
-            .patch( '/private' )
+            .patch( `${ baseRoute }/private` )
             .set( 'Authorization', "bearer " + jwt.adminUser.jwt )
             .send( {
                 user: { email: "userAppTest@gmail.com" },
@@ -60,11 +61,11 @@ describe( "Private-area/private-area", function () {
             } );
     } );
 
-    it( "delete /private ['ad'] role", function ( done ) {
+    it( "delete /api/v1/starter/private ['ad'] role", function ( done ) {
 
         // Act
         request( app )
-            .delete( '/private' )
+            .delete( `${ baseRoute }/private` )
             .set( 'Authorization', "bearer " + jwt.adminUser.jwt )
             .end( ( err, response ) => {
                 if ( err ) return;

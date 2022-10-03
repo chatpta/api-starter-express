@@ -34,7 +34,7 @@ app.use( express.urlencoded( { extended: false } ) );
 app.set('title', 'chatpta api starter');
 
 // Add routers
-app.use( subApps );
+app.use('/api/v1/starter', subApps );
 
 // Not found json response.
 app.use( error.notFound404 );

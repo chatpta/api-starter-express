@@ -4,13 +4,14 @@ const assert = require( "assert" );
 const request = require( 'supertest' );
 const app = require( '../../app' );
 
+const baseRoute = "/api/v1/starter";
 
 describe( "Errors/app", function () {
     it( "/not-exist returns 'not_found' 404", function ( done ) {
 
         // Act
         request( app )
-            .get( '/not-exist' )
+            .get(  `${ baseRoute }/not-exist` )
             .end( ( err, response ) => {
                 if ( err ) return;
 
@@ -26,7 +27,7 @@ describe( "Errors/app", function () {
 
             // Act
             request( app )
-                .get( '/users?first_name=Not_exist' )
+                .get( `${ baseRoute }/users?first_name=Not_exist` )
                 .end( ( err, response ) => {
                     if ( err ) return;
 
@@ -40,11 +41,11 @@ describe( "Errors/app", function () {
 } );
 
 describe( "Errors/app", function () {
-    it( "/error returns 'application_error' 500", function ( done ) {
+    it( "get /api/v1/profile/error returns 500 message", function ( done ) {
 
         // Act
         request( app )
-            .get( '/error' )
+            .get( `${ baseRoute }/error` )
             .end( ( err, response ) => {
                 if ( err ) return;
 

@@ -4,13 +4,14 @@ const assert = require( "assert" );
 const request = require( 'supertest' );
 const app = require( '../../app' );
 
+const baseRoute = "/api/v1/starter";
 
 describe( "App/app", function () {
-    it( "get /", function ( done ) {
+    it( "get /api/v1/profile/home", function ( done ) {
 
         // Act
         request( app )
-            .get( '/' )
+            .get( `${ baseRoute }/home` )
             .end( ( err, response ) => {
                 if ( err ) return;
 
@@ -21,11 +22,11 @@ describe( "App/app", function () {
             } );
     } );
 
-    it( "post /", function ( done ) {
+    it( "post /api/v1/profile/home", function ( done ) {
 
         // Act
         request( app )
-            .post( '/' )
+            .post( `${ baseRoute }/home` )
             .end( ( err, response ) => {
                 if ( err ) return;
 
@@ -36,11 +37,11 @@ describe( "App/app", function () {
             } );
     } );
 
-    it( "patch /", function ( done ) {
+    it( "patch /api/v1/profile/home", function ( done ) {
 
         // Act
         request( app )
-            .patch( '/' )
+            .patch( `${ baseRoute }/home` )
             .end( ( err, response ) => {
                 if ( err ) return;
 
@@ -51,11 +52,11 @@ describe( "App/app", function () {
             } );
     } );
 
-    it( "delete /", function ( done ) {
+    it( "delete /api/v1/profile/home", function ( done ) {
 
         // Act
         request( app )
-            .delete( '/' )
+            .delete( `${ baseRoute }/home` )
             .end( ( err, response ) => {
                 if ( err ) return;
 

@@ -4,6 +4,7 @@ const assert = require( "assert" );
 const request = require( 'supertest' );
 const app = require( '../../app' );
 
+const baseRoute = "/api/v1/starter";
 
 if ( process.env?.DB_CONN !== "none" ) {
     describe( "Item/app", function () {
@@ -13,7 +14,7 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Act
             request( app )
-                .post( '/items' )
+                .post( `${ baseRoute }/items` )
                 .send( { item: { title: "Items_app_post_test" } } )
                 .end( ( err, response ) => {
                     if ( err ) return;
@@ -31,22 +32,22 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Act
             request( app )
-                .get( `/items?item_id=${ item_id }` )
-                .end( ( err, response ) => {
-                    if ( err ) return;
+                .get( `${ baseRoute }/items?item_id=${ item_id }` )
+                    .end( ( err, response ) => {
+                        if ( err ) return;
 
-                    // Assert
-                    assert( response.status === 200 );
-                    assert( response.body.title === 'Items_app_post_test' );
-                    done();
-                } );
+                        // Assert
+                        assert( response.status === 200 );
+                        assert( response.body.title === 'Items_app_post_test' );
+                        done();
+                    } );
         } );
 
         it( "patch", function ( done ) {
 
             // Act
             request( app )
-                .patch( '/items' )
+                .patch( `${ baseRoute }/items` )
                 .send( {
                     item: { item_id: item_id },
                     updated_item: { title: "Item app patch test" }
@@ -65,7 +66,7 @@ if ( process.env?.DB_CONN !== "none" ) {
 
             // Act
             request( app )
-                .delete( '/items' )
+                .delete( `${ baseRoute }/items` )
                 .send( {
                     item: { item_id: item_id }
                 } )
