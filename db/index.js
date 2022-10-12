@@ -1,2 +1,2 @@
 'use strict';
-module.exports = require( './dbProvider' );
+module.exports = require( './lib/dbProvider' );

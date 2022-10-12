@@ -7,8 +7,8 @@
  * These scripts should not be part of main application.
  */
 const { Pool } = require( 'pg' );
-const config = require( '../config' );
-const lib = require( './lib/lib' );
+const config = require( '../../config' );
+const lib = require( './lib' );
 
 
 /**

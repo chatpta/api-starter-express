@@ -8,7 +8,7 @@
 /**
  * Connect to database and test it.
  */
-const Factory = require( './dbProvider' );
+const Factory = require( './lib/dbProvider' );
 
 Factory.getDbClient()
     .then( client => client.query( `
