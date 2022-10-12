@@ -1,0 +1,10 @@
+BEGIN;
+
+DROP TABLE IF EXISTS Items cascade;
+
+DROP TABLE IF EXISTS Users cascade;
+
+DROP EXTENSION IF EXISTS "uuid-ossp";
+
+COMMIT;
+
