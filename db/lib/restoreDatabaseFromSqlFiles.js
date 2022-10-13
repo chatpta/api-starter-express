@@ -11,7 +11,7 @@ module.exports = {
 
 async function restoreDatabaseFromSqlFiles() {
 
-    const path_to_sql = path.resolve( __dirname, '../..', 'test/fixture' );
+    const path_to_sql = path.resolve( __dirname, '../sql/data' );
     const rollback_file = path.resolve( __dirname, '../sql/rollback_000010.sql' );
     const restore_file = path.resolve( path_to_sql, 'chatpta_catalogue_db.sql' );
     const restore_images_file = path.resolve( path_to_sql, 'chatpta_catalogue_db_images.sql' );
