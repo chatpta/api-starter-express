@@ -7,7 +7,7 @@ const { readFile } = require( './readFile' );
 
 async function runRollback() {
 
-    const rollback_1 = path.resolve( __dirname, '../sql/rollback_000010.sql' );
+    const rollback_1 = path.resolve( __dirname, '../sql/rollbacks/rollback_000010.sql' );
 
     return Factory.getDbClient()
         .then( async client => client.query( await readFile( rollback_1 ) ) )

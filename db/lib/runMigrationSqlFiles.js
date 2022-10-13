@@ -7,7 +7,7 @@ const { readFile } = require( './readFile' );
 
 async function runMigrationSqlFiles() {
 
-    const createTables_1 = path.resolve( __dirname, '../sql/migrate_000010.sql' );
+    const createTables_1 = path.resolve( __dirname, '../sql/migrations/migrate_000010.sql' );
 
     return Factory.getDbClient()
         .then( async client => client.query( await readFile( createTables_1 ) ) )
