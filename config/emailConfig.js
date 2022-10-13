@@ -1,4 +1,11 @@
+const {
+    getSmtpEmailServer,
+    getSenderEmail,
+    getEmailPassword
+} = require( './secretConfig' );
+
 module.exports = {
-    smtpEmailServer: "not_required",
-    senderEmail: "not_required"
+    getSmtpEmailServer,
+    getSenderEmail,
+    getEmailPassword
 };

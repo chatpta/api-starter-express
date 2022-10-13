@@ -8,11 +8,13 @@ const dbConfig = require( './dbConfig' );
 const authConfig = require( './authConfig' );
 const emailConfig = require( './emailConfig' );
 const secretConfig = require( './secretConfig' );
+const appConfig = require( './appConfig' );
 
 
 module.exports = {
     dbConfig,
     authConfig,
     emailConfig,
-    secretConfig
+    secretConfig,
+    appConfig
 };

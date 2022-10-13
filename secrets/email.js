@@ -1,4 +1,6 @@
 module.exports = exports = {
-    passEmail: "not_required"
+    smtpEmailServer: "chatptamail.com",
+    senderEmail: "accounts@chatpta.com",
+    passEmail: "password"
 };
 
