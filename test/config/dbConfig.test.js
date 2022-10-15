@@ -14,7 +14,7 @@ describe( "Config/dbConfig", function () {
             user: 'chatpta_starter_user',
             database: 'chatpta_starter_db',
             password: 'password',
-            port: 3111,
+            port: 40111,
             max: 20,
             idleTimeoutMillis: 2000,
             connectionTimeoutMillis: 200,

@@ -9,7 +9,7 @@ services:
     restart: always
     ports:
       - target: 5432
-        published: 3111
+        published: 40111
     environment:
       POSTGRES_DB: chatpta_starter_db
       POSTGRES_USER: chatpta_starter_user
@@ -20,7 +20,7 @@ services:
     restart: always
     ports:
       - target: 5432
-        published: 3222
+        published: 40222
     environment:
       POSTGRES_DB: chatpta_starter_db
       POSTGRES_USER: chatpta_starter_user
@@ -29,6 +29,6 @@ services:
   api-starter-express:
     build: .
     ports:
-      - target: 3000
-        published: 3000
+      - target: 40000
+        published: 40000
 

@@ -32,7 +32,7 @@ describe( "Config/appConfig", function () {
         const appPort = appConfig.getAppPort();
 
         // Assert
-        assert.deepStrictEqual( appPort, "30000" );
+        assert.deepStrictEqual( appPort, "40000" );
         done();
     } );
 
