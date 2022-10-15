@@ -6,10 +6,7 @@ const {
     pgDatabase,
     pgPassword,
     pgHost,
-    pgPort,
-    smtpEmailServer,
-    senderEmail,
-    passEmail
+    pgPort
 } = require( process?.env?.SECRET_PATH );
 
 function getPublicKey() {
@@ -44,18 +41,6 @@ function getPgPort() {
     return process?.env?.PGPORT || pgPort;
 }
 
-function getSmtpEmailServer() {
-    return process?.env?.SMTP_EMAIL_SERVER || smtpEmailServer;
-}
-
-function getSenderEmail() {
-    return process?.env?.SMTP_EMAIL_SERVER || senderEmail;
-}
-
-function getEmailPassword() {
-    return process?.env?.EMAIL_PASSWORD || passEmail;
-}
-
 module.exports = {
     getPublicKey,
     getPrivateKey,
@@ -64,8 +49,5 @@ module.exports = {
     getPgDatabase,
     getPgPassword,
     getPgHost,
-    getPgPort,
-    getSmtpEmailServer,
-    getSenderEmail,
-    getEmailPassword
+    getPgPort
 };
