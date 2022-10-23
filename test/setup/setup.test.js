@@ -27,11 +27,11 @@ if ( process.env?.DB_CONN !== "none" ) {
                        DELETE FROM Users;
                        DELETE FROM Items;
                   COMMIT;` )
-            .then( result => {
+            .then( () => {
                 console.log( "== Deleted all data from Database ==" );
             } )
             .catch( console.error )
-            .finally( process.exit );
+        // .finally( process.exit );
 
 
         // Close database pool after teach test
