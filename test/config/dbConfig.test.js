@@ -10,7 +10,7 @@ describe( "Config/dbConfig", function () {
 
         // Act
         const expectedConfigObj = {
-            host: 'localhost',
+            host: '127.0.0.1',
             user: 'chatpta_starter_user',
             database: 'chatpta_starter_db',
             password: 'password',
