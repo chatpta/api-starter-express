@@ -26,6 +26,17 @@ services:
       POSTGRES_USER: chatpta_starter_user
       POSTGRES_PASSWORD: password
 
+  api-starter-express-production-db:
+    image: postgres
+    restart: always
+    ports:
+      - target: 5432
+        published: 40333
+    environment:
+      POSTGRES_DB: chatpta_starter_db
+      POSTGRES_USER: chatpta_starter_user
+      POSTGRES_PASSWORD: password
+
   api-starter-express:
     build: .
     ports:
