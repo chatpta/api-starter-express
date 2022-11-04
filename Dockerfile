@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:18
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -9,10 +9,15 @@ COPY package*.json ./
 
 # RUN npm install
 # For production install from package-lock.json
-RUN npm ci --only=production
+RUN npm install
 
 # Bundle app source
 COPY . .
 
-EXPOSE 8080
+# Set node env
+ENV NODE_ENV=production
+ENV SECRET_PATH=/usr/src/app/secrets
+
+
+EXPOSE 40000
 CMD [ "node", "./bin/www" ]
