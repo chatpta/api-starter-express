@@ -18,6 +18,5 @@ COPY . .
 ENV NODE_ENV=production
 ENV SECRET_PATH=/usr/src/app/secrets
 
-
 EXPOSE 40000
 CMD [ "node", "./bin/www" ]
