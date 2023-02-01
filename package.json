@@ -15,7 +15,8 @@
     "testWithoutDb": "export NODE_ENV=test && export DB_CONN=none && mocha -r dotenv/config --watch --reporter spec --bail --check-leaks test/**/*.test.js",
     "testCoverage": "export NODE_ENV=test && nyc mocha -r dotenv/config test/**/*.test.js",
     "testDbResetToEmptyDefault": "export NODE_ENV=test && node -r dotenv/config db/dbResetToDefault.js",
-    "test": "export NODE_ENV=test && mocha -r dotenv/config --watch --reporter spec --bail --check-leaks test/**/*.test.js"
+    "test": "export NODE_ENV=test && mocha -r dotenv/config --watch --reporter spec --bail --check-leaks test/**/*.test.js",
+    "testWithDebug": "export NODE_ENV=test && export DEBUG=express:* && mocha -r dotenv/config --watch --reporter spec --bail --check-leaks test/**/*.test.js"
   },
   "dependencies": {
     "@chatpta/auth-util": "^3.0.0",
