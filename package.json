@@ -22,7 +22,7 @@
     "@chatpta/auth-util": "3.0.1",
     "@chatpta/common-util": "3.1.1",
     "@chatpta/jwt-read": "3.0.12",
-    "@chatpta/validate": "3.0.5",
+    "@chatpta/validate": "3.0.11",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "4.3.4",
