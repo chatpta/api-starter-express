@@ -32,7 +32,7 @@ describe( "Errors/app", function () {
                     if ( err ) return;
 
                     // Assert
-                    assert( response.status === 200 );
+                    assert.deepStrictEqual( response.status, 404 );
                     assert.deepStrictEqual( response.body.error, "record_not_found" );
                     done();
                 } );
