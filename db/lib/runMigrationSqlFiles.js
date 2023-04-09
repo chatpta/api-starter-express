@@ -16,7 +16,10 @@ async function runMigrationSqlFiles() {
                 console.log( "========== Migration complete ==========" );
             }
         } )
-        .catch( console.error )
+        .catch( err => {
+            console.log( "========== Migration Failed ==========\n\n" );
+            console.error( err );
+        } );
 }
 
 module.exports = {

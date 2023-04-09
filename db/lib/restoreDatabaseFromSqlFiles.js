@@ -24,7 +24,10 @@ async function restoreDatabaseFromSqlFiles() {
         .then( () => dbLib.restoreAllDatabase( null, create_views_file ) )
         .then( () => dbLib.restoreAllDatabase( null, create_search_file ) )
         .then( () => dbLib.restoreAllDatabase( null, create_pg_trgm ) )
-        .then( null );
+        .catch( err => {
+            console.log( "========== Failed ==========\n\n" );
+            console.error( err );
+        } );
 
 }
 

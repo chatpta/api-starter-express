@@ -16,7 +16,10 @@ async function runRollback() {
                 console.log( "========== Rollback complete ==========" );
             }
         } )
-        .catch( console.error )
+        .catch( err => {
+            console.log( "========== Rollback Failed ==========\n\n" );
+            console.error( err );
+        } );
 }
 
 module.exports = {
