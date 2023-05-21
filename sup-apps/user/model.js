@@ -4,7 +4,7 @@
  * This class executes functions for the User Model
  */
 const ActiveRecord = require( '../../model' );
-const libUser = require("./modelLib");
+const libUser = require("./modelQueries");
 
 
 class User extends ActiveRecord {
